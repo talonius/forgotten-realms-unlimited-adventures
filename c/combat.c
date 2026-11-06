@@ -36,10 +36,6 @@
  * combat_order is indexed from 1 up to 0x48, and heroes and tile_info from 1;
  * the shipped code adds the address of element 0 (c52a, b8f1, 5ff1).
  * side_count is indexed by side.
- *
- * This is the v1.0 build (CKIT.EXE file offset 0x1e310; addresses above are
- * v1.2's).  It differs from v1.2 only in round_end: v1.0 lets a dying hero
- * bleed every round regardless of cursor_obj[0x1d].
  */
 
 struct Pool;                    /* strutil.c's slot pool                  */
@@ -766,7 +762,7 @@ static void round_end(char far *done)                            /* 2b41:0f6b */
     while (p != 0) {
         fx_trigger_group(0x13, &p);
         fx_terrain_apply(p, 0, 1);
-        if (p->status == 5) {
+        if (p->status == 5 && !cursor_obj[0x1d]) {
             p->fight->dying++;
             if (p->fight->dying > 9)
                 p->status = 6;

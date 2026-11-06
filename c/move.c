@@ -42,14 +42,6 @@
  * _DATA is DGROUP 75dc..762b: the code's six literals, stored as five --
  * -d stores "Blocked:" once.  _BSS is next_x and next_y, the wilderness
  * square ahead, at d202..d203.
- *
- * This is the v1.0 build (CKIT.EXE 1.0, module at file offset 0x44819,
- * TEXT 3550:0009, _DATA at DGROUP 75b0, 39 bytes: five literals stored as
- * four; _BSS at d1a4); the addresses above are v1.2's.  What differs from
- * v1.2: next_square clamps the wilderness square ahead itself -- off the
- * 0x26 by 0xf map it falls back to the party's own square -- so
- * move_resolve's wilderness step has no range tests of its own and no
- * "There is no way to go in that direction." text.
  */
 
 struct StepEvent {              /* one of an area's 8 counted events      */
@@ -465,10 +457,6 @@ void far next_square(void)                                         /* 354b:0649 
 {
     next_x = cursor_obj[0x25] + dir_dx[geo.facing];
     next_y = cursor_obj[0x26] + dir_dy[geo.facing];
-    if (next_x < 0 || next_x > 0x25 || next_y < 0 || next_y > 0xe) {
-        next_x = cursor_obj[0x25];
-        next_y = cursor_obj[0x26];
-    }
 }
 
 void far quest_list(void)                                        /* 354b:0678 */
@@ -846,12 +834,16 @@ void far move_resolve(void)                                      /* 354b:0e76 */
         break;
     case 3:
         next_square();
-        cell = cell_zone_at(next_x, next_y);
-        bank_text_get(text_pool_block, cur_area_rec->zone_texts_head[cell], msg_buf);
+        if (next_x <= 0x25 && next_y <= 0xe) {
+            cell = cell_zone_at(next_x, next_y);
+            bank_text_get(text_pool_block, cur_area_rec->zone_texts_head[cell], msg_buf);
+        } else
+            str_copy(msg_buf, "There is no way to go in that direction.");
         has_text = 0;
         if (msg_buf[0])
             has_text = 1;
-        if (!wall_kind(cursor_obj[0x25], cursor_obj[0x26], geo.facing)) {
+        if (next_x <= 0x25 && next_y <= 0xe
+            && !wall_kind(cursor_obj[0x25], cursor_obj[0x26], geo.facing)) {
             step_wild();
             square_event = area_cell_at(cursor_obj[0x25], cursor_obj[0x26]);
             if (has_text && !square_event) {

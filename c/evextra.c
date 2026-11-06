@@ -87,12 +87,6 @@
  *
  * Shipped as written: edit_check's code 3 tests total, which nothing sets
  * when no monster group has a kind; the "Item Kind" title says "a".
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): the
- * module starts at EXE 0x08307c (load-based frame 3fc6 from byte c), and
- * the addresses above are v1.2's.  Against v1.2: npc_spells tests
- * slots_left's answer without first checking the pick is nonzero, and
- * page_extra prints "Old Class:" with attribute 0x80, not 0x180.
  */
 
 struct Hero;                    /* hero.c's party member                  */
@@ -251,7 +245,7 @@ void far npc_spells(void)                                        /* 3fc3:0002 */
                     if (!show_slots())
                         break;
                     spell = spell_menu(1, 2, &choice, &more);
-                    if (!slots_left(spell_info[spell].level, spell_info[spell].kind, &used)) {
+                    if (spell && !slots_left(spell_info[spell].level, spell_info[spell].kind, &used)) {
                         (void)0;
                         continue;
                     }
@@ -545,7 +539,7 @@ void far page_extra(int what)                                    /* 3fc3:0af9 */
         for (k = 0; k <= 6; k++)
             if (ed_ev->data[k + 0xa4] > 0
                 && first_level((struct Hero far *)ed_ev) > ed_ev->data[k + 0xa4]) {
-                text_print_at(0x1f6a, 0x1f48, 0x80, "Old Class:   %s", class_names[k]);
+                text_print_at(0x1f6a, 0x1f48, 0x180, "Old Class:   %s", class_names[k]);
                 k = 6;
             }
         break;

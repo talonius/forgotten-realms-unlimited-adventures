@@ -31,12 +31,6 @@
  * fix_cures step three of their counter pointers where they mean to count,
  * as shipped (side comments there).
  *
- * This is the v1.0 build (CKIT.EXE 1.0, file 0x45fd0..0x48d5d); the
- * addresses above are v1.2's.  v1.0's scribe_menu never resets index (the
- * spell list's cursor) to -1 inside its loop: not after "already knows",
- * "already scribed", "is already scribing" or "can not scribe".  The rest
- * of the module is v1.2's code.
- *
  * _DATA is 28 stored literals, DGROUP 762c..7851; -d stores "" as the NUL
  * of "cannot cast spells in this area" and " " as the tail of "is in no
  * condition to ".  The module declares no _BSS.
@@ -615,6 +609,7 @@ void far scribe_menu(void)                                       /* 31d4:0ba2 */
                 redraw = 1;
                 if (cur_node->known[(spell - 1) / 8] & bit_mask[(spell - 1) % 8]) {
                     hero_text(cur_node, "already knows that spell", 10, 1);
+                    index = -1;
                 } else {
                     item = cur_node->items;
                     found = 0;
@@ -628,6 +623,7 @@ void far scribe_menu(void)                                       /* 31d4:0ba2 */
                                             && (sub->slots[j] & 0x7f) == spell) {
                                             hero_text(cur_node, "already scribed that spell",
                                                       10, 1);
+                                            index = -1;
                                             found = 1;
                                         }
                             } else
@@ -637,6 +633,7 @@ void far scribe_menu(void)                                       /* 31d4:0ba2 */
                                         hero_text(cur_node, "is already scribing that spell",
                                                   10, 1);
                                         found = 1;
+                                        index = -1;
                                     }
                         }
                         item = item->next;
@@ -673,6 +670,7 @@ void far scribe_menu(void)                                       /* 31d4:0ba2 */
                             }
                         } else {
                             hero_text(cur_node, "can not scribe that spell.", 10, 1);
+                            index = -1;
                         }
                     }
                 }

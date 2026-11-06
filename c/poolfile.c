@@ -29,12 +29,6 @@
  * 0x12-byte record; pool_save keeps each record write's count in got.
  *
  * _DATA is empty.  _BSS is records at b252.
- *
- * In v1.0 the module starts 5 bytes earlier, at 2c01:0007 (EXE 0x02cbf7),
- * with poolfile_argument_noop; v1.2 dropped it.  Ghidra finds it only as
- * a scan candidate, and nothing in the recovered listing calls it.  Its
- * frame says it took arguments (a no-argument empty is a lone retf); how
- * many is not in the bytes, so it takes one.
  */
 
 struct ItemRec {                /* an item as a file holds it, 0x12 bytes */
@@ -76,10 +70,6 @@ extern struct Pool item_record_pool;                                    /* cb0e 
 extern char far *item_templates;                                       /* d122 */
 
 static int records;                                              /* b252 */
-
-void far poolfile_argument_noop(int unused)                      /* 2c01:0007 */
-{
-}
 
 void far pool_clear(void)                                        /* 2bfb:0002 */
 {

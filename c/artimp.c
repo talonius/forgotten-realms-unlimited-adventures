@@ -1,16 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): this object is at EXE
- * 0x07b4c0, frame 3d98:0000, 2,834 code bytes; _DATA 917a.  The comment
- * below describes v1.2.  v1.0 differs: art_import declares its locals in
- * another order and has no path buffer: the new library's file name is
- * made in place with path_in_dir(name, design_dir, 1) and created and saved
- * under that name (v1.2 builds it in path with path_append_name twice);
- * there is no slot_release on the picture's name after slot_close; the
- * palette is always set with pal_set and pal_commit (v1.2 only when
- * is_xvga() || !pixel_shift()); the sprite case sets hdr.type after
- * hdr.width.  art_unimport likewise has no path buffer and deletes
- * path_in_dir(name, design_dir, 1).
- *
- * CKIT.EXE overlay section 24, module 2d91: importing and unimporting art.
+/* CKIT.EXE overlay section 24, module 2d91: importing and unimporting art.
  * import_screen is screen 16 of editloop.c's loop, which artpick.c's
  * gallery ("Import") runs with the pick in env->bits (kind mask << 8 |
  * number): it keeps bits 0..14, imports through art_import, and ends with
@@ -158,6 +146,8 @@ extern char far dir_first(char disk, char far *name, char far *ext,
                           char files, char dirs);                /* 0e23:04d5 */
 extern char far *far dir_next(char far *is_dir);                 /* 0e23:0608 */
 extern void far draw_page_set(char mode);                         /* 0f5e:03aa */
+extern int  far pixel_shift(void);                              /* 0f5e:05d8 */
+extern char far is_xvga(void);                              /* 0f5e:05e0 */
 extern void far *far db_buffer(void);                         /* 107e:0001 */
 extern void far pal_set(int first, int count, unsigned char far *rgb,
                         int nspec, struct CycSpec far *spec);    /* 1157:00b3 */
@@ -172,6 +162,7 @@ extern void far lib_create(char far *name, int slot, long tag); /* 157c:000a */
 extern void far lib_insert(int slot, int n, long size);        /* 157c:0081 */
 extern void far lib_resize(int slot, int n, long size);        /* 157c:037e */
 extern void far path_in_dir(char far *path, char far *dir, char force); /* 17d3:0355 */
+extern void far path_append_name(char far *path, char far *name);    /* 17d3:03af */
 extern int  far str_format(char far *buf, char far *fmt, ...);   /* 1860:0037 */
 extern void far mode_change(int n);
                                 /* 18de:10cb, vector to overlay 3 1b41:02fe */
@@ -210,25 +201,26 @@ int far import_screen(int prev, struct EdEnv far *env, void far *arg) /* 3d91:00
 
 static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 */
 {
-    struct Node far *head;
-    struct Node far *cur;
     struct Cut cut;
     int far *buf;
-    struct CycSpec cyc[16];
     char far *item;
     long off;
-    short choice;
-    short key;
-    short ncyc;
     short first;
     short size;
+    short choice;
+    short ncyc;
     unsigned char pal[0x300];
     char name[0x20];
+    char path[0x50];
+    char sprite;
+    char ok;
+    struct Node far *head;
+    struct Node far *cur;
+    struct CycSpec cyc[16];
+    short key;
     char far *found;
     char is_dir;
-    char ok;
     char is_pcx;
-    char sprite;
     char redraw;
     register int n;
     register int ncol;
@@ -293,6 +285,7 @@ static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 *
             ncyc = ilbm_crng(0x18, cyc);
         }
         slot_close(0x18);
+        slot_release(name);
         cut.hdr.dy = cut.hdr.dx = 0;
         cut.key = 0xff;
         cut.frame = 0;
@@ -312,11 +305,11 @@ static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 *
             str_format(name, "SPRI0%03d.tlb", num);
             first = 0xb0;
             ncol = 0x50;
+            cut.hdr.type = 5;
             cut.row = 0x22;
             cut.col = 0xe0;
             cut.hdr.rows = 0x23;
             cut.hdr.width = 5;
-            cut.hdr.type = 5;
             cut.hdr.dy = -0x1a;
             cut.hdr.dx = -0x18;
             n = 3;
@@ -354,8 +347,10 @@ static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 *
             n = 1;
             break;
         }
-        pal_set(first, ncol, pal + first * 3, 0, 0);
-        pal_commit();
+        if (is_xvga() || !pixel_shift()) {
+            pal_set(first, ncol, pal + first * 3, 0, 0);
+            pal_commit();
+        }
         slot_release(name);
         lib_create(name, 0x18, 0x454c4954L);
         while (--n >= 0) {
@@ -418,10 +413,12 @@ static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 *
                 huge_move(cyc, item, ncyc * 4);
             }
         }
-        path_in_dir(name, design_dir, 1);
-        if ((n = dos_open(0x3c00, name, 0, 0)) >= 0) {
+        path[0] = 0;
+        path_append_name(path, design_dir);
+        path_append_name(path, name);
+        if ((n = dos_open(0x3c00, path, 0, 0)) >= 0) {
             dos_call(0x3e00, 0, n);
-            slot_save(0, name, 0x18);
+            slot_save(0, path, 0x18);
         }
         slot_close(0x18);
     }
@@ -431,6 +428,7 @@ static char far art_import(unsigned char num, unsigned char mask) /* 3d91:0082 *
 char far art_unimport(unsigned char num, unsigned char mask)     /* 3d91:0a06 */
 {
     char name[0x50];
+    char path[0x50];
 
     switch (mask) {
     case 1:
@@ -453,7 +451,9 @@ char far art_unimport(unsigned char num, unsigned char mask)     /* 3d91:0a06 */
         break;
     }
     slot_release(name);
-    path_in_dir(name, design_dir, 1);
-    dos_open(0x4100, name);
+    path[0] = 0;
+    path_append_name(path, design_dir);
+    path_append_name(path, name);
+    dos_open(0x4100, path);
     return 1;
 }

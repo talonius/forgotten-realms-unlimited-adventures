@@ -25,12 +25,6 @@
  * far-calls party_add and party_drop ahead of their definitions, and
  * near-calls party_delete ahead of its own, so it is static.
  *
- * This is the v1.0 build (CKIT.EXE 1.0, file 0x48d5d..0x49e49); the
- * addresses above are v1.2's.  v1.0's party_dialog does not grey out
- * Create/Delete, Load..Exit and item 0xb when test_mode (a saved game is
- * being loaded) is set, and party_menu's Modify case does not copy
- * start_xp into create_xp before modify_hero.
- *
  * _DATA is DGROUP 7852..79f8, 25 stored literals; -d stores "" on the NUL
  * of "Heart".  _BSS is three ints at d204..d209, which only this module is
  * known to write.  The menu's enable flags and the texts it shows from
@@ -169,10 +163,12 @@ extern char view_kind;                                           /* b40e */
 extern int view_mode;                                            /* b421 */
 extern char esc_check;                                           /* b423 */
 extern char game_saved;                                           /* b425 */
+extern long create_xp;                                           /* b42b */
 extern int saved_view_mode;                                            /* b433 */
 extern unsigned char far *cursor_obj;                            /* b75b */
 extern struct Pool party_pool;                                    /* b76e */
 extern char door_tries[];                                         /* ba04 */
+extern long start_xp;                                           /* ba28 */
 extern char adventure_exit;                                           /* bcf6 */
 extern int file_kind;                                            /* bcfb */
 extern int frame_col;                                            /* c3a3 */
@@ -180,6 +176,7 @@ extern int frame_row;                                            /* c3a5 */
 extern char free_train;                                          /* c524 */
 extern char prev_single_human;                                           /* ca0e */
 extern char menu_escaped;                                        /* ca2a */
+extern char test_mode;                                           /* cc7a */
 extern void far *node_pool;                                      /* ce5d */
 extern struct Hero far *node_list;                               /* d129 */
 extern char training_selection_changed;                                           /* d138 */
@@ -268,6 +265,11 @@ int far party_dialog(void)                                       /* 34ad:01ba */
             ui_mark(i, 0x18);
         else
             ui_mark(i, 0x10);
+    if (test_mode) {
+        ui_send(0, 1, 0x10);
+        ui_send(6, 9, 0x10);
+        ui_mark(0xb, 0x10);
+    }
     dl_draw(1);
     screen_flush_mode_set(0);
     screen_flush();
@@ -350,6 +352,7 @@ char far party_menu(char in_game)                                /* 34ad:04bf */
             break;
         case 2:
             if (party_items[2]) {
+                create_xp = start_xp;
                 modify_hero();
                 game_saved = 0;
             }

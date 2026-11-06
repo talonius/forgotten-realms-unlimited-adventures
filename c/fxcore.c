@@ -1,10 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993", EXE 0x06fec8; the
- * addresses below are v1.2's).  Differs from v1.2 in two places:
- * fx_disable lacks v1.2's "cursor_obj[0x1d] set and how 6/7/8 -> how 5"
- * rewrite, and fx_trigger_group's case 19 fires trigger 0xd9 where v1.2 fires
- * 0xe2.
- *
- * CKIT.EXE overlay 19 module 2e88: effects on a combatant and the rolls
+/* CKIT.EXE overlay 19 module 2e88: effects on a combatant and the rolls
  * behind them.  Adding, finding and removing effects, the triggers that
  * run an effect's handler, saving throws and attack rolls, the dice,
  * damage that is not a weapon's, recomputing a score an effect or an item
@@ -267,6 +261,8 @@ void far fx_disable(struct Hero far *h, int how, char far *msg) /* 3e88:000f */
     case 8:
         break;
     default:
+        if (cursor_obj[0x1d] != 0 && (how == 6 || how == 7 || how == 8))
+            how = 5;
         h->status = how;
         h->active = 0;
         h->hp = 0;
@@ -479,7 +475,7 @@ void far fx_trigger_group(unsigned char when, struct Hero far * far *hp) /* 3e88
         fx_trigger(hp, 0x63); fx_trigger(hp, 0xb2); fx_trigger(hp, 0xdd);
         break;
     case 19:
-        fx_trigger(hp, 0x0b); fx_trigger(hp, 0x17); fx_trigger(hp, 0xd9);
+        fx_trigger(hp, 0x0b); fx_trigger(hp, 0x17); fx_trigger(hp, 0xe2);
         break;
     case 20:
         fx_trigger(hp, 0x32); fx_trigger(hp, 0x36);

@@ -50,11 +50,6 @@
  * reads them, and section 5 reads piece_cols.  _BSS is d414..d421, the
  * one record geo, between module 2b69's _BSS (ending d412) and module
  * 28aa's (d422).
- *
- * This is the v1.0 build (CKIT.EXE file offset 0x5b9b0; addresses above are
- * v1.2's).  It differs from v1.2 only in view_draw, whose 3D branch first
- * clears a v1.0-only byte at DGROUP caac (cmbsetup.c's combat_setup clears
- * it too).
  */
 
 struct Res;                     /* tiles.c's                              */
@@ -158,7 +153,6 @@ extern char dir_dy[9];                                           /* 5fec */
 extern char far *text_pool_block;                                /* a7ec */
 extern struct Event far *event_table;                                /* a7f0 */
 extern char byte_b429;                                           /* b429 */
-extern char v10_byte_caac;      /* v1.0 only: cleared by view_draw (3D) */
 extern unsigned char far *cursor_obj;                            /* b75b */
 extern struct Res far *back_res;        /* c39b  the back tile            */
 extern struct Res far *wall_set_res[3];     /* caf8  the wall sets, by slot   */
@@ -585,7 +579,6 @@ void far view_draw(char x, char y, unsigned char dir)            /* 36e3:0bdb */
         y = y0;
     } else {
         screen_draw_begin(1);
-        v10_byte_caac = 0;
         view_frame();
         view_render(0x1f4c, 0x1f4c, x, y, dir);
         screen_flush();

@@ -20,11 +20,6 @@
  * section 19's module 2e88.  A mod18de_ callee is an RTLink vector stub;
  * its comment names the routine the stub reaches.
  *
- * This is the v1.0 build (CKIT.EXE 1.0, file 0x6ef60..0x6fec8); the
- * addresses above are v1.2's.  v1.0's encounter_roll takes its roll count
- * as encounter_ticks minus the area's interval (v1.2 divides) and never
- * takes the interval back off encounter_ticks inside the loop.
- *
  * _DATA is DGROUP 8f30..8fa3: seven stored literals; -d stores "%d" as the
  * tail of "0%d" and ":" as the tail of "Rest Time:".  _BSS is fx_live at
  * d450..d494.
@@ -546,12 +541,13 @@ char far encounter_roll(unsigned char area)                      /* 3d91:0bc4 */
         met = 1;
     else if (cur_area_rec->rest_enc_wide[area].chance > 0 && cur_area_rec->rest_enc_wide[area].event != 0 &&
              cur_area_rec->rest_enc_wide[area].ticks <= encounter_ticks) {
-        rolls = encounter_ticks - cur_area_rec->rest_enc_wide[area].ticks;
+        rolls = encounter_ticks / cur_area_rec->rest_enc_wide[area].ticks;
         while (rolls > 0 && !met) {
             if (fx_roll_dice(1, 100) <= cur_area_rec->rest_enc_wide[area].chance &&
                 event_test(cur_area_rec->rest_enc_wide[area].event, 1))
                 met = 1;
             rolls--;
+            encounter_ticks -= cur_area_rec->rest_enc_wide[area].ticks;
         }
     }
     cur_event = saved_event;

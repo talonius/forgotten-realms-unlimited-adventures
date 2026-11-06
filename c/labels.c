@@ -52,13 +52,6 @@
  * names give (goldbox.bss_order); only this module references them.  b384
  * (sections 16, 18, 21, 23 and 26) and b385 below, the pad b38f and menubox.c's
  * pop_attr at b390 above are not this module's.
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): EXE
- * 0x03556a, 5,656 code bytes, byte-exact.  The addresses and claims above
- * are v1.2's.  v1.0 differs: label_list, label_count and label_nth do not
- * strip the 0x80 bit off mask (no "mask &= 0x7f"); back_draw returns only
- * for n == 0xff (v1.2 also for 0); piece_box draws the 3rd+ piece set via
- * glyph_palette_load without checking geo.area->sets[2].
  */
 
 struct Res;                     /* tiles.c's                              */
@@ -446,6 +439,7 @@ int far label_count(unsigned char kind, unsigned char mask, unsigned char far *l
 
     if (labels_load(&tab, label_entry(kind)) == 0)
         return 0;
+    mask &= 0x7f;
     if ((want = pos != 0) != 0)
         *pos = -1;
     min = lo ? *lo : 0;
@@ -510,6 +504,7 @@ int far label_list(struct Node far *list, unsigned char kind, unsigned char mask
     none = 0;
     is3 = kind == 3;
     tab = 0;
+    mask &= 0x7f;
     if (labels_load(&tab, label_entry(kind)) == 0)
         return 0;
     i = 0;
@@ -579,6 +574,7 @@ int far label_nth(int idx, unsigned char kind, unsigned char mask, unsigned char
             *out = 0;
         return 0;
     }
+    mask &= 0x7f;
     i = 0;
     r = (struct Label far *)(tab + 0xe);
     if (first == 0)
@@ -878,7 +874,7 @@ void far back_draw(unsigned char col, unsigned char row, unsigned char n, char o
 {
     if (!raw && n >= 0x20 && n != 0xff && (cursor_obj[8] < 6 || cursor_obj[8] >= 0x14))
         n++;
-    if (n == 0xff)
+    if (n == 0 || n == 0xff)
         return;
     if (own) {
         back2_load(n);
@@ -899,13 +895,13 @@ void far piece_box(register int row, register int col, int n, int k) /* 2e8f:157
     k = k * 3 / 3;                              /* a mul and an idiv, as shipped */
     c = piece_cols[k] << 2;
     fill_rect(row, col, c + row, c + col, 0);
-    if (n != 0) {
-        c = (n - 1) / 5;
-        if (c < 2)
-            res_palette_load(wall_set_res[c]);
-        else
-            glyph_palette_load(db_buffer(), 0);
-        piece_glyph(col, (k == 7 || k == 8 ? 0 : -4) + row, n, k);
-        screen_flush();
-    }
+    if (n == 0)
+        return;
+    c = (n - 1) / 5;
+    if (c < 2)
+        res_palette_load(wall_set_res[c]);
+    else if (geo.area->sets[2])
+        glyph_palette_load(db_buffer(), 0);
+    piece_glyph(col, (k == 7 || k == 8 ? 0 : -4) + row, n, k);
+    screen_flush();
 }

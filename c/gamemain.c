@@ -29,11 +29,6 @@
  * near-calls game_session ahead of its definition, so that one is static
  * and prototyped.
  *
- * This is the v1.0 build (CKIT.EXE 1.0, file 0x2c4c7..0x2c810); the
- * addresses above are v1.2's.  v1.0 differs only in game_main calling one
- * more vector stub, 18e4:1445, between the second disk_setup and
- * pointer_show; v1.2 dropped that call (and the stub).
- *
  * _DATA is three literals, DGROUP 5ab2..5acb.  This module has no _BSS.
  */
 
@@ -104,7 +99,6 @@ extern void far view_attrs(char a, char b, char c, char d);
                                        /* 18de:13f5, vector to overlay 13 26e3:0572 */
 extern void far game_loop(void);    /* 18de:13eb, vector to overlay 4 1cff:0b1c */
 extern char far pending_load_get(void);    /* 18de:13e1, vector to overlay 4 1cff:08f0 */
-extern void far _v10_18e4_1445(void);  /* v1.0 only: 18e4:1445, vector to 22f1:13fd */
 
 extern int cur_level;                                            /* 6719 */
 extern struct Hero far *cur_node;                                /* b3dd */
@@ -173,7 +167,6 @@ int far game_main(int argc, char far *far *argv)                 /* 2b88:00b7 */
     prompt_window_pop();
     pal_select(0);
     disk_setup(disk_msg_status, 1, "Pod", 'S');
-    _v10_18e4_1445();
     pointer_show();
     menu_timeout = 0;
     timeout_key = 1;

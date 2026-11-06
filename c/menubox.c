@@ -1,9 +1,4 @@
-/* v1.0 BUILD (CKIT.EXE 1.0, March 19 1993), file offset 0x36b82, 6,786 code
- * bytes.  The addresses and claims below are v1.2's.  v1.0 differs: pop_proc
- * draws a disabled item's title and face in 0x80, not 0x180, and pop_line
- * greys an entry with (attr & 0xf0) | 7, without v1.2's 0x100 bit.
- *
- * CKIT.EXE overlay section 5, module 1ff3: the pop-up menu, a dialog item of
+/* CKIT.EXE overlay section 5, module 1ff3: the pop-up menu, a dialog item of
  * module 25e5's kind.  pop_proc is its handler: the item's val points at a
  * menu (a title, an array of 8-byte entries, a position and flags) and its
  * text at an optional view record that scrolls a long menu; width holds the
@@ -211,8 +206,8 @@ int far pop_proc(struct Wid far *w, int msg, int a, int b)       /* 2ff3:0033 */
             break;
         if (m->title)
             text_print_at(p->row, p->col - str_len(m->title) * 4 - 4,
-                          (p->flags & 1) ? 0x80 : p->color, m->title);
-        attr = (p->flags & 1) ? 0x80 : 0x70;
+                          (p->flags & 1) ? 0x180 : p->color, m->title);
+        attr = (p->flags & 1) ? 0x180 : 0x70;
         pop_attr = attr;
         if (pop_width(m) < p->len)
             m->width = p->len;
@@ -799,7 +794,7 @@ void far pop_line(int row, register int col, int width, char far *text, int attr
         draw_glyph(r, col + span - 4, glyph >> 7, (glyph & 0x7f) + 1);
     }
     if (eflags & 1)
-        attr = (attr & 0xf0) | 7;
+        attr = (attr & 0xf0) | 7 | 0x100u;
     if (*text == '(') {
         if (glyph)
             text_print_at(r, col + 4, attr, "%(%c%1g%)", width - 2, text[1]);

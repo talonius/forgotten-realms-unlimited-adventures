@@ -10,12 +10,12 @@ rtlink_workspace_body:
     cld
     ; Runtime helper saves the PSP/termination-vector context.
     mov es,word [cs:saved_dos_es]
-    call 0x1ae8:0xcf
+    call 0x1ae1:0xd5
     ; Register the manager callback at 0A64 with the runtime (AL=1); it closes the
     ; overlay file through 0A78 and sets the manager byte at 0C81.
     mov al,0x1
     mov dx, 0x0a64
-    call 0x1ae8:0xf4
+    call 0x1ae1:0xfa
     ; The first free workspace byte follows all 18-byte section records.
     mov ax,[section_count]
     call rtlink_section_record
@@ -45,7 +45,7 @@ rtlink_workspace_body:
     mov ax,[cs:section_count]
     mov cx,[cs:saved_dos_es]
     ; In this EXE, 1AE1:0009 is STC / RETF: backend unavailable.
-    call 0x1ae8:0x3
+    call 0x1ae1:0x9
     pop ds
     ; Enable caching if the probe succeeded OR cache slots were configured.
     jnc .enable_cache

@@ -44,11 +44,6 @@
  * targets is indexed from 1; hits, heroes and steps are too, and the
  * shipped code adds the address of element 0.  spell_path_targets's scans use
  * the global tick_slot as their loop counter.
- *
- * This is the v1.0 build (CKIT.EXE of March 19, 1993): EXE 0x05969c..0x05b818,
- * stored 3b6f:000c in section 12, _DATA at 85fc, _BSS at d1ba.  v1.0's
- * spell_choose does not reset the hot keys in its default case (v1.2 calls
- * hotkey_reset(0) there); the code is otherwise v1.2's.
  */
 
 struct Item {                   /* an item a party member carries         */
@@ -384,6 +379,7 @@ char far spell_choose(unsigned char type, int far *index)       /* 3b69:0166 */
         break;
     default:
         fkeys = -1;
+        hotkey_reset(0);
         str_copy(title, empty_text);
         str_copy(text, "Exit");
         break;

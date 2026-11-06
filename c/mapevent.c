@@ -48,19 +48,6 @@
  * msg_buf also by section 25 (0x7ec9d), pending_load by section 6; the bytes
  * do not decide static or public for the rest, nor for the routines no stub
  * or far call reaches.
- *
- * THIS IS THE v1.0 BUILD (CKIT.EXE "Version 1.0 March 19,1993"): the
- * addresses above are v1.2's; v1.0 places the module at file 0x02e303
- * (2d03:0003, _DATA 5b2a, 487 bytes, _BSS b1f6), 12,158 code bytes.
- * Against v1.2: every event move clamps its square with
- * int_min(v, cols) and (v, rows), not cols - 1 and rows - 1;
- * event_outcome keeps ev[0xa] & 0x20, not & 0x40, in rerun_square;
- * event_transfer's test-mode transfer stops without the "Transfer module
- * ends testing!" message (so v1.0 has no status_msg call and no such
- * literal), and only a kind 0xb transfer can land on one of the area's
- * entry spots -- v1.2's other branch for ev[0xc] & 1 is absent, so every
- * other kind goes to ev[9], ev[8].  Section 6 sets pending_load through the
- * vector stub to pending_load_set instead of storing it.
  */
 
 struct Item {
@@ -136,6 +123,7 @@ extern void far screen_flush(void);                              /* 05f5:0756 */
 extern void far text_wrap(unsigned char x1, unsigned char y1, unsigned char x2,
                           unsigned char y2, unsigned char fg, unsigned char bg,
                           char clear, char far *text);           /* 06c9:030f */
+extern void far status_msg(char far *fmt, char fg, char bg, ...); /* 06c9:08f7 */
 extern void far text_pause(void);                                /* 06c9:093c */
 extern void far msg_pause(void);                                 /* 06c9:0953 */
 extern void far hotkey_add(char key, unsigned char far *count);  /* 083a:0009 */
@@ -355,8 +343,8 @@ char far event_outcome(unsigned char far *ev, char alt)          /* 2cff:00b5 */
             r = ev[0x10];
             break;
         case 2:
-            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols);
-            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows);
+            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols - 1);
+            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows - 1);
             geo.facing = (ev[0xa] & 0x30) >> 3;
             party_pos_set();
             event_view_draw();
@@ -378,8 +366,8 @@ char far event_outcome(unsigned char far *ev, char alt)          /* 2cff:00b5 */
             r = ev[0xf];
             break;
         case 2:
-            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols);
-            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows);
+            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols - 1);
+            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows - 1);
             geo.facing = (ev[0xa] & 0x30) >> 3;
             party_pos_set();
             event_view_draw();
@@ -389,7 +377,7 @@ char far event_outcome(unsigned char far *ev, char alt)          /* 2cff:00b5 */
             step_back_due = 1;
         }
     }
-    rerun_square = ev[0xa] & 0x20;
+    rerun_square = ev[0xa] & 0x40;
     return r;
 }
 
@@ -1122,6 +1110,7 @@ void far event_transfer(unsigned char far *ev, char kind)         /* 2cff:1597 *
     stay = !(ev[7] & 0x10) && view_mode == 4 && kind != 0x22;
     if (go) {
         if (test_mode && kind == 0xb) {
+            status_msg("Transfer module ends testing!", 0xb, 0);
             adventure_exit = 1;
             return;
         }
@@ -1164,18 +1153,23 @@ void far event_transfer(unsigned char far *ev, char kind)         /* 2cff:1597 *
             else
                 view_3d();
             event_init();
-            if (!drow) {
-                transfer_dest_x = int_min(cur_area_rec->spots[slot - 1].x, cur_area_rec->cols);
-                transfer_dest_y = int_min(cur_area_rec->spots[slot - 1].y, cur_area_rec->rows);
-                geo.facing = cur_area_rec->spots[slot - 1].facing & 7;
-            } else {
-                transfer_dest_x = int_min(x, cur_area_rec->cols);
-                transfer_dest_y = int_min(y, cur_area_rec->rows);
+            if (drow) {
+                transfer_dest_x = int_min(x, cur_area_rec->cols - 1);
+                transfer_dest_y = int_min(y, cur_area_rec->rows - 1);
                 geo.facing = dir;
+            } else {
+                transfer_dest_x = int_min(cur_area_rec->spots[slot - 1].x, cur_area_rec->cols - 1);
+                transfer_dest_y = int_min(cur_area_rec->spots[slot - 1].y, cur_area_rec->rows - 1);
+                geo.facing = cur_area_rec->spots[slot - 1].facing & 7;
             }
+        } else if (ev[0xc] & 1) {
+            slot = ev[0xd];
+            transfer_dest_x = int_min(cur_area_rec->spots[slot - 1].x, cur_area_rec->cols - 1);
+            transfer_dest_y = int_min(cur_area_rec->spots[slot - 1].y, cur_area_rec->rows - 1);
+            geo.facing = cur_area_rec->spots[slot - 1].facing & 7;
         } else {
-            transfer_dest_x = int_min(ev[9], cur_area_rec->cols);
-            transfer_dest_y = int_min(ev[8], cur_area_rec->rows);
+            transfer_dest_x = int_min(ev[9], cur_area_rec->cols - 1);
+            transfer_dest_y = int_min(ev[8], cur_area_rec->rows - 1);
             geo.facing = (ev[7] & 0xc) >> 1;
         }
         party_pos_set();

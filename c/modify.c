@@ -25,8 +25,7 @@
  * ahead of its definition.  modify_hero edits cur_node in place: the six
  * abilities, the name and the maximum hit points, one field (field, 0..7)
  * at a time from the "Modify:" menu.  Only a member whose experience is
- * start_xp, half of it or a third of it may be changed (v1.0: v1.2 reads
- * create_xp, which party.c copies from start_xp).  Keep recomputes
+ * create_xp, half of it or a third of it may be changed.  Keep recomputes
  * what depends on the abilities; Exit puts back what was saved on entry.
  * This is DQK's modify.c with FRUA's Hero record (byte race, class and
  * gender).  hp_minimum gives class 4 alone the extra hit point below the
@@ -149,7 +148,7 @@ extern unsigned char hit_dice_level_limit[];                                 /* 
 extern unsigned char bit_mask[8];                                /* 6711 */
 extern struct Hero far *cur_node;                                /* b3dd */
 extern char tick_slot;                                           /* b3f2 */
-extern long start_xp;                                           /* ba28 */
+extern long create_xp;                                           /* b42b */
 extern struct Hero far *node_list;                               /* d129 */
 
 static unsigned char field = 0xff;                               /* 7070 */
@@ -696,8 +695,8 @@ void far modify_hero(void)                                       /* 32c2:12dc */
     short i;
     char key;
 
-    if (cur_node->xp != start_xp && cur_node->xp != start_xp / 2 &&
-        cur_node->xp != start_xp / 3) {
+    if (cur_node->xp != create_xp && cur_node->xp != create_xp / 2 &&
+        cur_node->xp != create_xp / 3) {
         status_msg("%s%s", 0xb, 0, cur_node->name, cant_modify_text);
         return;
     }

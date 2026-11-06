@@ -1,12 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): this object is at EXE
- * 0x06b5a0, frame 39fa:0000, 12,308 code bytes; _DATA 8de0.  The comment
- * below describes v1.2.  v1.0 differs in two routines: show_pic's empty
- * picture (num 0) only clears its box (no pic_release call), and
- * show_walls calls wall_sets_free(1) only for num < 0xff, clears rows
- * row + 0x1c..row + 0x1e (v1.2: row..row + 0x20), and draws the five wall
- * pieces for every num, 0 and 0xff included (v1.2 skips both).
- *
- * CKIT.EXE overlay section 18, module 29f4: the design editor's art screens.
+/* CKIT.EXE overlay section 18, module 29f4: the design editor's art screens.
  * art_screen (screen 8) lists the labels of one art kind -- pictures,
  * sprites, combat icons, big pictures, the overland, dungeon and
  * wilderness art, wall sets and backdrops, by labels.c's tables -- in
@@ -252,6 +244,8 @@ extern void far pic_open(char far *name, unsigned char id, char anim,
                                 /* 18de:1049, vector to overlay 3 1bbc:0077 */
 extern void far mode_change(int n);
                                 /* 18de:10cb, vector to overlay 3 1b41:02fe */
+extern void far pic_release(void);
+                                /* 18de:13c3, vector to overlay 3 1bbc:02b4 */
 extern void far big_open(unsigned char id);
                                 /* 18de:146d, vector to overlay 3 1bbc:0334 */
 extern int  far field_proc();
@@ -1126,6 +1120,7 @@ static void far show_pic(int num)                                /* 39f4:1df6 */
     if (num == 0) {
         col = row = 0x1f4c;
         fill_rect(row, col, row + 0x2c, col + 0x2c, 0);
+        pic_release();
     } else {
         pic_open("PIC", num, 0, &pic);
         pic_frame(3, 3, 1, 0);
@@ -1274,17 +1269,19 @@ static void far tile_grid(unsigned char far *p, int row, int col, unsigned char 
 static void far show_walls(int num)                              /* 39f4:2265 */
 {
     unsigned char k;
+    int step;
     register int col;
     register int row;
 
+    geo.area->sets[0] = num;
+    wall_sets_free(1);
     row = 0x1f4e;
     col = 0x1f46;
-    geo.area->sets[0] = num;
-    if (num < 0xff)
-        wall_sets_free(1);
-    fill_rect(row + 0x1c, col, row + 0x1e, col + 0x96, 8);
-    for (k = 1; k <= 5; k++, col += 0x1e)
-        piece_box(row, col, k, 6);
+    step = 0x1e;
+    fill_rect(row, col, row + 0x20, col + 0x96, 8);
+    if (num && num != 0xff)
+        for (k = 1; k <= 5; k++, col += step)
+            piece_box(row, col, k, 6);
 }
 
 static void far show_backs(int num, int scr)                     /* 39f4:22df */

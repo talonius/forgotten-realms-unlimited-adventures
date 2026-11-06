@@ -70,14 +70,6 @@
  * 4), ed_mode = disk = 0 (3 of 4), bits && confirm(...) in one test
  * (3 of 4), and design_key's second if without else (2 of 4).  Not
  * forced: register on choice and pick, the for form of the walk.
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): the
- * module starts at EXE 0x080d90, the section's first byte, and the
- * addresses above are v1.2's.  Against v1.2: design_delete copies the
- * design directory into the path (strcpy) instead of appending it to an
- * empty one, and walks and removes the design directory itself by name;
- * design_menu's "Create New Design" with no directory left does not
- * repeat game_load(0) after design_dir_restore.
  */
 
 struct Node {                   /* a list_menu line, as menu.c's          */
@@ -254,25 +246,33 @@ void far design_delete(void)                                     /* 3d91:0339 */
     char far *name;
     char is_dir;
 
-    str_copy(path, design_dir);
+    path[0] = 0;
+    path_append_name(path, design_dir);
     path_append_name(path, "SAVE");
     if (dir_first(0, path, 0, 1, 0))
         while ((name = dir_next(&is_dir)) != 0) {
-            str_copy(path, design_dir);
+            path[0] = 0;
+            path_append_name(path, design_dir);
             path_append_name(path, "SAVE");
             path_append_name(path, name);
             dos_open(0x4100, path);
         }
-    str_copy(path, design_dir);
+    path[0] = 0;
+    path_append_name(path, design_dir);
     path_append_name(path, "SAVE");
     dos_open(0x3a00, path);
-    if (dir_first(0, design_dir, 0, 1, 0))
+    path[0] = 0;
+    path_append_name(path, design_dir);
+    if (dir_first(0, path, 0, 1, 0))
         while ((name = dir_next(&is_dir)) != 0) {
-            str_copy(path, design_dir);
+            path[0] = 0;
+            path_append_name(path, design_dir);
             path_append_name(path, name);
             dos_open(0x4100, path);
         }
-    dos_open(0x3a00, design_dir);
+    path[0] = 0;
+    path_append_name(path, design_dir);
+    dos_open(0x3a00, path);
 }
 
 char far design_key(int id, int key)                             /* 3d91:04d3 */
@@ -364,8 +364,10 @@ char far design_menu(void)                                       /* 3d91:051f */
                 start_save();
                 ed_unlocked = 1;
                 area_start_select();
-            } else
+            } else {
                 design_dir_restore();
+                game_load(0);
+            }
             break;
         case 3:
             bits = 7;

@@ -50,12 +50,6 @@
  *
  * _DATA is 16 stored literals, DGROUP 72ae..73e0; -d stores the list
  * title "" as the NUL of the first.  The module has no _BSS.
- *
- * This is the v1.0 build (CKIT.EXE 1.0, module at file offset 0x3f9be,
- * TEXT 35e3:000e, _DATA at DGROUP 727c); the addresses above are v1.2's.
- * The one change from v1.2: train_hero's race level limits test the
- * hero's current strength and intelligence (stats[].cur) where v1.2 tests
- * the base scores.
  */
 
 struct Pool;                    /* strutil.c's slot pool                  */
@@ -404,20 +398,20 @@ void far train_hero(void)                                   /* 35e1:06b9 */
             lvl = cur_node->level[i];
             switch (cur_node->race) {
             case 2:
-                if (i == 2 && (lvl == 9 || lvl == 8 && cur_node->stats[0].cur == 17 ||
-                               lvl == 7 && cur_node->stats[0].cur < 17))
+                if (i == 2 && (lvl == 9 || lvl == 8 && cur_node->stats[0].base == 17 ||
+                               lvl == 7 && cur_node->stats[0].base < 17))
                     blocked = 1;
                 break;
             case 0:
-                if (i == 2 && (lvl == 7 || lvl == 6 && cur_node->stats[0].cur == 17 ||
-                               lvl == 5 && cur_node->stats[0].cur < 17))
+                if (i == 2 && (lvl == 7 || lvl == 6 && cur_node->stats[0].base == 17 ||
+                               lvl == 5 && cur_node->stats[0].base < 17))
                     blocked = 1;
-                if (i == 5 && (lvl == 11 || lvl == 9 && cur_node->stats[1].cur < 17 ||
-                               lvl == 10 && cur_node->stats[1].cur == 17))
+                if (i == 5 && (lvl == 11 || lvl == 9 && cur_node->stats[1].base < 17 ||
+                               lvl == 10 && cur_node->stats[1].base == 17))
                     blocked = 1;
                 break;
             case 3:
-                if (i == 2 && (lvl == 6 || lvl == 5 && cur_node->stats[0].cur < 18))
+                if (i == 2 && (lvl == 6 || lvl == 5 && cur_node->stats[0].base < 18))
                     blocked = 1;
                 if (i == 0 && lvl >= 7)
                     blocked = 1;
@@ -428,16 +422,16 @@ void far train_hero(void)                                   /* 35e1:06b9 */
                     break;
                 }
                 if ((i == 2 || i == 4) &&
-                    (lvl == 8 || lvl == 7 && cur_node->stats[0].cur == 17 ||
-                     lvl == 6 && cur_node->stats[0].cur < 17))
+                    (lvl == 8 || lvl == 7 && cur_node->stats[0].base == 17 ||
+                     lvl == 6 && cur_node->stats[0].base < 17))
                     blocked = 1;
-                if (i == 5 && (lvl == 8 || lvl == 7 && cur_node->stats[1].cur == 17 ||
-                               lvl == 6 && cur_node->stats[1].cur < 17))
+                if (i == 5 && (lvl == 8 || lvl == 7 && cur_node->stats[1].base == 17 ||
+                               lvl == 6 && cur_node->stats[1].base < 17))
                     blocked = 1;
                 break;
             case 4:
-                if (i == 2 && (lvl == 6 || lvl == 5 && cur_node->stats[0].cur == 17 ||
-                               lvl == 4 && cur_node->stats[0].cur < 17))
+                if (i == 2 && (lvl == 6 || lvl == 5 && cur_node->stats[0].base == 17 ||
+                               lvl == 4 && cur_node->stats[0].base < 17))
                     blocked = 1;
                 break;
             }

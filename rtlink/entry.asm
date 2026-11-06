@@ -1,5 +1,5 @@
 ; RTLink startup wrapper.
-; Link-time address 18E4:07D7; original EXE file offset 0x1BA17.
+; Link-time address 18DE:07D7; original EXE file offset 0x1B9B7.
 ; Four explicit byte pairs preserve alternate encodings NASM does not select.
 
 bits 16

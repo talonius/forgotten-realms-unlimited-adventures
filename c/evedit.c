@@ -1,8 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993", EXE 0x067f10): the
- * same module but the unmarked text_print_at (i != 0) uses attribute 0x80
- * where v1.2 uses 0x180.  The addresses below are v1.2's.
- *
- * CKIT.EXE overlay section 17, module 29f4: the event editor's pages.  An
+/* CKIT.EXE overlay section 17, module 29f4: the event editor's pages.  An
  * event is edited through the "script" library (opened in slot 0x18): its
  * item for the event kind, and for kinds below 0x33 also item 0, hold the
  * editor's title and pages, each page a list of field records (a label,
@@ -67,7 +63,7 @@
  * (a break in the body moves the test); "i + i + 9" in icons_load (i * 2
  * shifts); "++ed_cur >= count"; "(n = f()) >= 0" in event_edit's picker
  * cases (jointly: any one case alone bakes the same); case 9 ahead of cases 4 and 5 in field_store; "i == 0 ? 0x87 :
- * 0x180" (0x80 in v1.0).
+ * 0x180".
  */
 
 struct ItemRec {                /* an item's saved fields, 18 bytes, shop.c's */
@@ -682,7 +678,7 @@ void far choice_show(int id)                                     /* 39f4:0ea4 */
     if (dl_item_count() > id + 1) {
         for (j = 0; j <= 4; j++)
             ui_mark(id + j + 1, j == i ? 0x18 : 0x10);
-        text_print_at(f[1].spec[3] + 0x1f40, f[1].spec[4] + 0x1f40, i == 0 ? 0x87 : 0x80,
+        text_print_at(f[1].spec[3] + 0x1f40, f[1].spec[4] + 0x1f40, i == 0 ? 0x87 : 0x180,
                       "%s", f[1].spec + 6);
     }
 }

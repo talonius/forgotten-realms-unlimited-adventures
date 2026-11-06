@@ -39,13 +39,6 @@
  * panel rectangle panel_x1..panel_y2 is addressed only in this module, but
  * its gap b3e8..b3eb is not addressed here, so it is declared extern, as
  * in DQK.
- *
- * THIS IS THE v1.0 BUILD (CKIT.EXE "Version 1.0 March 19,1993"): the
- * addresses above are v1.2's; v1.0 places the module at file 0x02db90
- * (2c8c:0000, _DATA 5ae6, ten literals to 5b28).  Against v1.2, v1.0's
- * party_info_display has no default case in the compass switch: a facing whose
- * letter is none of E, N, S and W draws nothing and shows no error box
- * (so there is no "Facing %d/8 chr '%c'" literal).
  */
 
 struct Hero {                   /* a party member                         */
@@ -83,6 +76,7 @@ extern char far *far msg_format(char far *fmt, ...);             /* 0a75:03fa */
 extern void far str_copy(char far *dst, char far *src);      /* 00d7:255e */
 extern void far str_cat(char far *dst, char far *src);      /* 00d7:24b6 */
 extern void far draw_glyph(int row, int col, int n, int glyph);  /* 11d7:0bd1 */
+extern void far error_box(char far *fmt, ...);                   /* 0da7:03c8 */
 
 extern char dir_names[8][3];                                     /* 5fb2 */
 extern char byte_6726;                                           /* 6726 */
@@ -260,6 +254,9 @@ void far party_info_display(void)                                       /* 2c86:
         break;
     case 'W':
         draw_glyph(0x1f40, 0x1f40, 1, 0x18);
+        break;
+    default:
+        error_box("Facing %d/8 chr '%c'", geo.facing, dir_names[geo.facing][0]);
         break;
     }
     str_cat(pos, " ");             /* pos is not shown again, as shipped */

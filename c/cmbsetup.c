@@ -38,12 +38,6 @@
  * Directions run 0 (north) clockwise to 7 (north-west), as dir_dx and
  * dir_dy step them.  The dungeon map is 13 by 5 blocks of 6 by 5 cells
  * around the party's square; a formation is 6 rows of 11 cells.
- *
- * This is the v1.0 build (CKIT.EXE file offset 0x277f0; addresses above are
- * v1.2's).  It differs from v1.2 in party_ready, which takes the morale as
- * control & 0x7f unscaled and sets an NPC's control to cursor_obj[0x20] +
- * 0x80 (v1.2 doubles the one and quadruples the other), and in combat_setup,
- * which first clears a v1.0-only byte at DGROUP caac.
  */
 
 struct Map {
@@ -168,7 +162,6 @@ extern struct Hero far *cur_node;                                /* b3dd */
 extern char view_flag;                                           /* b40f */
 extern unsigned char combat_round;                                  /* b418 */
 extern int view_mode;                                            /* b421 */
-extern char v10_byte_caac;      /* v1.0 only: cleared first by combat_setup */
 extern char text_slow;                                           /* b431 */
 extern char exploration_menu_context;                                           /* b4e8 */
 extern struct Res far *icon_res;                                 /* b71c */
@@ -794,9 +787,9 @@ static void party_ready(void)                                    /* 3482:0fe1 */
         h->fight->facing = quarter_dir[geo.facing / 2];
         if (h->side == 1)
             h->fight->facing = (h->fight->facing + 4) % 8;
-        mor = h->control & 0x7f;
+        mor = (h->control & 0x7f) * 2;
         if (h->side == 0 && h->fight->not_pc == 1 && (mor == 0 || mor > 0x66))
-            h->control = cursor_obj[0x20] + 0x80;
+            h->control = cursor_obj[0x20] * 4 + 0x80;
         h->fight->byte_17 = 1;
         h = h->next;
     }
@@ -1088,7 +1081,6 @@ void far combat_setup(void)                                      /* 3482:1c4d */
 {
     struct Hero far *h;
 
-    v10_byte_caac = 0;
     text_slow = 0;
     view_flag = 0xff;
     magic_on = 0;

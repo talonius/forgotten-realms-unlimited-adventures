@@ -1,12 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993", EXE 0x00a79e; the
- * addresses below are v1.2's).  Differs from v1.2 in three places:
- * box_draw_top also calls clip_set(0x1f98, 0x1f40, 0x1f9d, 0x1fe0) before
- * and clip_reset after its glyph; menu_parse and menu_split keep DQK's
- * digit class (a hotkey may be '0'..'9'); and menu_wait_key does not
- * restart frame_at while the menu is not animating, so menu_timeout counts
- * from the last frame (or the start) rather than from the last poll.
- *
- * CKIT.EXE resident module 183a: menus.  Hotkey tables, the button hook,
+/* CKIT.EXE resident module 183a: menus.  Hotkey tables, the button hook,
  * menu text parsing and drawing, the key wait with its animation and
  * timeout, and the menu shapes built on them (prompts, lists, grids).
  * A port of Dark Queen of Krynn's menu.c.
@@ -342,9 +334,7 @@ void far box_draw(void)                                          /* 183a:03b2 */
 
 void far box_draw_top(void)                                         /* 183a:03ea */
 {
-    clip_set(0x1f98, 0x1f40, 0x1f9d, 0x1fe0);
     draw_glyph(0x1f40, 0x1f40, 1, 6);
-    clip_reset();
 }
 
 void far box_draw_both(void)                                     /* 183a:0400 */
@@ -499,7 +489,7 @@ int far menu_parse(char far *s, char far * far *items)           /* 183a:0755 */
                 p++;
                 if (*p == '@')
                     at = 1;
-            } while (*p && (*p < 'A' || *p > 'Z') && (*p < '0' || *p > '9'));
+            } while (*p && (*p < 'A' || *p > 'Z'));
             if (at) {
                 at = 0;
                 def_index = count;
@@ -740,13 +730,13 @@ static void far menu_split(char far *s)                          /* 183a:0e65 */
     k = 0;
     i = 0;
     while (i < len) {
-        if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9')) {
+        if (s[i] >= 'A' && s[i] <= 'Z') {
             if (hotkeys[n].key == k) {
                 hotkeys[n].ch = s[i];
                 start = i;
                 do
                     i++;
-                while ((s[i] < 'A' || s[i] > 'Z' || (s[i] >= '0' && s[i] <= '9')) && i < len);
+                while ((s[i] < 'A' || s[i] > 'Z') && i < len);
                 str_copy(buf, substr(s, start + 1, i - start));
                 str_copy(prompt_text, msg_format("%s%s", prompt_text, buf));
                 n++;
@@ -797,7 +787,8 @@ static int far menu_wait_key(char anim)                          /* 183a:0fe7 */
                         anim_frame = anim_first;
                     frame_at = ticks_now();
                 }
-            }
+            } else
+                frame_at = ticks_now();
             if (menu_timeout > 0 && ticks_now() - frame_at >= menu_timeout) {
                 timed_out = 1;
                 break;

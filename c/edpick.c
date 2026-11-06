@@ -1,10 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993", EXE 0x081789; the
- * addresses below are v1.2's).  Differs from v1.2 in two places:
- * ask_screen's question 6 passes the chained-event count as a long (v1.2
- * casts it to int for the "%d"), and pick_screen's kinds 6 and 7 start
- * with lo = num ? 1 : 0 where v1.2 sets lo = 0.
- *
- * CKIT.EXE overlay section 26, module 2e34: three of the design editor's
+/* CKIT.EXE overlay section 26, module 2e34: three of the design editor's
  * screens and the editor's heading.  Each screen reads its request from
  * env->bits, clears part of it and leaves its answer there, and returns
  * the screen it was called with.
@@ -302,7 +296,7 @@ int far ask_screen(int prev, struct EdEnv far *env, void far *arg) /* 3e34:000e 
         n = 1;
         break;
     case 6:
-        str_format(quest, ask_questions[k], ((env->bits & 0xff00) >> 8) + 1);
+        str_format(quest, ask_questions[k], (int)((env->bits & 0xff00) >> 8) + 1);
         str_format(keys, "%s %s", ok_text, cancel_text);
         n = 1;
         break;
@@ -455,7 +449,7 @@ int far pick_screen(int prev, struct EdEnv far *env, void far *arg) /* 3e34:02e8
     case 7:
         by_id = 1;
         num = (env->bits & 0xff0) >> 4;
-        lo = num ? 1 : 0;
+        lo = 0;
         unavail = -1;
         top = num - (lo > 0 ? 1 : 0);
         cur = num;

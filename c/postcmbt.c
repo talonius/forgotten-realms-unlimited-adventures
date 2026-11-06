@@ -37,13 +37,6 @@
  * stored as seven -- -d stores the three "Take:" once and "Items Exit" as
  * the tail of "Money Items Exit".  _BSS is three chars, fled, killed and
  * has_items, at d20a..d20c.
- *
- * This is the v1.0 build (CKIT.EXE of March 19, 1993): EXE 0x04b6af..0x04cab7,
- * stored 32f1:000f in section 10, _DATA at 7a08, _BSS at d1ac.  v1.0 still has
- * two of DQK's forms that v1.2 changed: loot_exp adds a monster's money to the
- * pool before the cursor_obj[0x1e] flag (the flag withholds only its items),
- * and any combatant able or in state 3, 4 or 5 -- monsters included -- keeps
- * the party alive.
  */
 
 struct Stat {
@@ -276,10 +269,10 @@ void far loot_exp(long far *share)                               /* 32ef:01ff */
         if (p->side == 1 && p->status != 0 && p->status != 3 && p->status != 9) {
             killed = 1;
             if (p->fight->not_pc == 1) {
-                for (i = 0; i <= 2; i++)
-                    pool[i] += p->coins[i];
                 total += p->xp_value;
                 if (!cursor_obj[0x1e]) {
+                    for (i = 0; i <= 2; i++)
+                        pool[i] += p->coins[i];
                     if (it && it->type != 0x69) {
                         q = pool_items;
                         pool_items = it;
@@ -384,7 +377,8 @@ void far combat_results(void)                                    /* 32ef:0599 */
     p = node_list;
     alive = 0;
     while (p && !alive) {
-        if (p->active || p->status == 4 || p->status == 3 || p->status == 5)
+        if (p->fight->not_pc != 1
+            && (p->active || p->status == 4 || p->status == 3 || p->status == 5))
             alive = 1;
         p = p->next;
     }

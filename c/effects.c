@@ -48,13 +48,6 @@
  * (0x03946d, 0x039604), sections 4 and 8 use c671, and hero.c and
  * sections 8 and 10 use c672.
  *
- * This is the v1.0 build (CKIT.EXE of March 19, 1993): EXE 0x04fa70..0x0532e3,
- * stored 36e9:0000 in section 11, _DATA at 7fa4 ("" on the NUL of
- * "paralyzed", 7fad), _BSS at c616.  v1.0's paralysis messages read
- * "paralyzed" and "paralyzed by poison" where v1.2's read "is paralyzed"
- * and "is paralyzed by poison", and fx_adjacent_save_aura gives effect 0x94 a
- * duration of 0, not 1.
- *
  * heroes and steps are indexed from 1; the shipped code adds the address
  * of element 0 (b8f1, ca28).  targets[1] is DGROUP cfe7.
  */
@@ -383,9 +376,9 @@ void far fx_paralyze(struct Hero far *h, int unused, char save) /* 36e3:0000 */
     fx_target = h->fight->target;
     saved = fx_saving_throw(fx_target, 0, save);
     if (find_effect(h, 0x58, &node))
-        fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "paralyzed");
+        fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "is paralyzed");
     else
-        fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "paralyzed by poison");
+        fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "is paralyzed by poison");
 }
 
 void far fx_cancel(char id)                                      /* 36e3:00a1 */
@@ -1402,7 +1395,7 @@ void far fx_paralyze_gaze(struct Hero far *h, struct Effect far *fx, char remove
                 fx_target = h;
             }
             saved = fx_saving_throw(fx_target, 1, 3) || find_effect(fx_target, 0x7e, &node);
-            fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "paralyzed");
+            fx_add_message(fx_target, 0x34, 10, 0xc, 0, 1, saved, "is paralyzed");
         }
     }
 }
@@ -1531,7 +1524,7 @@ void far fx_adjacent_save_aura(struct Hero far *h, struct Effect far *fx, char r
         m = (heroes - 1)[(steps - 1)[tick_slot].who];
         if (m->side != h->side && !fx_saving_throw(m, 4, 0) && !find_effect(m, 0x76, &node)) {
             hit_flash(m, 1, game_text[1]);
-            fx_add(h, 0x94, 0, 0xff, 0);
+            fx_add(h, 0x94, 1, 0xff, 0);
         }
     }
 }

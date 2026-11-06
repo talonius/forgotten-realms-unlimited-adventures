@@ -1,10 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): this object is at EXE
- * 0x07c116, frame 3e5d:0006, 5,507 code bytes; _DATA a69c, _BSS d4ce.  The
- * comment below describes v1.2.  The only difference from v1.2: trn_load
- * calls path_default_ext without a prototype in scope, so its force
- * argument 1 is pushed as an int (mov ax,1), one byte longer.
- *
- * CKIT.EXE overlay section 24, module 2e59: cutting a glyph out of the screen.
+/* CKIT.EXE overlay section 24, module 2e59: cutting a glyph out of the screen.
  * glyph_grab copies the cut's 8-byte glyph header to the start of the
  * scratch block db_buffer returns, ORs flags into its type, adjusts the
  * type and the row width by video mode (is_xvga, pixel_shift), and
@@ -130,7 +124,7 @@ extern void far video_address_set(int row, int col);                  /* 0f5e:07
 extern void far pointer_show(void);                              /* 0f5e:0d1c */
 extern void far *far db_buffer(void);                         /* 107e:0001 */
 extern void far console_beep(void);                              /* 107e:02c5 */
-extern char far path_default_ext();  /* 17a1:0264; v1.0: no prototype, so the 1 is pushed as an int */
+extern char far path_default_ext(char far *path, char far *ext, char force); /* 17a1:0264 */
 extern int  far ilbm_cmap();       /* no prototype: called (8, 0) and (8, n, rgb) */
                                                                  /* 2fb1:01c5 */
 extern int  far ilbm_crng(int slot, void far *cyc);              /* 2fb1:0310 */

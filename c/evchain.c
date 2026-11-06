@@ -67,12 +67,6 @@
  * key == 0x86 and pos + (last >= 0) as relations, not ?: (mov ax,1);
  * switch (t) in the post-switch case 11; register n and row in usage_draw;
  * the if/else shapes of chain_splice and chain_link that put return 0 last.
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): EXE
- * 0x075e20 (the section's first byte), 8,815 code bytes, byte-exact.  The
- * addresses and claims above are v1.2's.  v1.0 differs only in
- * chain_command's "Prev" (case 1), which reads the previous link's event
- * without v1.2's null check on the link.
  */
 
 struct MapCell {                /* a square of the area, 6 bytes          */
@@ -680,7 +674,11 @@ static void far chain_command(struct EvChain far *p, register int cmd) /* 3d91:0
         case 1:
             chain_prev(&p->chain, 1);
             l = chain_prev(&p->chain, 0);
-            alt_reset(ev = l->ev, 1);
+            if (l)
+                ev = l->ev;
+            else
+                ev = 0;
+            alt_reset(ev, 1);
             p->cmd = ev | 0x600;
             p->next = 5;
             break;

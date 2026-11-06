@@ -1,6 +1,5 @@
 /* CKIT.EXE overlay section 24, module 3039: reading a PCX picture, the
- * PCX counterpart of ilbm.c.  This is the v1.0 build: its header-check error box
- * reads "Can't read PCX, bad header!" where v1.2's reads "not 256 color!".  The picture is a file loaded whole into a
+ * PCX counterpart of ilbm.c.  The picture is a file loaded whole into a
  * cache slot (slot_base gives its first byte, slot_used its length).  For
  * section 24's art import (artimp.c), which runs this module for a file
  * name ending in X or x and ilbm.c's for any other:
@@ -225,7 +224,7 @@ void far pcx_show(int slot)                                      /* 4039:02c3 */
     h = hdr.ymax - hdr.ymin + 1;
     rowbytes = hdr.planes * hdr.line_bytes;
     if (hdr.encoding != 1 || hdr.bpp != 8 || rowbytes > 0x500 || hdr.planes != 1) {
-        error_box("Can't read PCX, bad header!");
+        error_box("Can't read PCX, not 256 color!");
         return;
     }
     clear_screen(0);

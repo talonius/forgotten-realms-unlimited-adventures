@@ -1,9 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993", EXE 0x062c00): the
- * same module but a disabled field (flags & 1) draws its label and frame
- * in attribute 0x80 where v1.2 uses 0x180.  The addresses below are
- * v1.2's.
- *
- * CKIT.EXE overlay section 15, module 28aa: number fields, dialog items of
+/* CKIT.EXE overlay section 15, module 28aa: number fields, dialog items of
  * module 25e5's kind.  num_proc handles a field holding a long: the item's
  * text is its label, drawn left of the field, and its val a struct NumSave
  * (the largest and least value allowed, the value, a copy of it, where the
@@ -72,7 +67,7 @@ struct Wid {                    /* one dialog item, 0x20 bytes, as dialog.c */
     int len;                    /* +16 here the field's width in digits   */
     int width;                  /* +18                                    */
     int glyph;                  /* +1a bank<<10|index                     */
-    char flags;                 /* +1c 1 drawn in 0x80, 2 not drawn (and
+    char flags;                 /* +1c 1 drawn in 0x180, 2 not drawn (and
                                        neither is hit), 4 has the focus,
                                        8 the next key starts a new value,
                                        0x20 cancelled (Esc or 0x60),
@@ -187,9 +182,9 @@ int far num_proc(struct Wid far *w, int msg, int a, int b)       /* 38aa:0000 */
             draw_glyph(p->row, p->col, p->glyph >> 10, (p->glyph & 0x3ff) + scratch_word);
         if (p->text)
             text_print_at(p->row, p->col - str_len(p->text) * 4 - 4,
-                          (p->flags & 1) ? 0x80 : p->color, p->text);
+                          (p->flags & 1) ? 0x180 : p->color, p->text);
         if (p->flags & 1)
-            attr = 0x80;
+            attr = 0x180;
         else if (p->flags & 4)
             attr = 0xf0;
         else

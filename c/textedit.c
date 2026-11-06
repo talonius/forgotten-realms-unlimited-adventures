@@ -52,11 +52,6 @@
  * edit_end use and section 15 uses the same way, lie past labels.c's _DATA
  * (5ec9 is a pad byte) and before menubox.c's at 5ed0: a module's _DATA is
  * one block, so they are not this module's, and they are extern here.
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): EXE
- * 0x0334e0, 8,330 code bytes, byte-exact.  The addresses and claims above
- * are v1.2's.  v1.0 differs only in field_char and box_char, which lack
- * v1.2's "a NUL character draws as a space" (c == 0 -> ' ') check.
  */
 
 typedef int (far *ItemProc)();       /* (item, msg, a, b), as dialog.c's */
@@ -602,6 +597,8 @@ static char line_move(char far *text, unsigned char far *pos, char up) /* 2c86:1
 /* One character of a field, or the cursor bar past its end. */
 static void field_char(register int row, int col, unsigned char at, int len, int attr, char c) /* 2c86:1306 */
 {
+    if (c == 0)
+        c = ' ';
     if (at < len)
         text_print_at(row, col + at * 4, attr, "%c", c);
     else {
@@ -628,6 +625,8 @@ static void box_char(int row, int col, unsigned char pos, int attr, char far *te
     pos = int_max(0, int_min(pos - b->lines[n].start, 0x25));
     if (c == 0)
         c = *(text + b->lines[n].start + pos);
+    if (c == 0)
+        c = ' ';
     text_print_at(row + n * 4, col + pos * 4, attr, "%c", c);
 }
 

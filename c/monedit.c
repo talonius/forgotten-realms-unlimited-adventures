@@ -92,15 +92,6 @@
  * "effects[i++] =" or two statements; i's two statements or one;
  * monst_listed and monst_unlisted char or int; register or plain prev and
  * i; parse_long's n initialized in its declaration.
- *
- * This is the v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): the
- * module starts at EXE 0x07f37c (load-based frame 3e66 from byte c), and
- * the addresses above are v1.2's.  Against v1.2, monster_screen's
- * re-created NPC path does not call mu_learn after the training loop,
- * does not set npc to 0xb2, and stores every effect's +4 byte into
- * effects[0] (i is never advanced, so the zero fill clears all 10, as
- * shipped); monst_default builds MONST%03d.dat's path with path_in_dir
- * (17d3:0355) in one buffer rather than with path_append_name twice.
  */
 
 struct EdEnv {                  /* editloop.c's, passed to every screen   */
@@ -211,7 +202,7 @@ extern void far pool_free(void far *ptr, int unused, struct Pool far *pool); /* 
 extern void far game_exit(void);                                 /* 0d48:002f */
 extern void far frame_border(void);                              /* 0d65:002a */
 extern void far error_box(char far *fmt, ...);                   /* 0da7:03c8 */
-extern void far path_in_dir(char far *path, char far *dir, char force); /* 17d3:0355 */
+extern void far path_append_name(char far *path, char far *name);    /* 17d3:03af */
 extern int  far str_format(char far *buf, char far *fmt, ...);   /* 1860:0037 */
 extern void far mode_change(int n);
                                 /* 18de:10cb, vector to overlay 3 1b41:02fe */
@@ -335,6 +326,7 @@ int far monster_screen(int prev, struct EdEnv far *env, struct MonArg far *arg) 
                         do
                             train_hero();
                         while (!training_done);
+                        mu_learn(cur_node);
                         cur_node = node_save;
                         free_train = free_save;
                         cursor_obj[0x30] = cursor_save;
@@ -342,9 +334,12 @@ int far monster_screen(int prev, struct EdEnv far *env, struct MonArg far *arg) 
                     }
                 }
                 a->rec->hero.mon_id = a->num;
+                a->rec->hero.control = 0xb2;
                 i = 0;
-                for (eff = a->rec->hero.effects; eff; eff = eff->next)
+                for (eff = a->rec->hero.effects; eff; eff = eff->next) {
                     a->rec->effects[i] = eff->strength;
+                    i++;
+                }
                 for (; i < 10; i++)
                     a->rec->effects[i] = 0;
                 for (eff = a->rec->hero.effects; eff; eff = eff_next) {
@@ -463,10 +458,13 @@ char far monst_default(unsigned char num, char far *buf)         /* 3e62:0798 */
 {
     char ok;
     char path[0x50];
+    char name[0x10];
 
     ok = 0;
-    str_format(path, "MONST%03d.dat", num);
-    path_in_dir(path, design_dir, 1);
+    str_format(name, "MONST%03d.dat", num);
+    path[0] = 0;
+    path_append_name(path, design_dir);
+    path_append_name(path, name);
     if (dos_open(0x4100, path) >= 0 && monst_load(num)) {
         str_copy(buf, mon_arg->rec->hero.name);
         ok = 1;

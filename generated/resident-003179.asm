@@ -5,11 +5,11 @@ bits 16
 cpu 8086
 org 0x3179
 
-    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0xff, 0x06, 0x22, 0xd9, 0x75, 0x04, 0xff, 0x06, 0x24, 0xd9 ; 003179 |....M...".u...$.|
+    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0xff, 0x06, 0x80, 0xd9, 0x75, 0x04, 0xff, 0x06, 0x82, 0xd9 ; 003179 |....M.....u.....|
     db 0x50, 0x52, 0xba, 0x01, 0x02, 0xec, 0x8a, 0xe0, 0xf6, 0xd0, 0x22, 0x06, 0x2a, 0x00, 0x88, 0x26 ; 003189 |PR........".*..&|
-    db 0x2a, 0x00, 0x08, 0x06, 0x2e, 0xd9, 0xf7, 0x06, 0x22, 0xd9, 0x01, 0x00, 0x74, 0x0a, 0x5a, 0x58 ; 003199 |*......."...t.ZX|
-    db 0xf7, 0x06, 0x22, 0xd9, 0x02, 0x00, 0x1f, 0xcb, 0x83, 0x3e, 0xd3, 0xd6, 0x00, 0x75, 0x10, 0x53 ; 0031a9 |.."......>...u.S|
-    db 0x51, 0x56, 0x57, 0x06, 0xfc, 0x9a, 0x23, 0x08, 0x64, 0x0f, 0x07, 0x5f, 0x5e, 0x59, 0x5b, 0x5a ; 0031b9 |QVW...#.d.._^Y[Z|
+    db 0x2a, 0x00, 0x08, 0x06, 0x8c, 0xd9, 0xf7, 0x06, 0x80, 0xd9, 0x01, 0x00, 0x74, 0x0a, 0x5a, 0x58 ; 003199 |*...........t.ZX|
+    db 0xf7, 0x06, 0x80, 0xd9, 0x02, 0x00, 0x1f, 0xcb, 0x83, 0x3e, 0x31, 0xd7, 0x00, 0x75, 0x10, 0x53 ; 0031a9 |.........>1..u.S|
+    db 0x51, 0x56, 0x57, 0x06, 0xfc, 0x9a, 0x21, 0x08, 0x5e, 0x0f, 0x07, 0x5f, 0x5e, 0x59, 0x5b, 0x5a ; 0031b9 |QVW...!.^.._^Y[Z|
     db 0x58, 0x1f, 0xcb ; 0031c9 |X..|
 
 ; Ghidra 10d7:005c: FUN_10d7_005c
@@ -38,10 +38,10 @@ loc_0031e9:
 ; Ghidra 10d7:007d: FUN_10d7_007d
 fn_0031ed:
 loc_0031ed:
-    add di,[ss:0xd6e8]                         ; 0031ed 10d7:007d
-    cmp di,[ss:0xd6ff]                         ; 0031f2 10d7:0082
+    add di,[ss:0xd746]                         ; 0031ed 10d7:007d
+    cmp di,[ss:0xd75d]                         ; 0031f2 10d7:0082
     jc short loc_0031fe                        ; 0031f7 10d7:0087
-    add di,[ss:0xd6fc]                         ; 0031f9 10d7:0089
+    add di,[ss:0xd75a]                         ; 0031f9 10d7:0089
 loc_0031fe:
     ret                                        ; 0031fe 10d7:008e
 
@@ -51,8 +51,8 @@ fn_0031ff:
     db 0x8b, 0xec ; 003200 10d7:0090: mov bp,sp [alternate encoding required]
     push si                                    ; 003202 10d7:0092
     push di                                    ; 003203 10d7:0093
-    mov es,word [0xd5af]                       ; 003204 10d7:0094
-    mov di,[0xd701]                            ; 003208 10d7:0098
+    mov es,word [0xd60d]                       ; 003204 10d7:0094
+    mov di,[0xd75f]                            ; 003208 10d7:0098
     push ds                                    ; 00320c 10d7:009c
     lds si,word [bp+0x6]                       ; 00320d 10d7:009d
     mov bh,[bp+0x10]                           ; 003210 10d7:00a0
@@ -113,8 +113,8 @@ fn_003272:
     db 0x8b, 0xec ; 003273 10d7:0103: mov bp,sp [alternate encoding required]
     push si                                    ; 003275 10d7:0105
     push di                                    ; 003276 10d7:0106
-    mov es,word [0xd5af]                       ; 003277 10d7:0107
-    mov di,[0xd701]                            ; 00327b 10d7:010b
+    mov es,word [0xd60d]                       ; 003277 10d7:0107
+    mov di,[0xd75f]                            ; 00327b 10d7:010b
     push ds                                    ; 00327f 10d7:010f
     lds si,word [bp+0x6]                       ; 003280 10d7:0110
     mov ah,[bp+0xc]                            ; 003283 10d7:0113
@@ -145,9 +145,9 @@ loc_0032a0:
 
 ; Ghidra 10d7:0141: FUN_10d7_0141
 fn_0032b1:
-    dec word [0xd6ec]                          ; 0032b1 10d7:0141
+    dec word [0xd74a]                          ; 0032b1 10d7:0141
     jnz short loc_0032bc                       ; 0032b5 10d7:0145
-    call word 0xf64:word 0xdfd                 ; 0032b7 10d7:0147
+    call word 0xf5e:word 0xdfb                 ; 0032b7 10d7:0147
 loc_0032bc:
     retf                                       ; 0032bc 10d7:014c
     db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ; 0032bd |......|
@@ -191,12 +191,12 @@ loc_00330a:
     pop si                                     ; 00330b 10d7:019b
     pop bp                                     ; 00330c 10d7:019c
     retf                                       ; 00330d 10d7:019d
-    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0xff, 0x06, 0x22, 0xd9, 0x75, 0x04, 0xff, 0x06, 0x24, 0xd9 ; 00330e |....M...".u...$.|
-    db 0x50, 0x52, 0xba, 0x01, 0x02, 0xec, 0x8a, 0xe0, 0xf6, 0xd0, 0x22, 0x06, 0x83, 0xa6, 0x88, 0x26 ; 00331e |PR........"....&|
-    db 0x83, 0xa6, 0x08, 0x06, 0x2e, 0xd9, 0xf7, 0x06, 0x22, 0xd9, 0x01, 0x00, 0x74, 0x17, 0x5a, 0x58 ; 00332e |........"...t.ZX|
-    db 0xf7, 0x06, 0x22, 0xd9, 0x02, 0x00, 0x1f, 0x74, 0x05, 0x2e, 0xff, 0x2e, 0x4f, 0x01, 0x50, 0xb0 ; 00333e |.."....t....O.P.|
-    db 0x20, 0xe6, 0x20, 0x58, 0xcf, 0xb0, 0x20, 0xe6, 0x20, 0xfb, 0x83, 0x3e, 0xd3, 0xd6, 0x00, 0x75 ; 00334e | . X.. . ..>...u|
-    db 0x10, 0x53, 0x51, 0x56, 0x57, 0x06, 0xfc, 0x9a, 0x23, 0x08, 0x64, 0x0f, 0x07, 0x5f, 0x5e, 0x59 ; 00335e |.SQVW...#.d.._^Y|
+    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0xff, 0x06, 0x80, 0xd9, 0x75, 0x04, 0xff, 0x06, 0x82, 0xd9 ; 00330e |....M.....u.....|
+    db 0x50, 0x52, 0xba, 0x01, 0x02, 0xec, 0x8a, 0xe0, 0xf6, 0xd0, 0x22, 0x06, 0xdd, 0xa6, 0x88, 0x26 ; 00331e |PR........"....&|
+    db 0xdd, 0xa6, 0x08, 0x06, 0x8c, 0xd9, 0xf7, 0x06, 0x80, 0xd9, 0x01, 0x00, 0x74, 0x17, 0x5a, 0x58 ; 00332e |............t.ZX|
+    db 0xf7, 0x06, 0x80, 0xd9, 0x02, 0x00, 0x1f, 0x74, 0x05, 0x2e, 0xff, 0x2e, 0x4f, 0x01, 0x50, 0xb0 ; 00333e |.......t....O.P.|
+    db 0x20, 0xe6, 0x20, 0x58, 0xcf, 0xb0, 0x20, 0xe6, 0x20, 0xfb, 0x83, 0x3e, 0x31, 0xd7, 0x00, 0x75 ; 00334e | . X.. . ..>1..u|
+    db 0x10, 0x53, 0x51, 0x56, 0x57, 0x06, 0xfc, 0x9a, 0x21, 0x08, 0x5e, 0x0f, 0x07, 0x5f, 0x5e, 0x59 ; 00335e |.SQVW...!.^.._^Y|
     db 0x5b, 0x5a, 0x58, 0x1f, 0xcf ; 00336e |[ZX..|
 
 ; Ghidra 10d7:0203: candidate_resident_003373
@@ -223,7 +223,7 @@ fn_0033b1:
     db 0x8b, 0xec ; 0033b2 10d7:0242: mov bp,sp [alternate encoding required]
     push si                                    ; 0033b4 10d7:0244
     push di                                    ; 0033b5 10d7:0245
-    mov es,word [0xd5af]                       ; 0033b6 10d7:0246
+    mov es,word [0xd60d]                       ; 0033b6 10d7:0246
     mov si,[bp+0x6]                            ; 0033ba 10d7:024a
     mov ax,[bp+0x8]                            ; 0033bd 10d7:024d
     mov ds,ax                                  ; 0033c0 10d7:0250
@@ -231,16 +231,16 @@ fn_0033b1:
     mov ax,[bp+0xc]                            ; 0033c5 10d7:0255
     shr ax,1                                   ; 0033c8 10d7:0258
     mov bx,[bp+0xe]                            ; 0033ca 10d7:025a
-    mov bp,[ss:0xd701]                         ; 0033cd 10d7:025d
+    mov bp,[ss:0xd75f]                         ; 0033cd 10d7:025d
 loc_0033d2:
     db 0x8b, 0xc8 ; 0033d2 10d7:0262: mov cx,ax [alternate encoding required]
     db 0x8b, 0xfd ; 0033d4 10d7:0264: mov di,bp [alternate encoding required]
     rep movsw                                  ; 0033d6 10d7:0266
     db 0x03, 0xf3 ; 0033d8 10d7:0268: add si,bx [alternate encoding required]
-    add bp,[ss:0xd6e8]                         ; 0033da 10d7:026a
-    cmp bp,[ss:0xd6ff]                         ; 0033df 10d7:026f
+    add bp,[ss:0xd746]                         ; 0033da 10d7:026a
+    cmp bp,[ss:0xd75d]                         ; 0033df 10d7:026f
     jc short loc_0033eb                        ; 0033e4 10d7:0274
-    add bp,[ss:0xd6fc]                         ; 0033e6 10d7:0276
+    add bp,[ss:0xd75a]                         ; 0033e6 10d7:0276
 loc_0033eb:
     dec dx                                     ; 0033eb 10d7:027b
     jnz short loc_0033d2                       ; 0033ec 10d7:027c
@@ -257,8 +257,8 @@ fn_0033f6:
     db 0x8b, 0xec ; 0033f7 10d7:0287: mov bp,sp [alternate encoding required]
     push si                                    ; 0033f9 10d7:0289
     push di                                    ; 0033fa 10d7:028a
-    mov es,word [0xd5af]                       ; 0033fb 10d7:028b
-    mov di,[0xd701]                            ; 0033ff 10d7:028f
+    mov es,word [0xd60d]                       ; 0033fb 10d7:028b
+    mov di,[0xd75f]                            ; 0033ff 10d7:028f
     mov si,[bp+0x6]                            ; 003403 10d7:0293
     mov ax,[bp+0x8]                            ; 003406 10d7:0296
     mov ds,ax                                  ; 003409 10d7:0299
@@ -287,8 +287,8 @@ fn_00342a:
     db 0x8b, 0xec ; 00342b 10d7:02bb: mov bp,sp [alternate encoding required]
     push si                                    ; 00342d 10d7:02bd
     push di                                    ; 00342e 10d7:02be
-    mov es,word [0xd5af]                       ; 00342f 10d7:02bf
-    mov di,[0xd701]                            ; 003433 10d7:02c3
+    mov es,word [0xd60d]                       ; 00342f 10d7:02bf
+    mov di,[0xd75f]                            ; 003433 10d7:02c3
     mov bx,[bp+0x6]                            ; 003437 10d7:02c7
     mov ax,[bp+0x8]                            ; 00343a 10d7:02ca
     mov ds,ax                                  ; 00343d 10d7:02cd
@@ -309,10 +309,10 @@ loc_00344c:
     pop di                                     ; 003457 10d7:02e7
     db 0x03, 0xf2 ; 003458 10d7:02e8: add si,dx [alternate encoding required]
     db 0x03, 0xda ; 00345a 10d7:02ea: add bx,dx [alternate encoding required]
-    add di,[ss:0xd6e8]                         ; 00345c 10d7:02ec
-    cmp di,[ss:0xd6ff]                         ; 003461 10d7:02f1
+    add di,[ss:0xd746]                         ; 00345c 10d7:02ec
+    cmp di,[ss:0xd75d]                         ; 003461 10d7:02f1
     jc short loc_00346d                        ; 003466 10d7:02f6
-    add di,[ss:0xd6fc]                         ; 003468 10d7:02f8
+    add di,[ss:0xd75a]                         ; 003468 10d7:02f8
 loc_00346d:
     dec word [bp+0xe]                          ; 00346d 10d7:02fd
     jnz short loc_003448                       ; 003470 10d7:0300
@@ -329,8 +329,8 @@ fn_00347a:
     db 0x8b, 0xec ; 00347b 10d7:030b: mov bp,sp [alternate encoding required]
     push si                                    ; 00347d 10d7:030d
     push di                                    ; 00347e 10d7:030e
-    mov es,word [0xd5af]                       ; 00347f 10d7:030f
-    mov di,[0xd701]                            ; 003483 10d7:0313
+    mov es,word [0xd60d]                       ; 00347f 10d7:030f
+    mov di,[0xd75f]                            ; 003483 10d7:0313
     mov bx,[bp+0x6]                            ; 003487 10d7:0317
     mov ax,[bp+0x8]                            ; 00348a 10d7:031a
     mov ds,ax                                  ; 00348d 10d7:031d
@@ -365,20 +365,20 @@ fn_0034b8:
     db 0x8b, 0xec ; 0034b9 10d7:0349: mov bp,sp [alternate encoding required]
     push si                                    ; 0034bb 10d7:034b
     push di                                    ; 0034bc 10d7:034c
-    mov es,word [0xd5af]                       ; 0034bd 10d7:034d
-    mov si,[0xd701]                            ; 0034c1 10d7:0351
+    mov es,word [0xd60d]                       ; 0034bd 10d7:034d
+    mov si,[0xd75f]                            ; 0034c1 10d7:0351
     mov dx,[bp+0x6]                            ; 0034c5 10d7:0355
     mov bx,[bp+0x8]                            ; 0034c8 10d7:0358
     mov al,[bp+0xa]                            ; 0034cb 10d7:035b
-    mov bp,[0xd6e8]                            ; 0034ce 10d7:035e
+    mov bp,[0xd746]                            ; 0034ce 10d7:035e
 loc_0034d2:
     db 0x8b, 0xcb ; 0034d2 10d7:0362: mov cx,bx [alternate encoding required]
     db 0x8b, 0xfe ; 0034d4 10d7:0364: mov di,si [alternate encoding required]
     rep stosb                                  ; 0034d6 10d7:0366
     db 0x03, 0xf5 ; 0034d8 10d7:0368: add si,bp [alternate encoding required]
-    cmp si,[0xd6ff]                            ; 0034da 10d7:036a
+    cmp si,[0xd75d]                            ; 0034da 10d7:036a
     jc short loc_0034e4                        ; 0034de 10d7:036e
-    add si,[0xd6fc]                            ; 0034e0 10d7:0370
+    add si,[0xd75a]                            ; 0034e0 10d7:0370
 loc_0034e4:
     dec dx                                     ; 0034e4 10d7:0374
     jnz short loc_0034d2                       ; 0034e5 10d7:0375
@@ -393,21 +393,21 @@ fn_0034eb:
     db 0x8b, 0xec ; 0034ec 10d7:037c: mov bp,sp [alternate encoding required]
     push si                                    ; 0034ee 10d7:037e
     push di                                    ; 0034ef 10d7:037f
-    mov es,word [0xd5af]                       ; 0034f0 10d7:0380
-    mov si,[0xd701]                            ; 0034f4 10d7:0384
+    mov es,word [0xd60d]                       ; 0034f0 10d7:0380
+    mov si,[0xd75f]                            ; 0034f4 10d7:0384
     mov dx,[bp+0x6]                            ; 0034f8 10d7:0388
     mov bx,[bp+0x8]                            ; 0034fb 10d7:038b
     mov ax,[bp+0xa]                            ; 0034fe 10d7:038e
     shr bx,1                                   ; 003501 10d7:0391
-    mov bp,[0xd6e8]                            ; 003503 10d7:0393
+    mov bp,[0xd746]                            ; 003503 10d7:0393
 loc_003507:
     db 0x8b, 0xcb ; 003507 10d7:0397: mov cx,bx [alternate encoding required]
     db 0x8b, 0xfe ; 003509 10d7:0399: mov di,si [alternate encoding required]
     rep stosw                                  ; 00350b 10d7:039b
     db 0x03, 0xf5 ; 00350d 10d7:039d: add si,bp [alternate encoding required]
-    cmp si,[0xd6ff]                            ; 00350f 10d7:039f
+    cmp si,[0xd75d]                            ; 00350f 10d7:039f
     jc short loc_003519                        ; 003513 10d7:03a3
-    add si,[0xd6fc]                            ; 003515 10d7:03a5
+    add si,[0xd75a]                            ; 003515 10d7:03a5
 loc_003519:
     dec dx                                     ; 003519 10d7:03a9
     jnz short loc_003507                       ; 00351a 10d7:03aa
@@ -422,8 +422,8 @@ fn_003520:
     db 0x8b, 0xec ; 003521 10d7:03b1: mov bp,sp [alternate encoding required]
     push si                                    ; 003523 10d7:03b3
     push di                                    ; 003524 10d7:03b4
-    mov es,word [0xd5af]                       ; 003525 10d7:03b5
-    mov di,[0xd701]                            ; 003529 10d7:03b9
+    mov es,word [0xd60d]                       ; 003525 10d7:03b5
+    mov di,[0xd75f]                            ; 003529 10d7:03b9
     mov dx,[bp+0x6]                            ; 00352d 10d7:03bd
     mov bx,[bp+0x8]                            ; 003530 10d7:03c0
     mov si,[bp+0xc]                            ; 003533 10d7:03c3
@@ -439,10 +439,10 @@ loc_00353e:
     stosw                                      ; 003545 10d7:03d5
     loop loc_00353e                            ; 003546 10d7:03d6
     pop di                                     ; 003548 10d7:03d8
-    add di,[0xd6e8]                            ; 003549 10d7:03d9
-    cmp di,[0xd6ff]                            ; 00354d 10d7:03dd
+    add di,[0xd746]                            ; 003549 10d7:03d9
+    cmp di,[0xd75d]                            ; 00354d 10d7:03dd
     jc short loc_003557                        ; 003551 10d7:03e1
-    add di,[0xd6fc]                            ; 003553 10d7:03e3
+    add di,[0xd75a]                            ; 003553 10d7:03e3
 loc_003557:
     dec bp                                     ; 003557 10d7:03e7
     jnz short loc_00353b                       ; 003558 10d7:03e8
@@ -457,8 +457,8 @@ fn_00355e:
     db 0x8b, 0xec ; 00355f 10d7:03ef: mov bp,sp [alternate encoding required]
     push si                                    ; 003561 10d7:03f1
     push di                                    ; 003562 10d7:03f2
-    mov es,word [0xd5af]                       ; 003563 10d7:03f3
-    mov di,[0xd701]                            ; 003567 10d7:03f7
+    mov es,word [0xd60d]                       ; 003563 10d7:03f3
+    mov di,[0xd75f]                            ; 003567 10d7:03f7
     push ds                                    ; 00356b 10d7:03fb
     mov dx,[bp+0xe]                            ; 00356c 10d7:03fc
     shl dx,1                                   ; 00356f 10d7:03ff
@@ -494,7 +494,6 @@ fn_003599:
     push di                                    ; 00359d 10d7:042d
     push ds                                    ; 00359e 10d7:042e
     les di,word [bp+0x12]                      ; 00359f 10d7:042f
-loc_0035a2:
     lds si,word [bp+0x8]                       ; 0035a2 10d7:0432
     mov ax,[bp+0xc]                            ; 0035a5 10d7:0435
     mov dh,[si]                                ; 0035a8 10d7:0438
@@ -569,57 +568,17 @@ loc_0035a2:
     shl bl,1                                   ; 003639 10d7:04c9
     mov bx,[bx+si]                             ; 00363b 10d7:04cb
     and bx,0x300                               ; 00363d 10d7:04cd
-    db 0x0b, 0xc3 ; 003641 10d7:04d1: or ax,bx [alternate encoding required]
-    db 0x32, 0xff ; 003643 10d7:04d3: xor bh,bh [alternate encoding required]
-    shr cl,1                                   ; 003645 10d7:04d5
-    rcl bl,1                                   ; 003647 10d7:04d7
-    shr ch,1                                   ; 003649 10d7:04d9
-    rcl bl,1                                   ; 00364b 10d7:04db
-    shr dl,1                                   ; 00364d 10d7:04dd
-    rcl bl,1                                   ; 00364f 10d7:04df
-    shr dh,1                                   ; 003651 10d7:04e1
-    rcl bl,1                                   ; 003653 10d7:04e3
-    shl bl,1                                   ; 003655 10d7:04e5
-    mov bx,[bx+si]                             ; 003657 10d7:04e7
-    and bx,0xc00                               ; 003659 10d7:04e9
-    db 0x0b, 0xc3 ; 00365d 10d7:04ed: or ax,bx [alternate encoding required]
-    db 0x32, 0xff ; 00365f 10d7:04ef: xor bh,bh [alternate encoding required]
-    shr cl,1                                   ; 003661 10d7:04f1
-    rcl bl,1                                   ; 003663 10d7:04f3
-    shr ch,1                                   ; 003665 10d7:04f5
-    rcl bl,1                                   ; 003667 10d7:04f7
-    shr dl,1                                   ; 003669 10d7:04f9
-    rcl bl,1                                   ; 00366b 10d7:04fb
-    shr dh,1                                   ; 00366d 10d7:04fd
-    rcl bl,1                                   ; 00366f 10d7:04ff
-    shl bl,1                                   ; 003671 10d7:0501
-    mov bx,[bx+si]                             ; 003673 10d7:0503
-    and bx,0x3000                              ; 003675 10d7:0505
-    db 0x0b, 0xc3 ; 003679 10d7:0509: or ax,bx [alternate encoding required]
-    db 0x32, 0xff ; 00367b 10d7:050b: xor bh,bh [alternate encoding required]
-    shr cl,1                                   ; 00367d 10d7:050d
-    rcl bl,1                                   ; 00367f 10d7:050f
-    shr ch,1                                   ; 003681 10d7:0511
-    rcl bl,1                                   ; 003683 10d7:0513
-    shr dl,1                                   ; 003685 10d7:0515
-    rcl bl,1                                   ; 003687 10d7:0517
-    shr dh,1                                   ; 003689 10d7:0519
-    rcl bl,1                                   ; 00368b 10d7:051b
-    shl bl,1                                   ; 00368d 10d7:051d
-    mov bx,[bx+si]                             ; 00368f 10d7:051f
-    and bx,0xc000                              ; 003691 10d7:0521
-    db 0x0b, 0xc3 ; 003695 10d7:0525: or ax,bx [alternate encoding required]
-    xchg al,ah                                 ; 003697 10d7:0527
-    stosw                                      ; 003699 10d7:0529
-    dec word [bp+0x6]                          ; 00369a 10d7:052a
-    jz short loc_0036a2                        ; 00369d 10d7:052d
-    jmp near loc_0035a2                        ; 00369f 10d7:052f
-loc_0036a2:
-    pop ds                                     ; 0036a2 10d7:0532
-    pop di                                     ; 0036a3 10d7:0533
-    pop si                                     ; 0036a4 10d7:0534
-    pop bp                                     ; 0036a5 10d7:0535
-    retf                                       ; 0036a6 10d7:0536
+    db 0x0b, 0xc3, 0x32, 0xff, 0xd0, 0xe9, 0xd0, 0xd3, 0xd0, 0xed, 0xd0, 0xd3, 0xd0, 0xea, 0xd0, 0xd3 ; 003641 |..2.............|
+    db 0xd0, 0xee, 0xd0, 0xd3, 0xd0, 0xe3, 0x8b, 0x18, 0x81, 0xe3, 0x00, 0x0c, 0x0b, 0xc3, 0x32, 0xff ; 003651 |..............2.|
+    db 0xd0, 0xe9, 0xd0, 0xd3, 0xd0, 0xed, 0xd0, 0xd3, 0xd0, 0xea, 0xd0, 0xd3, 0xd0, 0xee, 0xd0, 0xd3 ; 003661 |................|
+    db 0xd0, 0xe3, 0x8b, 0x18, 0x81 ; 003671 |.....|
+    jcxz loc_003678                            ; 003676 10d7:0506
+loc_003678:
+    xor [bp+di],cl                             ; 003678 10d7:0508
+    ret                                        ; 00367a 10d7:050a
+    db 0x32, 0xff, 0xd0, 0xe9, 0xd0, 0xd3, 0xd0, 0xed, 0xd0, 0xd3, 0xd0, 0xea, 0xd0, 0xd3, 0xd0, 0xee ; 00367b |2...............|
+    db 0xd0, 0xd3, 0xd0, 0xe3, 0x8b, 0x18, 0x81, 0xe3, 0x00, 0xc0, 0x0b, 0xc3, 0x86, 0xc4, 0xab, 0xff ; 00368b |................|
+    db 0x4e, 0x06, 0x74, 0x03, 0xe9, 0x00, 0xff, 0x1f, 0x5f, 0x5e, 0x5d, 0xcb ; 00369b |N.t....._^].|
 
 ; Ghidra 10d7:0537: FUN_10d7_0537
 fn_0036a7:
@@ -669,8 +628,8 @@ fn_0036ee:
     db 0x8b, 0xec ; 0036ef 10d7:057f: mov bp,sp [alternate encoding required]
     push si                                    ; 0036f1 10d7:0581
     push di                                    ; 0036f2 10d7:0582
-    mov es,word [0xd5af]                       ; 0036f3 10d7:0583
-    mov di,[0xd701]                            ; 0036f7 10d7:0587
+    mov es,word [0xd60d]                       ; 0036f3 10d7:0583
+    mov di,[0xd75f]                            ; 0036f7 10d7:0587
     mov si,[bp+0xe]                            ; 0036fb 10d7:058b
     mov ax,[bp+0x10]                           ; 0036fe 10d7:058e
     mov ds,ax                                  ; 003701 10d7:0591
@@ -1369,8 +1328,8 @@ fn_003b54:
     push si                                    ; 003b57 10d7:09e7
     push di                                    ; 003b58 10d7:09e8
     push ds                                    ; 003b59 10d7:09e9
-    mov si,[0xd701]                            ; 003b5a 10d7:09ea
-    mov ds,word [0xd5af]                       ; 003b5e 10d7:09ee
+    mov si,[0xd75f]                            ; 003b5a 10d7:09ea
+    mov ds,word [0xd60d]                       ; 003b5e 10d7:09ee
     les di,word [bp+0x6]                       ; 003b62 10d7:09f2
     mov dx,[bp+0xa]                            ; 003b65 10d7:09f5
     mov ax,[bp+0xc]                            ; 003b68 10d7:09f8
@@ -1380,10 +1339,10 @@ loc_003b6d:
     push si                                    ; 003b6f 10d7:09ff
     rep movsw                                  ; 003b70 10d7:0a00
     pop si                                     ; 003b72 10d7:0a02
-    add si,[ss:0xd6e8]                         ; 003b73 10d7:0a03
-    cmp si,[ss:0xd6ff]                         ; 003b78 10d7:0a08
+    add si,[ss:0xd746]                         ; 003b73 10d7:0a03
+    cmp si,[ss:0xd75d]                         ; 003b78 10d7:0a08
     jc short loc_003b84                        ; 003b7d 10d7:0a0d
-    add si,[ss:0xd6fc]                         ; 003b7f 10d7:0a0f
+    add si,[ss:0xd75a]                         ; 003b7f 10d7:0a0f
 loc_003b84:
     dec dx                                     ; 003b84 10d7:0a14
     jnz short loc_003b6d                       ; 003b85 10d7:0a15
@@ -1612,9 +1571,9 @@ fn_003cca:
     pop si                                     ; 003cf8 10d7:0b88
     pop bp                                     ; 003cf9 10d7:0b89
     retf                                       ; 003cfa 10d7:0b8a
-    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0x50, 0x8b, 0xc1, 0xb1, 0x03, 0xd3, 0xf8, 0xa3, 0xd1, 0xd6 ; 003cfb |....M.P.........|
-    db 0x8b, 0xc2, 0xd3, 0xf8, 0xa3, 0xf3, 0xd6, 0x89, 0x1e, 0x05, 0xd7, 0x58, 0xa9, 0x7e, 0x00, 0x74 ; 003d0b |...........X.~.t|
-    db 0x0e, 0x06, 0x56, 0x57, 0x50, 0xfc, 0x9a, 0x3e, 0x07, 0x64, 0x0f, 0x58, 0x5f, 0x5e, 0x07, 0x1f ; 003d1b |..VWP..>.d.X_^..|
+    db 0x1e, 0x2e, 0x8e, 0x1e, 0x4d, 0x01, 0x50, 0x8b, 0xc1, 0xb1, 0x03, 0xd3, 0xf8, 0xa3, 0x2f, 0xd7 ; 003cfb |....M.P......./.|
+    db 0x8b, 0xc2, 0xd3, 0xf8, 0xa3, 0x51, 0xd7, 0x89, 0x1e, 0x63, 0xd7, 0x58, 0xa9, 0x7e, 0x00, 0x74 ; 003d0b |.....Q...c.X.~.t|
+    db 0x0e, 0x06, 0x56, 0x57, 0x50, 0xfc, 0x9a, 0x3c, 0x07, 0x5e, 0x0f, 0x58, 0x5f, 0x5e, 0x07, 0x1f ; 003d1b |..VWP..<.^.X_^..|
     db 0xcb ; 003d2b |.|
 
 ; Ghidra 10d7:0bbc: FUN_10d7_0bbc
@@ -1623,8 +1582,8 @@ fn_003d2c:
     db 0x8b, 0xec ; 003d2d 10d7:0bbd: mov bp,sp [alternate encoding required]
     push si                                    ; 003d2f 10d7:0bbf
     push di                                    ; 003d30 10d7:0bc0
-    mov es,word [0xd5af]                       ; 003d31 10d7:0bc1
-    mov di,[0xd701]                            ; 003d35 10d7:0bc5
+    mov es,word [0xd60d]                       ; 003d31 10d7:0bc1
+    mov di,[0xd75f]                            ; 003d35 10d7:0bc5
     push ds                                    ; 003d39 10d7:0bc9
     lds si,word [bp+0x6]                       ; 003d3a 10d7:0bca
     mov bx,[bp+0xa]                            ; 003d3d 10d7:0bcd
@@ -1678,10 +1637,10 @@ loc_003d91:
     pop di                                     ; 003d97 10d7:0c27
     mov ax,ds                                  ; 003d98 10d7:0c28
     pop ds                                     ; 003d9a 10d7:0c2a
-    add di,[0xd6e8]                            ; 003d9b 10d7:0c2b
-    cmp di,[0xd6ff]                            ; 003d9f 10d7:0c2f
+    add di,[0xd746]                            ; 003d9b 10d7:0c2b
+    cmp di,[0xd75d]                            ; 003d9f 10d7:0c2f
     jc short loc_003da9                        ; 003da3 10d7:0c33
-    add di,[0xd6fc]                            ; 003da5 10d7:0c35
+    add di,[0xd75a]                            ; 003da5 10d7:0c35
 loc_003da9:
     push ds                                    ; 003da9 10d7:0c39
     mov ds,ax                                  ; 003daa 10d7:0c3a
@@ -1699,8 +1658,8 @@ fn_003db6:
     db 0x8b, 0xec ; 003db7 10d7:0c47: mov bp,sp [alternate encoding required]
     push si                                    ; 003db9 10d7:0c49
     push di                                    ; 003dba 10d7:0c4a
-    mov es,word [0xd5af]                       ; 003dbb 10d7:0c4b
-    mov di,[0xd701]                            ; 003dbf 10d7:0c4f
+    mov es,word [0xd60d]                       ; 003dbb 10d7:0c4b
+    mov di,[0xd75f]                            ; 003dbf 10d7:0c4f
     push ds                                    ; 003dc3 10d7:0c53
     lds si,word [bp+0x6]                       ; 003dc4 10d7:0c54
     mov dx,[bp+0xa]                            ; 003dc7 10d7:0c57
@@ -1711,10 +1670,10 @@ loc_003dca:
     db 0x8b, 0xfb ; 003dd1 10d7:0c61: mov di,bx [alternate encoding required]
     mov ax,ds                                  ; 003dd3 10d7:0c63
     pop ds                                     ; 003dd5 10d7:0c65
-    add di,[0xd6e8]                            ; 003dd6 10d7:0c66
-    cmp di,[0xd6ff]                            ; 003dda 10d7:0c6a
+    add di,[0xd746]                            ; 003dd6 10d7:0c66
+    cmp di,[0xd75d]                            ; 003dda 10d7:0c6a
     jc short loc_003de4                        ; 003dde 10d7:0c6e
-    add di,[0xd6fc]                            ; 003de0 10d7:0c70
+    add di,[0xd75a]                            ; 003de0 10d7:0c70
 loc_003de4:
     push ds                                    ; 003de4 10d7:0c74
     mov ds,ax                                  ; 003de5 10d7:0c75
@@ -1733,8 +1692,8 @@ fn_003def:
     push si                                    ; 003df2 10d7:0c82
     push di                                    ; 003df3 10d7:0c83
     push ds                                    ; 003df4 10d7:0c84
-    mov si,[0xd701]                            ; 003df5 10d7:0c85
-    mov ds,word [0xd5af]                       ; 003df9 10d7:0c89
+    mov si,[0xd75f]                            ; 003df5 10d7:0c85
+    mov ds,word [0xd60d]                       ; 003df9 10d7:0c89
     les di,word [bp+0x6]                       ; 003dfd 10d7:0c8d
     mov dx,[bp+0xa]                            ; 003e00 10d7:0c90
 loc_003e03:
@@ -1744,10 +1703,10 @@ loc_003e03:
     db 0x8b, 0xf3 ; 003e0a 10d7:0c9a: mov si,bx [alternate encoding required]
     mov ax,es                                  ; 003e0c 10d7:0c9c
     pop es                                     ; 003e0e 10d7:0c9e
-    add si,[es:0xd6e8]                         ; 003e0f 10d7:0c9f
-    cmp si,[es:0xd6ff]                         ; 003e14 10d7:0ca4
+    add si,[es:0xd746]                         ; 003e0f 10d7:0c9f
+    cmp si,[es:0xd75d]                         ; 003e14 10d7:0ca4
     jc short loc_003e20                        ; 003e19 10d7:0ca9
-    add si,[es:0xd6fc]                         ; 003e1b 10d7:0cab
+    add si,[es:0xd75a]                         ; 003e1b 10d7:0cab
 loc_003e20:
     push es                                    ; 003e20 10d7:0cb0
     mov es,ax                                  ; 003e21 10d7:0cb1
@@ -1838,8 +1797,8 @@ fn_003ea1:
     db 0x8b, 0xec ; 003ea2 10d7:0d32: mov bp,sp [alternate encoding required]
     push si                                    ; 003ea4 10d7:0d34
     push di                                    ; 003ea5 10d7:0d35
-    mov es,word [0xd5af]                       ; 003ea6 10d7:0d36
-    mov di,[0xd701]                            ; 003eaa 10d7:0d3a
+    mov es,word [0xd60d]                       ; 003ea6 10d7:0d36
+    mov di,[0xd75f]                            ; 003eaa 10d7:0d3a
     mov dx,[bp+0x8]                            ; 003eae 10d7:0d3e
     push ds                                    ; 003eb1 10d7:0d41
     lds si,word [bp+0xa]                       ; 003eb2 10d7:0d42
@@ -1857,10 +1816,10 @@ loc_003ebd:
     inc bx                                     ; 003ecd 10d7:0d5d
     inc bx                                     ; 003ece 10d7:0d5e
     and bl,0x1e                                ; 003ecf 10d7:0d5f
-    add di,[ss:0xd6e8]                         ; 003ed2 10d7:0d62
-    cmp di,[ss:0xd6ff]                         ; 003ed7 10d7:0d67
+    add di,[ss:0xd746]                         ; 003ed2 10d7:0d62
+    cmp di,[ss:0xd75d]                         ; 003ed7 10d7:0d67
     jc short loc_003ee3                        ; 003edc 10d7:0d6c
-    add di,[ss:0xd6fc]                         ; 003ede 10d7:0d6e
+    add di,[ss:0xd75a]                         ; 003ede 10d7:0d6e
 loc_003ee3:
     dec word [bp+0x6]                          ; 003ee3 10d7:0d73
     jnz short loc_003ebd                       ; 003ee6 10d7:0d76
@@ -1914,8 +1873,8 @@ fn_003f26:
     push si                                    ; 003f29 10d7:0db9
     push di                                    ; 003f2a 10d7:0dba
     push ds                                    ; 003f2b 10d7:0dbb
-    mov es,word [0xd5af]                       ; 003f2c 10d7:0dbc
-    mov di,[0xd701]                            ; 003f30 10d7:0dc0
+    mov es,word [0xd60d]                       ; 003f2c 10d7:0dbc
+    mov di,[0xd75f]                            ; 003f30 10d7:0dc0
     lds si,word [bp+0x10]                      ; 003f34 10d7:0dc4
     mov bx,[bp+0xe]                            ; 003f37 10d7:0dc7
     db 0x32, 0xe4 ; 003f3a 10d7:0dca: xor ah,ah [alternate encoding required]
@@ -1939,7 +1898,7 @@ loc_003f55:
     jmp short loc_003f48                       ; 003f59 10d7:0de9
 loc_003f5b:
     pop di                                     ; 003f5b 10d7:0deb
-    add di,[ss:0xd6e8]                         ; 003f5c 10d7:0dec
+    add di,[ss:0xd746]                         ; 003f5c 10d7:0dec
     dec dx                                     ; 003f61 10d7:0df1
     jnz short loc_003f47                       ; 003f62 10d7:0df2
     mov dx,[bp+0x8]                            ; 003f64 10d7:0df4
@@ -2532,1139 +2491,125 @@ loc_0042b7:
     db 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x59, 0xf9, 0x8a, 0xc6, 0xe6 ; 004935 |...........Y....|
     db 0x61, 0xe3, 0xf7, 0xac, 0x8a, 0xe0, 0x24, 0x0f, 0xd0, 0xe0, 0x8a, 0xd8, 0x49, 0xb0, 0x80, 0xe6 ; 004945 |a.....$.....I...|
     db 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xf6, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76 ; 004955 |C.B<(w....C.B<(v|
-    db 0xf6, 0x2e, 0xff, 0xa7, 0x9f, 0x10 ; 004965 |......|
-loc_00496b:
-    jmp near loc_00429b                        ; 00496b 10d7:17fb
-    db 0x8a, 0xc2 ; 00496e 10d7:17fe: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004970 10d7:1800
-    jcxz loc_00496b                            ; 004972 10d7:1802
-    db 0x8a, 0xc4 ; 004974 10d7:1804: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004976 10d7:1806
-    clc                                        ; 004978 10d7:1808
-    rcr al,1                                   ; 004979 10d7:1809
-    sar al,1                                   ; 00497b 10d7:180b
-    sar al,1                                   ; 00497d 10d7:180d
-    add al,0x20                                ; 00497f 10d7:180f
-    db 0x8a, 0xd8 ; 004981 10d7:1811: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004983 10d7:1813: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004985 10d7:1815: mov al,ah [alternate encoding required]
-loc_004987:
-    mov al,0x80                                ; 004987 10d7:1817
-    out byte 0x43,al                           ; 004989 10d7:1819
-    in al,byte 0x42                            ; 00498b 10d7:181b
-    cmp al,0x28                                ; 00498d 10d7:181d
-    ja short loc_004987                        ; 00498f 10d7:181f
-loc_004991:
-    mov al,0x80                                ; 004991 10d7:1821
-    out byte 0x43,al                           ; 004993 10d7:1823
-    in al,byte 0x42                            ; 004995 10d7:1825
-    cmp al,0x28                                ; 004997 10d7:1827
-    jna short loc_004991                       ; 004999 10d7:1829
-    jmp word near [cs:bx+0x109f]               ; 00499b 10d7:182b
-loc_0049a0:
-    jmp near loc_00429b                        ; 0049a0 10d7:1830
-    db 0x8a, 0xc6 ; 0049a3 10d7:1833: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 0049a5 10d7:1835
-    db 0x8a, 0xc2 ; 0049a7 10d7:1837: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 0049a9 10d7:1839
-    jcxz loc_0049a0                            ; 0049ab 10d7:183b
-    db 0x8a, 0xc2 ; 0049ad 10d7:183d: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 0049af 10d7:183f
-    db 0x8a, 0xc4 ; 0049b1 10d7:1841: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 0049b3 10d7:1843
-    clc                                        ; 0049b5 10d7:1845
-    rcr al,1                                   ; 0049b6 10d7:1846
-    sar al,1                                   ; 0049b8 10d7:1848
-    sar al,1                                   ; 0049ba 10d7:184a
-    add al,0x20                                ; 0049bc 10d7:184c
-    db 0x8a, 0xd8 ; 0049be 10d7:184e: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 0049c0 10d7:1850: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 0049c2 10d7:1852: mov al,ah [alternate encoding required]
-    nop                                        ; 0049c4 10d7:1854
-    nop                                        ; 0049c5 10d7:1855
-    nop                                        ; 0049c6 10d7:1856
-    nop                                        ; 0049c7 10d7:1857
-    db 0x8a, 0xc4 ; 0049c8 10d7:1858: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 0049ca 10d7:185a
-    out byte 0x43,al                           ; 0049cc 10d7:185c
-    in al,byte 0x42                            ; 0049ce 10d7:185e
-    cmp al,0x28                                ; 0049d0 10d7:1860
-    jna short loc_004a07                       ; 0049d2 10d7:1862
-loc_0049d4:
-    jmp short loc_0049d7                       ; 0049d4 10d7:1864
-    db 0x90 ; 0049d6 |.|
-loc_0049d7:
-    db 0x8a, 0xc6 ; 0049d7 10d7:1867: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 0049d9 10d7:1869
-    db 0x8a, 0xc2 ; 0049db 10d7:186b: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 0049dd 10d7:186d
-    mov al,0x80                                ; 0049df 10d7:186f
-    out byte 0x43,al                           ; 0049e1 10d7:1871
-    in al,byte 0x42                            ; 0049e3 10d7:1873
-    cmp al,0x28                                ; 0049e5 10d7:1875
-    jna short loc_004a26                       ; 0049e7 10d7:1877
-    db 0x8a, 0xc6 ; 0049e9 10d7:1879: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 0049eb 10d7:187b: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 0049ed 10d7:187d: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 0049ef 10d7:187f: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 0049f1 10d7:1881: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 0049f3 10d7:1883: mov al,dh [alternate encoding required]
-    mov al,0x80                                ; 0049f5 10d7:1885
-    out byte 0x43,al                           ; 0049f7 10d7:1887
-    in al,byte 0x42                            ; 0049f9 10d7:1889
-    cmp al,0x28                                ; 0049fb 10d7:188b
-    ja short loc_0049d4                        ; 0049fd 10d7:188d
-    nop                                        ; 0049ff 10d7:188f
-    nop                                        ; 004a00 10d7:1890
-    nop                                        ; 004a01 10d7:1891
-    nop                                        ; 004a02 10d7:1892
-loc_004a03:
-    nop                                        ; 004a03 10d7:1893
-    nop                                        ; 004a04 10d7:1894
-    nop                                        ; 004a05 10d7:1895
-    nop                                        ; 004a06 10d7:1896
-loc_004a07:
-    nop                                        ; 004a07 10d7:1897
-    db 0x8a, 0xc6 ; 004a08 10d7:1898: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004a0a 10d7:189a
-    db 0x8a, 0xc2 ; 004a0c 10d7:189c: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004a0e 10d7:189e
-    mov al,0x80                                ; 004a10 10d7:18a0
-    out byte 0x43,al                           ; 004a12 10d7:18a2
-    in al,byte 0x42                            ; 004a14 10d7:18a4
-    cmp al,0x28                                ; 004a16 10d7:18a6
-    ja short loc_004a35                        ; 004a18 10d7:18a8
-    db 0x8a, 0xc6 ; 004a1a 10d7:18aa: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004a1c 10d7:18ac: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004a1e 10d7:18ae: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004a20 10d7:18b0: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004a22 10d7:18b2: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004a24 10d7:18b4: mov al,dh [alternate encoding required]
-loc_004a26:
-    mov al,0x80                                ; 004a26 10d7:18b6
-    out byte 0x43,al                           ; 004a28 10d7:18b8
-    in al,byte 0x42                            ; 004a2a 10d7:18ba
-    cmp al,0x28                                ; 004a2c 10d7:18bc
-    jna short loc_004a03                       ; 004a2e 10d7:18be
-    jmp word near [cs:bx+0x109f]               ; 004a30 10d7:18c0
-loc_004a35:
-    jmp short loc_004a38                       ; 004a35 10d7:18c5
-    db 0x90 ; 004a37 |.|
-loc_004a38:
-    jmp short loc_004a3b                       ; 004a38 10d7:18c8
-    db 0x90 ; 004a3a |.|
-loc_004a3b:
-    jmp short loc_004a3e                       ; 004a3b 10d7:18cb
-    db 0x90 ; 004a3d |.|
-loc_004a3e:
-    db 0x8a, 0xc4 ; 004a3e 10d7:18ce: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004a40 10d7:18d0: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004a42 10d7:18d2
-loc_004a47:
-    jmp near loc_00429b                        ; 004a47 10d7:18d7
-    db 0x8a, 0xc6 ; 004a4a 10d7:18da: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004a4c 10d7:18dc
-    nop                                        ; 004a4e 10d7:18de
-    nop                                        ; 004a4f 10d7:18df
-    db 0x8a, 0xc2 ; 004a50 10d7:18e0: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004a52 10d7:18e2
-    jcxz loc_004a47                            ; 004a54 10d7:18e4
-    db 0x8a, 0xc2 ; 004a56 10d7:18e6: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004a58 10d7:18e8
-    db 0x8a, 0xc4 ; 004a5a 10d7:18ea: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004a5c 10d7:18ec
-    clc                                        ; 004a5e 10d7:18ee
-    rcr al,1                                   ; 004a5f 10d7:18ef
-    sar al,1                                   ; 004a61 10d7:18f1
-    sar al,1                                   ; 004a63 10d7:18f3
-    add al,0x20                                ; 004a65 10d7:18f5
-    db 0x8a, 0xd8 ; 004a67 10d7:18f7: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004a69 10d7:18f9: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004a6b 10d7:18fb: mov al,ah [alternate encoding required]
-    jmp short loc_004a70                       ; 004a6d 10d7:18fd
-    db 0x90 ; 004a6f |.|
-loc_004a70:
-    nop                                        ; 004a70 10d7:1900
-    db 0x8a, 0xc4 ; 004a71 10d7:1901: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004a73 10d7:1903
-    out byte 0x43,al                           ; 004a75 10d7:1905
-    in al,byte 0x42                            ; 004a77 10d7:1907
-    cmp al,0x28                                ; 004a79 10d7:1909
-    jna short loc_004aaa                       ; 004a7b 10d7:190b
-loc_004a7d:
-    jmp short loc_004a80                       ; 004a7d 10d7:190d
-    db 0x90 ; 004a7f |.|
-loc_004a80:
-    db 0x8a, 0xc6 ; 004a80 10d7:1910: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004a82 10d7:1912
-    nop                                        ; 004a84 10d7:1914
-    nop                                        ; 004a85 10d7:1915
-    db 0x8a, 0xc2 ; 004a86 10d7:1916: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004a88 10d7:1918
-    mov al,0x80                                ; 004a8a 10d7:191a
-    out byte 0x43,al                           ; 004a8c 10d7:191c
-    in al,byte 0x42                            ; 004a8e 10d7:191e
-    cmp al,0x28                                ; 004a90 10d7:1920
-    jna short loc_004ac3                       ; 004a92 10d7:1922
-    nop                                        ; 004a94 10d7:1924
-    nop                                        ; 004a95 10d7:1925
-    nop                                        ; 004a96 10d7:1926
-    nop                                        ; 004a97 10d7:1927
-    mov al,0x80                                ; 004a98 10d7:1928
-    out byte 0x43,al                           ; 004a9a 10d7:192a
-    in al,byte 0x42                            ; 004a9c 10d7:192c
-    cmp al,0x28                                ; 004a9e 10d7:192e
-    ja short loc_004a7d                        ; 004aa0 10d7:1930
-    nop                                        ; 004aa2 10d7:1932
-    nop                                        ; 004aa3 10d7:1933
-    nop                                        ; 004aa4 10d7:1934
-    nop                                        ; 004aa5 10d7:1935
-loc_004aa6:
-    nop                                        ; 004aa6 10d7:1936
-    nop                                        ; 004aa7 10d7:1937
-    nop                                        ; 004aa8 10d7:1938
-    nop                                        ; 004aa9 10d7:1939
-loc_004aaa:
-    nop                                        ; 004aaa 10d7:193a
-    db 0x8a, 0xc6 ; 004aab 10d7:193b: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004aad 10d7:193d
-    nop                                        ; 004aaf 10d7:193f
-    nop                                        ; 004ab0 10d7:1940
-    db 0x8a, 0xc2 ; 004ab1 10d7:1941: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004ab3 10d7:1943
-    mov al,0x80                                ; 004ab5 10d7:1945
-    out byte 0x43,al                           ; 004ab7 10d7:1947
-    in al,byte 0x42                            ; 004ab9 10d7:1949
-    cmp al,0x28                                ; 004abb 10d7:194b
-    ja short loc_004ad2                        ; 004abd 10d7:194d
-    nop                                        ; 004abf 10d7:194f
-    nop                                        ; 004ac0 10d7:1950
-    nop                                        ; 004ac1 10d7:1951
-    nop                                        ; 004ac2 10d7:1952
-loc_004ac3:
-    mov al,0x80                                ; 004ac3 10d7:1953
-    out byte 0x43,al                           ; 004ac5 10d7:1955
-    in al,byte 0x42                            ; 004ac7 10d7:1957
-    cmp al,0x28                                ; 004ac9 10d7:1959
-    jna short loc_004aa6                       ; 004acb 10d7:195b
-    jmp word near [cs:bx+0x109f]               ; 004acd 10d7:195d
-loc_004ad2:
-    jmp short loc_004ad5                       ; 004ad2 10d7:1962
-    db 0x90 ; 004ad4 |.|
-loc_004ad5:
-    jmp short loc_004ad8                       ; 004ad5 10d7:1965
-    db 0x90 ; 004ad7 |.|
-loc_004ad8:
-    db 0x8a, 0xc4 ; 004ad8 10d7:1968: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ada 10d7:196a: mov al,ah [alternate encoding required]
-    nop                                        ; 004adc 10d7:196c
-    jmp word near [cs:bx+0x109f]               ; 004add 10d7:196d
-loc_004ae2:
-    jmp near loc_00429b                        ; 004ae2 10d7:1972
-    db 0x8a, 0xc6 ; 004ae5 10d7:1975: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004ae7 10d7:1977
-    jcxz loc_004ae2                            ; 004ae9 10d7:1979
-    db 0x8a, 0xc2 ; 004aeb 10d7:197b: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004aed 10d7:197d
-    db 0x8a, 0xc4 ; 004aef 10d7:197f: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004af1 10d7:1981
-    clc                                        ; 004af3 10d7:1983
-    rcr al,1                                   ; 004af4 10d7:1984
-    sar al,1                                   ; 004af6 10d7:1986
-    sar al,1                                   ; 004af8 10d7:1988
-    add al,0x20                                ; 004afa 10d7:198a
-    db 0x8a, 0xd8 ; 004afc 10d7:198c: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004afe 10d7:198e: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004b00 10d7:1990: mov al,ah [alternate encoding required]
-    jmp short loc_004b05                       ; 004b02 10d7:1992
-    db 0x90 ; 004b04 |.|
-loc_004b05:
-    nop                                        ; 004b05 10d7:1995
-    nop                                        ; 004b06 10d7:1996
-    nop                                        ; 004b07 10d7:1997
-    db 0x8a, 0xc4 ; 004b08 10d7:1998: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004b0a 10d7:199a: mov al,ah [alternate encoding required]
-loc_004b0c:
-    jmp short loc_004b0f                       ; 004b0c 10d7:199c
-    db 0x90 ; 004b0e |.|
-loc_004b0f:
-    db 0x8a, 0xc6 ; 004b0f 10d7:199f: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004b11 10d7:19a1
-    nop                                        ; 004b13 10d7:19a3
-    nop                                        ; 004b14 10d7:19a4
-    db 0x8a, 0xc2 ; 004b15 10d7:19a5: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004b17 10d7:19a7
-    db 0x8a, 0xc4 ; 004b19 10d7:19a9: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004b1b 10d7:19ab
-    out byte 0x43,al                           ; 004b1d 10d7:19ad
-    in al,byte 0x42                            ; 004b1f 10d7:19af
-    cmp al,0x28                                ; 004b21 10d7:19b1
-    ja short loc_004b0c                        ; 004b23 10d7:19b3
-    nop                                        ; 004b25 10d7:19b5
-    nop                                        ; 004b26 10d7:19b6
-    nop                                        ; 004b27 10d7:19b7
-    nop                                        ; 004b28 10d7:19b8
-loc_004b29:
-    jmp short loc_004b2c                       ; 004b29 10d7:19b9
-    db 0x90 ; 004b2b |.|
-loc_004b2c:
-    db 0x8a, 0xc6 ; 004b2c 10d7:19bc: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004b2e 10d7:19be
-    nop                                        ; 004b30 10d7:19c0
-    nop                                        ; 004b31 10d7:19c1
-    db 0x8a, 0xc2 ; 004b32 10d7:19c2: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004b34 10d7:19c4
-    db 0x8a, 0xc4 ; 004b36 10d7:19c6: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004b38 10d7:19c8
-    out byte 0x43,al                           ; 004b3a 10d7:19ca
-    in al,byte 0x42                            ; 004b3c 10d7:19cc
-    cmp al,0x28                                ; 004b3e 10d7:19ce
-    jna short loc_004b29                       ; 004b40 10d7:19d0
-    jmp word near [cs:bx+0x109f]               ; 004b42 10d7:19d2
-loc_004b47:
-    jmp near loc_00429b                        ; 004b47 10d7:19d7
-    db 0x8a, 0xc6 ; 004b4a 10d7:19da: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004b4c 10d7:19dc
-    jcxz loc_004b47                            ; 004b4e 10d7:19de
-    nop                                        ; 004b50 10d7:19e0
-    nop                                        ; 004b51 10d7:19e1
-    db 0x8a, 0xc4 ; 004b52 10d7:19e2: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc2 ; 004b54 10d7:19e4: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004b56 10d7:19e6
-    db 0x8a, 0xc4 ; 004b58 10d7:19e8: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004b5a 10d7:19ea
-    clc                                        ; 004b5c 10d7:19ec
-    rcr al,1                                   ; 004b5d 10d7:19ed
-    sar al,1                                   ; 004b5f 10d7:19ef
-    sar al,1                                   ; 004b61 10d7:19f1
-    add al,0x20                                ; 004b63 10d7:19f3
-    db 0x8a, 0xd8 ; 004b65 10d7:19f5: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004b67 10d7:19f7: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004b69 10d7:19f9: mov al,ah [alternate encoding required]
-    jmp short loc_004b6e                       ; 004b6b 10d7:19fb
-    db 0x90 ; 004b6d |.|
-loc_004b6e:
-    nop                                        ; 004b6e 10d7:19fe
-    nop                                        ; 004b6f 10d7:19ff
-    nop                                        ; 004b70 10d7:1a00
-    nop                                        ; 004b71 10d7:1a01
-loc_004b72:
-    jmp short loc_004b75                       ; 004b72 10d7:1a02
-    db 0x90 ; 004b74 |.|
-loc_004b75:
-    db 0x8a, 0xc6 ; 004b75 10d7:1a05: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004b77 10d7:1a07
-    nop                                        ; 004b79 10d7:1a09
-    nop                                        ; 004b7a 10d7:1a0a
-    nop                                        ; 004b7b 10d7:1a0b
-    nop                                        ; 004b7c 10d7:1a0c
-    db 0x8a, 0xc2 ; 004b7d 10d7:1a0d: mov al,dl [alternate encoding required]
-    db 0x8a, 0xc2 ; 004b7f 10d7:1a0f: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004b81 10d7:1a11
-    db 0x8a, 0xc4 ; 004b83 10d7:1a13: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004b85 10d7:1a15
-    out byte 0x43,al                           ; 004b87 10d7:1a17
-    in al,byte 0x42                            ; 004b89 10d7:1a19
-    cmp al,0x28                                ; 004b8b 10d7:1a1b
-    ja short loc_004b72                        ; 004b8d 10d7:1a1d
-    nop                                        ; 004b8f 10d7:1a1f
-    nop                                        ; 004b90 10d7:1a20
-    nop                                        ; 004b91 10d7:1a21
-    nop                                        ; 004b92 10d7:1a22
-loc_004b93:
-    jmp short loc_004b96                       ; 004b93 10d7:1a23
-    db 0x90 ; 004b95 |.|
-loc_004b96:
-    db 0x8a, 0xc6 ; 004b96 10d7:1a26: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004b98 10d7:1a28
-    nop                                        ; 004b9a 10d7:1a2a
-    nop                                        ; 004b9b 10d7:1a2b
-    nop                                        ; 004b9c 10d7:1a2c
-    nop                                        ; 004b9d 10d7:1a2d
-    db 0x8a, 0xc4 ; 004b9e 10d7:1a2e: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc2 ; 004ba0 10d7:1a30: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004ba2 10d7:1a32
-    db 0x8a, 0xc4 ; 004ba4 10d7:1a34: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004ba6 10d7:1a36
-    out byte 0x43,al                           ; 004ba8 10d7:1a38
-    in al,byte 0x42                            ; 004baa 10d7:1a3a
-    cmp al,0x28                                ; 004bac 10d7:1a3c
-    jna short loc_004b93                       ; 004bae 10d7:1a3e
-    jmp word near [cs:bx+0x109f]               ; 004bb0 10d7:1a40
-loc_004bb5:
-    jmp near loc_00429b                        ; 004bb5 10d7:1a45
-    db 0x8a, 0xc2 ; 004bb8 10d7:1a48: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004bba 10d7:1a4a
-    jcxz loc_004bb5                            ; 004bbc 10d7:1a4c
-    db 0x8a, 0xc4 ; 004bbe 10d7:1a4e: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004bc0 10d7:1a50
-    clc                                        ; 004bc2 10d7:1a52
-    rcr al,1                                   ; 004bc3 10d7:1a53
-    sar al,1                                   ; 004bc5 10d7:1a55
-    sar al,1                                   ; 004bc7 10d7:1a57
-    add al,0x20                                ; 004bc9 10d7:1a59
-    db 0x8a, 0xd8 ; 004bcb 10d7:1a5b: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004bcd 10d7:1a5d: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004bcf 10d7:1a5f: mov al,ah [alternate encoding required]
-    jmp short loc_004be7                       ; 004bd1 10d7:1a61
-    db 0x90 ; 004bd3 |.|
-loc_004bd4:
-    db 0x8a, 0xc2 ; 004bd4 10d7:1a64: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004bd6 10d7:1a66
-    mov al,0x80                                ; 004bd8 10d7:1a68
-    out byte 0x43,al                           ; 004bda 10d7:1a6a
-    in al,byte 0x42                            ; 004bdc 10d7:1a6c
-    cmp al,0x28                                ; 004bde 10d7:1a6e
-    jna short loc_004c02                       ; 004be0 10d7:1a70
-    db 0x8a, 0xc6 ; 004be2 10d7:1a72: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004be4 10d7:1a74: mov al,dh [alternate encoding required]
-    nop                                        ; 004be6 10d7:1a76
-loc_004be7:
-    nop                                        ; 004be7 10d7:1a77
-    db 0x8a, 0xc6 ; 004be8 10d7:1a78: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004bea 10d7:1a7a: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004bec 10d7:1a7c
-    jmp short loc_004bd4                       ; 004bee 10d7:1a7e
-loc_004bf0:
-    db 0x8a, 0xc2 ; 004bf0 10d7:1a80: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004bf2 10d7:1a82
-    mov al,0x80                                ; 004bf4 10d7:1a84
-    out byte 0x43,al                           ; 004bf6 10d7:1a86
-    in al,byte 0x42                            ; 004bf8 10d7:1a88
-    cmp al,0x28                                ; 004bfa 10d7:1a8a
-    ja short loc_004c08                        ; 004bfc 10d7:1a8c
-    nop                                        ; 004bfe 10d7:1a8e
-    nop                                        ; 004bff 10d7:1a8f
-    nop                                        ; 004c00 10d7:1a90
-    nop                                        ; 004c01 10d7:1a91
-loc_004c02:
-    db 0x8a, 0xc6 ; 004c02 10d7:1a92: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c04 10d7:1a94
-    jmp short loc_004bf0                       ; 004c06 10d7:1a96
-loc_004c08:
-    db 0x8a, 0xc6 ; 004c08 10d7:1a98: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c0a 10d7:1a9a
-    jmp short loc_004c0f                       ; 004c0c 10d7:1a9c
-    db 0x90 ; 004c0e |.|
-loc_004c0f:
-    nop                                        ; 004c0f 10d7:1a9f
-    db 0x8a, 0xc4 ; 004c10 10d7:1aa0: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c12 10d7:1aa2: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004c14 10d7:1aa4
-loc_004c19:
-    jmp near loc_00429b                        ; 004c19 10d7:1aa9
-    db 0x8a, 0xc2 ; 004c1c 10d7:1aac: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004c1e 10d7:1aae
-    jcxz loc_004c19                            ; 004c20 10d7:1ab0
-    db 0x8a, 0xc4 ; 004c22 10d7:1ab2: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004c24 10d7:1ab4
-    clc                                        ; 004c26 10d7:1ab6
-    rcr al,1                                   ; 004c27 10d7:1ab7
-    sar al,1                                   ; 004c29 10d7:1ab9
-    sar al,1                                   ; 004c2b 10d7:1abb
-    add al,0x20                                ; 004c2d 10d7:1abd
-    db 0x8a, 0xd8 ; 004c2f 10d7:1abf: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c31 10d7:1ac1: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c33 10d7:1ac3: mov al,ah [alternate encoding required]
-    jmp short loc_004c4e                       ; 004c35 10d7:1ac5
-    db 0x90 ; 004c37 |.|
-loc_004c38:
-    jmp short loc_004c3b                       ; 004c38 10d7:1ac8
-    db 0x90 ; 004c3a |.|
-loc_004c3b:
-    db 0x8a, 0xc2 ; 004c3b 10d7:1acb: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004c3d 10d7:1acd
-    mov al,0x80                                ; 004c3f 10d7:1acf
-    out byte 0x43,al                           ; 004c41 10d7:1ad1
-    in al,byte 0x42                            ; 004c43 10d7:1ad3
-    cmp al,0x28                                ; 004c45 10d7:1ad5
-    jna short loc_004c6c                       ; 004c47 10d7:1ad7
-    db 0x8a, 0xc4 ; 004c49 10d7:1ad9: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c4b 10d7:1adb: mov al,ah [alternate encoding required]
-    nop                                        ; 004c4d 10d7:1add
-loc_004c4e:
-    nop                                        ; 004c4e 10d7:1ade
-    db 0x8a, 0xc4 ; 004c4f 10d7:1adf: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc6 ; 004c51 10d7:1ae1: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c53 10d7:1ae3
-    jmp short loc_004c38                       ; 004c55 10d7:1ae5
-loc_004c57:
-    jmp short loc_004c5a                       ; 004c57 10d7:1ae7
-    db 0x90 ; 004c59 |.|
-loc_004c5a:
-    db 0x8a, 0xc2 ; 004c5a 10d7:1aea: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004c5c 10d7:1aec
-    mov al,0x80                                ; 004c5e 10d7:1aee
-    out byte 0x43,al                           ; 004c60 10d7:1af0
-    in al,byte 0x42                            ; 004c62 10d7:1af2
-    cmp al,0x28                                ; 004c64 10d7:1af4
-    ja short loc_004c72                        ; 004c66 10d7:1af6
-    nop                                        ; 004c68 10d7:1af8
-    nop                                        ; 004c69 10d7:1af9
-    nop                                        ; 004c6a 10d7:1afa
-    nop                                        ; 004c6b 10d7:1afb
-loc_004c6c:
-    db 0x8a, 0xc6 ; 004c6c 10d7:1afc: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c6e 10d7:1afe
-    jmp short loc_004c57                       ; 004c70 10d7:1b00
-loc_004c72:
-    db 0x8a, 0xc6 ; 004c72 10d7:1b02: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c74 10d7:1b04
-    jmp short loc_004c79                       ; 004c76 10d7:1b06
-    db 0x90 ; 004c78 |.|
-loc_004c79:
-    nop                                        ; 004c79 10d7:1b09
-    db 0x8a, 0xc4 ; 004c7a 10d7:1b0a: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c7c 10d7:1b0c: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004c7e 10d7:1b0e
-loc_004c83:
-    jmp near loc_00429b                        ; 004c83 10d7:1b13
-    db 0x8a, 0xc6 ; 004c86 10d7:1b16: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004c88 10d7:1b18
-    jcxz loc_004c83                            ; 004c8a 10d7:1b1a
-    db 0x8a, 0xc4 ; 004c8c 10d7:1b1c: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004c8e 10d7:1b1e
-    clc                                        ; 004c90 10d7:1b20
-    rcr al,1                                   ; 004c91 10d7:1b21
-    sar al,1                                   ; 004c93 10d7:1b23
-    sar al,1                                   ; 004c95 10d7:1b25
-    add al,0x20                                ; 004c97 10d7:1b27
-    db 0x8a, 0xd8 ; 004c99 10d7:1b29: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c9b 10d7:1b2b: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004c9d 10d7:1b2d: mov al,ah [alternate encoding required]
-    jmp short loc_004cb8                       ; 004c9f 10d7:1b2f
-    db 0x90 ; 004ca1 |.|
-loc_004ca2:
-    jmp short loc_004ca5                       ; 004ca2 10d7:1b32
-    db 0x90 ; 004ca4 |.|
-loc_004ca5:
-    db 0x8a, 0xc6 ; 004ca5 10d7:1b35: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004ca7 10d7:1b37
-    mov al,0x80                                ; 004ca9 10d7:1b39
-    out byte 0x43,al                           ; 004cab 10d7:1b3b
-    in al,byte 0x42                            ; 004cad 10d7:1b3d
-    cmp al,0x28                                ; 004caf 10d7:1b3f
-    jna short loc_004cea                       ; 004cb1 10d7:1b41
-    db 0x8a, 0xc4 ; 004cb3 10d7:1b43: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004cb5 10d7:1b45: mov al,ah [alternate encoding required]
-    nop                                        ; 004cb7 10d7:1b47
-loc_004cb8:
-    nop                                        ; 004cb8 10d7:1b48
-    db 0x8a, 0xc4 ; 004cb9 10d7:1b49: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc2 ; 004cbb 10d7:1b4b: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004cbd 10d7:1b4d
-    mov al,0x80                                ; 004cbf 10d7:1b4f
-    out byte 0x43,al                           ; 004cc1 10d7:1b51
-    in al,byte 0x42                            ; 004cc3 10d7:1b53
-    cmp al,0x28                                ; 004cc5 10d7:1b55
-    ja short loc_004ca2                        ; 004cc7 10d7:1b57
-    nop                                        ; 004cc9 10d7:1b59
-    nop                                        ; 004cca 10d7:1b5a
-    nop                                        ; 004ccb 10d7:1b5b
-    nop                                        ; 004ccc 10d7:1b5c
-loc_004ccd:
-    jmp short loc_004cd0                       ; 004ccd 10d7:1b5d
-    db 0x90 ; 004ccf |.|
-loc_004cd0:
-    db 0x8a, 0xc6 ; 004cd0 10d7:1b60: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004cd2 10d7:1b62
-    mov al,0x80                                ; 004cd4 10d7:1b64
-    out byte 0x43,al                           ; 004cd6 10d7:1b66
-    in al,byte 0x42                            ; 004cd8 10d7:1b68
-    cmp al,0x28                                ; 004cda 10d7:1b6a
-    ja short loc_004cfd                        ; 004cdc 10d7:1b6c
-    db 0x8a, 0xc4 ; 004cde 10d7:1b6e: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ce0 10d7:1b70: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ce2 10d7:1b72: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ce4 10d7:1b74: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ce6 10d7:1b76: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ce8 10d7:1b78: mov al,ah [alternate encoding required]
-loc_004cea:
-    db 0x8a, 0xc2 ; 004cea 10d7:1b7a: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004cec 10d7:1b7c
-    mov al,0x80                                ; 004cee 10d7:1b7e
-    out byte 0x43,al                           ; 004cf0 10d7:1b80
-    in al,byte 0x42                            ; 004cf2 10d7:1b82
-    cmp al,0x28                                ; 004cf4 10d7:1b84
-    jna short loc_004ccd                       ; 004cf6 10d7:1b86
-    jmp word near [cs:bx+0x109f]               ; 004cf8 10d7:1b88
-loc_004cfd:
-    db 0x8a, 0xc2 ; 004cfd 10d7:1b8d: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004cff 10d7:1b8f
-    jmp short loc_004d04                       ; 004d01 10d7:1b91
-    db 0x90 ; 004d03 |.|
-loc_004d04:
-    jmp short loc_004d07                       ; 004d04 10d7:1b94
-    db 0x90 ; 004d06 |.|
-loc_004d07:
-    nop                                        ; 004d07 10d7:1b97
-    db 0x8a, 0xc4 ; 004d08 10d7:1b98: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d0a 10d7:1b9a: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004d0c 10d7:1b9c
-loc_004d11:
-    jmp near loc_00429b                        ; 004d11 10d7:1ba1
-    db 0x8a, 0xc6 ; 004d14 10d7:1ba4: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004d16 10d7:1ba6
-    jcxz loc_004d11                            ; 004d18 10d7:1ba8
-    db 0x8a, 0xc4 ; 004d1a 10d7:1baa: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004d1c 10d7:1bac
-    clc                                        ; 004d1e 10d7:1bae
-    rcr al,1                                   ; 004d1f 10d7:1baf
-    sar al,1                                   ; 004d21 10d7:1bb1
-    sar al,1                                   ; 004d23 10d7:1bb3
-    add al,0x20                                ; 004d25 10d7:1bb5
-    db 0x8a, 0xd8 ; 004d27 10d7:1bb7: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d29 10d7:1bb9: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d2b 10d7:1bbb: mov al,ah [alternate encoding required]
-    jmp short loc_004d46                       ; 004d2d 10d7:1bbd
-    db 0x90 ; 004d2f |.|
-loc_004d30:
-    jmp short loc_004d33                       ; 004d30 10d7:1bc0
-    db 0x90 ; 004d32 |.|
-loc_004d33:
-    db 0x8a, 0xc6 ; 004d33 10d7:1bc3: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004d35 10d7:1bc5
-    mov al,0x80                                ; 004d37 10d7:1bc7
-    out byte 0x43,al                           ; 004d39 10d7:1bc9
-    in al,byte 0x42                            ; 004d3b 10d7:1bcb
-    cmp al,0x28                                ; 004d3d 10d7:1bcd
-    jna short loc_004d7b                       ; 004d3f 10d7:1bcf
-    db 0x8a, 0xc4 ; 004d41 10d7:1bd1: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d43 10d7:1bd3: mov al,ah [alternate encoding required]
-    nop                                        ; 004d45 10d7:1bd5
-loc_004d46:
-    nop                                        ; 004d46 10d7:1bd6
-    db 0x8a, 0xc4 ; 004d47 10d7:1bd7: mov al,ah [alternate encoding required]
-    jmp short loc_004d4c                       ; 004d49 10d7:1bd9
-    db 0x90 ; 004d4b |.|
-loc_004d4c:
-    db 0x8a, 0xc2 ; 004d4c 10d7:1bdc: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004d4e 10d7:1bde
-    mov al,0x80                                ; 004d50 10d7:1be0
-    out byte 0x43,al                           ; 004d52 10d7:1be2
-    in al,byte 0x42                            ; 004d54 10d7:1be4
-    cmp al,0x28                                ; 004d56 10d7:1be6
-    ja short loc_004d30                        ; 004d58 10d7:1be8
-    nop                                        ; 004d5a 10d7:1bea
-    nop                                        ; 004d5b 10d7:1beb
-    nop                                        ; 004d5c 10d7:1bec
-    nop                                        ; 004d5d 10d7:1bed
-loc_004d5e:
-    jmp short loc_004d61                       ; 004d5e 10d7:1bee
-    db 0x90 ; 004d60 |.|
-loc_004d61:
-    db 0x8a, 0xc6 ; 004d61 10d7:1bf1: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004d63 10d7:1bf3
-    mov al,0x80                                ; 004d65 10d7:1bf5
-    out byte 0x43,al                           ; 004d67 10d7:1bf7
-    in al,byte 0x42                            ; 004d69 10d7:1bf9
-    cmp al,0x28                                ; 004d6b 10d7:1bfb
-    ja short loc_004d91                        ; 004d6d 10d7:1bfd
-    db 0x8a, 0xc4 ; 004d6f 10d7:1bff: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d71 10d7:1c01: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d73 10d7:1c03: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d75 10d7:1c05: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d77 10d7:1c07: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004d79 10d7:1c09: mov al,ah [alternate encoding required]
-loc_004d7b:
-    jmp short loc_004d7e                       ; 004d7b 10d7:1c0b
-    db 0x90 ; 004d7d |.|
-loc_004d7e:
-    db 0x8a, 0xc2 ; 004d7e 10d7:1c0e: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004d80 10d7:1c10
-    mov al,0x80                                ; 004d82 10d7:1c12
-    out byte 0x43,al                           ; 004d84 10d7:1c14
-    in al,byte 0x42                            ; 004d86 10d7:1c16
-    cmp al,0x28                                ; 004d88 10d7:1c18
-    jna short loc_004d5e                       ; 004d8a 10d7:1c1a
-    jmp word near [cs:bx+0x109f]               ; 004d8c 10d7:1c1c
-loc_004d91:
-    jmp short loc_004d94                       ; 004d91 10d7:1c21
-    db 0x90 ; 004d93 |.|
-loc_004d94:
-    db 0x8a, 0xc2 ; 004d94 10d7:1c24: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004d96 10d7:1c26
-    jmp short loc_004d9b                       ; 004d98 10d7:1c28
-    db 0x90 ; 004d9a |.|
-loc_004d9b:
-    jmp short loc_004d9e                       ; 004d9b 10d7:1c2b
-    db 0x90 ; 004d9d |.|
-loc_004d9e:
-    nop                                        ; 004d9e 10d7:1c2e
-    db 0x8a, 0xc4 ; 004d9f 10d7:1c2f: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004da1 10d7:1c31: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004da3 10d7:1c33
-loc_004da8:
-    jmp near loc_00429b                        ; 004da8 10d7:1c38
-    db 0x8a, 0xc2 ; 004dab 10d7:1c3b: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004dad 10d7:1c3d
-    jcxz loc_004da8                            ; 004daf 10d7:1c3f
-    db 0x8a, 0xc4 ; 004db1 10d7:1c41: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004db3 10d7:1c43
-    clc                                        ; 004db5 10d7:1c45
-    rcr al,1                                   ; 004db6 10d7:1c46
-    sar al,1                                   ; 004db8 10d7:1c48
-    sar al,1                                   ; 004dba 10d7:1c4a
-    add al,0x20                                ; 004dbc 10d7:1c4c
-    db 0x8a, 0xd8 ; 004dbe 10d7:1c4e: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004dc0 10d7:1c50: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004dc2 10d7:1c52: mov al,ah [alternate encoding required]
-    jmp short loc_004ddd                       ; 004dc4 10d7:1c54
-    db 0x90 ; 004dc6 |.|
-loc_004dc7:
-    jmp short loc_004dca                       ; 004dc7 10d7:1c57
-    db 0x90 ; 004dc9 |.|
-loc_004dca:
-    db 0x8a, 0xc2 ; 004dca 10d7:1c5a: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004dcc 10d7:1c5c
-    mov al,0x80                                ; 004dce 10d7:1c5e
-    out byte 0x43,al                           ; 004dd0 10d7:1c60
-    in al,byte 0x42                            ; 004dd2 10d7:1c62
-    cmp al,0x28                                ; 004dd4 10d7:1c64
-    jna short loc_004e0f                       ; 004dd6 10d7:1c66
-    db 0x8a, 0xc4 ; 004dd8 10d7:1c68: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004dda 10d7:1c6a: mov al,ah [alternate encoding required]
-    nop                                        ; 004ddc 10d7:1c6c
-loc_004ddd:
-    nop                                        ; 004ddd 10d7:1c6d
-    db 0x8a, 0xc4 ; 004dde 10d7:1c6e: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc6 ; 004de0 10d7:1c70: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004de2 10d7:1c72
-    mov al,0x80                                ; 004de4 10d7:1c74
-    out byte 0x43,al                           ; 004de6 10d7:1c76
-    in al,byte 0x42                            ; 004de8 10d7:1c78
-    cmp al,0x28                                ; 004dea 10d7:1c7a
-    ja short loc_004dc7                        ; 004dec 10d7:1c7c
-    nop                                        ; 004dee 10d7:1c7e
-    nop                                        ; 004def 10d7:1c7f
-    nop                                        ; 004df0 10d7:1c80
-    nop                                        ; 004df1 10d7:1c81
-loc_004df2:
-    jmp short loc_004df5                       ; 004df2 10d7:1c82
-    db 0x90 ; 004df4 |.|
-loc_004df5:
-    db 0x8a, 0xc2 ; 004df5 10d7:1c85: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004df7 10d7:1c87
-    mov al,0x80                                ; 004df9 10d7:1c89
-    out byte 0x43,al                           ; 004dfb 10d7:1c8b
-    in al,byte 0x42                            ; 004dfd 10d7:1c8d
-    cmp al,0x28                                ; 004dff 10d7:1c8f
-    ja short loc_004e22                        ; 004e01 10d7:1c91
-    db 0x8a, 0xc4 ; 004e03 10d7:1c93: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e05 10d7:1c95: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e07 10d7:1c97: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e09 10d7:1c99: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e0b 10d7:1c9b: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e0d 10d7:1c9d: mov al,ah [alternate encoding required]
-loc_004e0f:
-    db 0x8a, 0xc6 ; 004e0f 10d7:1c9f: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004e11 10d7:1ca1
-    mov al,0x80                                ; 004e13 10d7:1ca3
-    out byte 0x43,al                           ; 004e15 10d7:1ca5
-    in al,byte 0x42                            ; 004e17 10d7:1ca7
-    cmp al,0x28                                ; 004e19 10d7:1ca9
-    jna short loc_004df2                       ; 004e1b 10d7:1cab
-    jmp word near [cs:bx+0x109f]               ; 004e1d 10d7:1cad
-loc_004e22:
-    db 0x8a, 0xc6 ; 004e22 10d7:1cb2: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004e24 10d7:1cb4
-    jmp short loc_004e29                       ; 004e26 10d7:1cb6
-    db 0x90 ; 004e28 |.|
-loc_004e29:
-    jmp short loc_004e2c                       ; 004e29 10d7:1cb9
-    db 0x90 ; 004e2b |.|
-loc_004e2c:
-    nop                                        ; 004e2c 10d7:1cbc
-    db 0x8a, 0xc4 ; 004e2d 10d7:1cbd: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e2f 10d7:1cbf: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004e31 10d7:1cc1
-loc_004e36:
-    jmp near loc_00429b                        ; 004e36 10d7:1cc6
-    db 0x8a, 0xc6 ; 004e39 10d7:1cc9: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004e3b 10d7:1ccb
-    jcxz loc_004e36                            ; 004e3d 10d7:1ccd
-    db 0x8a, 0xc4 ; 004e3f 10d7:1ccf: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004e41 10d7:1cd1
-    clc                                        ; 004e43 10d7:1cd3
-    rcr al,1                                   ; 004e44 10d7:1cd4
-    sar al,1                                   ; 004e46 10d7:1cd6
-    sar al,1                                   ; 004e48 10d7:1cd8
-    add al,0x20                                ; 004e4a 10d7:1cda
-    db 0x8a, 0xd8 ; 004e4c 10d7:1cdc: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e4e 10d7:1cde: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e50 10d7:1ce0: mov al,ah [alternate encoding required]
-    jmp short loc_004e6b                       ; 004e52 10d7:1ce2
-    db 0x90 ; 004e54 |.|
-loc_004e55:
-    jmp short loc_004e58                       ; 004e55 10d7:1ce5
-    db 0x90 ; 004e57 |.|
-loc_004e58:
-    db 0x8a, 0xc6 ; 004e58 10d7:1ce8: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004e5a 10d7:1cea
-    mov al,0x80                                ; 004e5c 10d7:1cec
-    out byte 0x43,al                           ; 004e5e 10d7:1cee
-    in al,byte 0x42                            ; 004e60 10d7:1cf0
-    cmp al,0x28                                ; 004e62 10d7:1cf2
-    jna short loc_004e89                       ; 004e64 10d7:1cf4
-    db 0x8a, 0xc4 ; 004e66 10d7:1cf6: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e68 10d7:1cf8: mov al,ah [alternate encoding required]
-    nop                                        ; 004e6a 10d7:1cfa
-loc_004e6b:
-    nop                                        ; 004e6b 10d7:1cfb
-    db 0x8a, 0xc4 ; 004e6c 10d7:1cfc: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc2 ; 004e6e 10d7:1cfe: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004e70 10d7:1d00
-    jmp short loc_004e55                       ; 004e72 10d7:1d02
-loc_004e74:
-    jmp short loc_004e77                       ; 004e74 10d7:1d04
-    db 0x90 ; 004e76 |.|
-loc_004e77:
-    db 0x8a, 0xc6 ; 004e77 10d7:1d07: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004e79 10d7:1d09
-    mov al,0x80                                ; 004e7b 10d7:1d0b
-    out byte 0x43,al                           ; 004e7d 10d7:1d0d
-    in al,byte 0x42                            ; 004e7f 10d7:1d0f
-    cmp al,0x28                                ; 004e81 10d7:1d11
-    ja short loc_004e8f                        ; 004e83 10d7:1d13
-    nop                                        ; 004e85 10d7:1d15
-    nop                                        ; 004e86 10d7:1d16
-    nop                                        ; 004e87 10d7:1d17
-    nop                                        ; 004e88 10d7:1d18
-loc_004e89:
-    db 0x8a, 0xc2 ; 004e89 10d7:1d19: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004e8b 10d7:1d1b
-    jmp short loc_004e74                       ; 004e8d 10d7:1d1d
-loc_004e8f:
-    db 0x8a, 0xc2 ; 004e8f 10d7:1d1f: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004e91 10d7:1d21
-    jmp short loc_004e96                       ; 004e93 10d7:1d23
-    db 0x90 ; 004e95 |.|
-loc_004e96:
-    nop                                        ; 004e96 10d7:1d26
-    db 0x8a, 0xc4 ; 004e97 10d7:1d27: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004e99 10d7:1d29: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004e9b 10d7:1d2b
-loc_004ea0:
-    jmp near loc_00429b                        ; 004ea0 10d7:1d30
-    db 0x8a, 0xc6 ; 004ea3 10d7:1d33: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004ea5 10d7:1d35
-    jcxz loc_004ea0                            ; 004ea7 10d7:1d37
-    db 0x8a, 0xc4 ; 004ea9 10d7:1d39: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004eab 10d7:1d3b
-    clc                                        ; 004ead 10d7:1d3d
-    rcr al,1                                   ; 004eae 10d7:1d3e
-    sar al,1                                   ; 004eb0 10d7:1d40
-    sar al,1                                   ; 004eb2 10d7:1d42
-    add al,0x20                                ; 004eb4 10d7:1d44
-    db 0x8a, 0xd8 ; 004eb6 10d7:1d46: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004eb8 10d7:1d48: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004eba 10d7:1d4a: mov al,ah [alternate encoding required]
-    jmp short loc_004ed2                       ; 004ebc 10d7:1d4c
-    db 0x90 ; 004ebe |.|
-loc_004ebf:
-    db 0x8a, 0xc6 ; 004ebf 10d7:1d4f: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004ec1 10d7:1d51
-    mov al,0x80                                ; 004ec3 10d7:1d53
-    out byte 0x43,al                           ; 004ec5 10d7:1d55
-    in al,byte 0x42                            ; 004ec7 10d7:1d57
-    cmp al,0x28                                ; 004ec9 10d7:1d59
-    jna short loc_004eed                       ; 004ecb 10d7:1d5b
-    db 0x8a, 0xc6 ; 004ecd 10d7:1d5d: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc6 ; 004ecf 10d7:1d5f: mov al,dh [alternate encoding required]
-    nop                                        ; 004ed1 10d7:1d61
-loc_004ed2:
-    nop                                        ; 004ed2 10d7:1d62
-    db 0x8a, 0xc6 ; 004ed3 10d7:1d63: mov al,dh [alternate encoding required]
-    db 0x8a, 0xc2 ; 004ed5 10d7:1d65: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004ed7 10d7:1d67
-    jmp short loc_004ebf                       ; 004ed9 10d7:1d69
-loc_004edb:
-    db 0x8a, 0xc6 ; 004edb 10d7:1d6b: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004edd 10d7:1d6d
-    mov al,0x80                                ; 004edf 10d7:1d6f
-    out byte 0x43,al                           ; 004ee1 10d7:1d71
-    in al,byte 0x42                            ; 004ee3 10d7:1d73
-    cmp al,0x28                                ; 004ee5 10d7:1d75
-    ja short loc_004ef3                        ; 004ee7 10d7:1d77
-    nop                                        ; 004ee9 10d7:1d79
-    nop                                        ; 004eea 10d7:1d7a
-    nop                                        ; 004eeb 10d7:1d7b
-    nop                                        ; 004eec 10d7:1d7c
-loc_004eed:
-    db 0x8a, 0xc2 ; 004eed 10d7:1d7d: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004eef 10d7:1d7f
-    jmp short loc_004edb                       ; 004ef1 10d7:1d81
-loc_004ef3:
-    db 0x8a, 0xc2 ; 004ef3 10d7:1d83: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004ef5 10d7:1d85
-    jmp short loc_004efa                       ; 004ef7 10d7:1d87
-    db 0x90 ; 004ef9 |.|
-loc_004efa:
-    nop                                        ; 004efa 10d7:1d8a
-    db 0x8a, 0xc4 ; 004efb 10d7:1d8b: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004efd 10d7:1d8d: mov al,ah [alternate encoding required]
-    jmp word near [cs:bx+0x109f]               ; 004eff 10d7:1d8f
-loc_004f04:
-    jmp near loc_00429b                        ; 004f04 10d7:1d94
-    db 0x8a, 0xc2 ; 004f07 10d7:1d97: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004f09 10d7:1d99
-    jcxz loc_004f04                            ; 004f0b 10d7:1d9b
-    nop                                        ; 004f0d 10d7:1d9d
-    nop                                        ; 004f0e 10d7:1d9e
-    db 0x8a, 0xc4 ; 004f0f 10d7:1d9f: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc6 ; 004f11 10d7:1da1: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004f13 10d7:1da3
-    db 0x8a, 0xc4 ; 004f15 10d7:1da5: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004f17 10d7:1da7
-    clc                                        ; 004f19 10d7:1da9
-    rcr al,1                                   ; 004f1a 10d7:1daa
-    sar al,1                                   ; 004f1c 10d7:1dac
-    sar al,1                                   ; 004f1e 10d7:1dae
-    add al,0x20                                ; 004f20 10d7:1db0
-    db 0x8a, 0xd8 ; 004f22 10d7:1db2: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004f24 10d7:1db4: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004f26 10d7:1db6: mov al,ah [alternate encoding required]
-    jmp short loc_004f2b                       ; 004f28 10d7:1db8
-    db 0x90 ; 004f2a |.|
-loc_004f2b:
-    nop                                        ; 004f2b 10d7:1dbb
-    nop                                        ; 004f2c 10d7:1dbc
-    nop                                        ; 004f2d 10d7:1dbd
-    nop                                        ; 004f2e 10d7:1dbe
-loc_004f2f:
-    jmp short loc_004f32                       ; 004f2f 10d7:1dbf
-    db 0x90 ; 004f31 |.|
-loc_004f32:
-    db 0x8a, 0xc2 ; 004f32 10d7:1dc2: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004f34 10d7:1dc4
-    nop                                        ; 004f36 10d7:1dc6
-    nop                                        ; 004f37 10d7:1dc7
-    nop                                        ; 004f38 10d7:1dc8
-    nop                                        ; 004f39 10d7:1dc9
-    db 0x8a, 0xc2 ; 004f3a 10d7:1dca: mov al,dl [alternate encoding required]
-    db 0x8a, 0xc6 ; 004f3c 10d7:1dcc: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004f3e 10d7:1dce
-    db 0x8a, 0xc4 ; 004f40 10d7:1dd0: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004f42 10d7:1dd2
-    out byte 0x43,al                           ; 004f44 10d7:1dd4
-    in al,byte 0x42                            ; 004f46 10d7:1dd6
-    cmp al,0x28                                ; 004f48 10d7:1dd8
-    ja short loc_004f2f                        ; 004f4a 10d7:1dda
-    nop                                        ; 004f4c 10d7:1ddc
-    nop                                        ; 004f4d 10d7:1ddd
-    nop                                        ; 004f4e 10d7:1dde
-    nop                                        ; 004f4f 10d7:1ddf
-loc_004f50:
-    jmp short loc_004f53                       ; 004f50 10d7:1de0
-    db 0x90 ; 004f52 |.|
-loc_004f53:
-    db 0x8a, 0xc2 ; 004f53 10d7:1de3: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004f55 10d7:1de5
-    nop                                        ; 004f57 10d7:1de7
-    nop                                        ; 004f58 10d7:1de8
-    nop                                        ; 004f59 10d7:1de9
-    nop                                        ; 004f5a 10d7:1dea
-    db 0x8a, 0xc4 ; 004f5b 10d7:1deb: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc6 ; 004f5d 10d7:1ded: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004f5f 10d7:1def
-    db 0x8a, 0xc4 ; 004f61 10d7:1df1: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004f63 10d7:1df3
-    out byte 0x43,al                           ; 004f65 10d7:1df5
-    in al,byte 0x42                            ; 004f67 10d7:1df7
-    cmp al,0x28                                ; 004f69 10d7:1df9
-    jna short loc_004f50                       ; 004f6b 10d7:1dfb
-    jmp word near [cs:bx+0x109f]               ; 004f6d 10d7:1dfd
-loc_004f72:
-    jmp near loc_00429b                        ; 004f72 10d7:1e02
-    db 0x8a, 0xc2 ; 004f75 10d7:1e05: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004f77 10d7:1e07
-    jcxz loc_004f72                            ; 004f79 10d7:1e09
-    db 0x8a, 0xc6 ; 004f7b 10d7:1e0b: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004f7d 10d7:1e0d
-    db 0x8a, 0xc4 ; 004f7f 10d7:1e0f: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004f81 10d7:1e11
-    clc                                        ; 004f83 10d7:1e13
-    rcr al,1                                   ; 004f84 10d7:1e14
-    sar al,1                                   ; 004f86 10d7:1e16
-    sar al,1                                   ; 004f88 10d7:1e18
-    add al,0x20                                ; 004f8a 10d7:1e1a
-    db 0x8a, 0xd8 ; 004f8c 10d7:1e1c: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004f8e 10d7:1e1e: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004f90 10d7:1e20: mov al,ah [alternate encoding required]
-    jmp short loc_004f95                       ; 004f92 10d7:1e22
-    db 0x90 ; 004f94 |.|
-loc_004f95:
-    nop                                        ; 004f95 10d7:1e25
-    nop                                        ; 004f96 10d7:1e26
-    nop                                        ; 004f97 10d7:1e27
-    db 0x8a, 0xc4 ; 004f98 10d7:1e28: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004f9a 10d7:1e2a: mov al,ah [alternate encoding required]
-loc_004f9c:
-    jmp short loc_004f9f                       ; 004f9c 10d7:1e2c
-    db 0x90 ; 004f9e |.|
-loc_004f9f:
-    db 0x8a, 0xc2 ; 004f9f 10d7:1e2f: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004fa1 10d7:1e31
-    nop                                        ; 004fa3 10d7:1e33
-    nop                                        ; 004fa4 10d7:1e34
-    db 0x8a, 0xc6 ; 004fa5 10d7:1e35: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004fa7 10d7:1e37
-    db 0x8a, 0xc4 ; 004fa9 10d7:1e39: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004fab 10d7:1e3b
-    out byte 0x43,al                           ; 004fad 10d7:1e3d
-    in al,byte 0x42                            ; 004faf 10d7:1e3f
-    cmp al,0x28                                ; 004fb1 10d7:1e41
-    ja short loc_004f9c                        ; 004fb3 10d7:1e43
-    nop                                        ; 004fb5 10d7:1e45
-    nop                                        ; 004fb6 10d7:1e46
-    nop                                        ; 004fb7 10d7:1e47
-    nop                                        ; 004fb8 10d7:1e48
-loc_004fb9:
-    jmp short loc_004fbc                       ; 004fb9 10d7:1e49
-    db 0x90 ; 004fbb |.|
-loc_004fbc:
-    db 0x8a, 0xc2 ; 004fbc 10d7:1e4c: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004fbe 10d7:1e4e
-    nop                                        ; 004fc0 10d7:1e50
-    nop                                        ; 004fc1 10d7:1e51
-    db 0x8a, 0xc6 ; 004fc2 10d7:1e52: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004fc4 10d7:1e54
-    db 0x8a, 0xc4 ; 004fc6 10d7:1e56: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 004fc8 10d7:1e58
-    out byte 0x43,al                           ; 004fca 10d7:1e5a
-    in al,byte 0x42                            ; 004fcc 10d7:1e5c
-    cmp al,0x28                                ; 004fce 10d7:1e5e
-    jna short loc_004fb9                       ; 004fd0 10d7:1e60
-    jmp word near [cs:bx+0x109f]               ; 004fd2 10d7:1e62
-loc_004fd7:
-    jmp near loc_00429b                        ; 004fd7 10d7:1e67
-    db 0x8a, 0xc2 ; 004fda 10d7:1e6a: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 004fdc 10d7:1e6c
-    nop                                        ; 004fde 10d7:1e6e
-    nop                                        ; 004fdf 10d7:1e6f
-    db 0x8a, 0xc6 ; 004fe0 10d7:1e70: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004fe2 10d7:1e72
-    jcxz loc_004fd7                            ; 004fe4 10d7:1e74
-    db 0x8a, 0xc6 ; 004fe6 10d7:1e76: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 004fe8 10d7:1e78
-    db 0x8a, 0xc4 ; 004fea 10d7:1e7a: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 004fec 10d7:1e7c
-    clc                                        ; 004fee 10d7:1e7e
-    rcr al,1                                   ; 004fef 10d7:1e7f
-    sar al,1                                   ; 004ff1 10d7:1e81
-    sar al,1                                   ; 004ff3 10d7:1e83
-    add al,0x20                                ; 004ff5 10d7:1e85
-    db 0x8a, 0xd8 ; 004ff7 10d7:1e87: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ff9 10d7:1e89: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 004ffb 10d7:1e8b: mov al,ah [alternate encoding required]
-    jmp short loc_005000                       ; 004ffd 10d7:1e8d
-    db 0x90 ; 004fff |.|
-loc_005000:
-    nop                                        ; 005000 10d7:1e90
-    db 0x8a, 0xc4 ; 005001 10d7:1e91: mov al,ah [alternate encoding required]
-    mov al,0x80                                ; 005003 10d7:1e93
-    out byte 0x43,al                           ; 005005 10d7:1e95
-    in al,byte 0x42                            ; 005007 10d7:1e97
-    cmp al,0x28                                ; 005009 10d7:1e99
-    jna short loc_00503a                       ; 00500b 10d7:1e9b
-loc_00500d:
-    jmp short loc_005010                       ; 00500d 10d7:1e9d
-    db 0x90 ; 00500f |.|
-loc_005010:
-    db 0x8a, 0xc2 ; 005010 10d7:1ea0: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 005012 10d7:1ea2
-    nop                                        ; 005014 10d7:1ea4
-    nop                                        ; 005015 10d7:1ea5
-    db 0x8a, 0xc6 ; 005016 10d7:1ea6: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 005018 10d7:1ea8
-    mov al,0x80                                ; 00501a 10d7:1eaa
-    out byte 0x43,al                           ; 00501c 10d7:1eac
-    in al,byte 0x42                            ; 00501e 10d7:1eae
-    cmp al,0x28                                ; 005020 10d7:1eb0
-    jna short loc_005053                       ; 005022 10d7:1eb2
-    nop                                        ; 005024 10d7:1eb4
-    nop                                        ; 005025 10d7:1eb5
-    nop                                        ; 005026 10d7:1eb6
-    nop                                        ; 005027 10d7:1eb7
-    mov al,0x80                                ; 005028 10d7:1eb8
-    out byte 0x43,al                           ; 00502a 10d7:1eba
-    in al,byte 0x42                            ; 00502c 10d7:1ebc
-    cmp al,0x28                                ; 00502e 10d7:1ebe
-    ja short loc_00500d                        ; 005030 10d7:1ec0
-    nop                                        ; 005032 10d7:1ec2
-    nop                                        ; 005033 10d7:1ec3
-    nop                                        ; 005034 10d7:1ec4
-    nop                                        ; 005035 10d7:1ec5
-loc_005036:
-    nop                                        ; 005036 10d7:1ec6
-    nop                                        ; 005037 10d7:1ec7
-    nop                                        ; 005038 10d7:1ec8
-    nop                                        ; 005039 10d7:1ec9
-loc_00503a:
-    nop                                        ; 00503a 10d7:1eca
-    db 0x8a, 0xc2 ; 00503b 10d7:1ecb: mov al,dl [alternate encoding required]
-    out byte 0x61,al                           ; 00503d 10d7:1ecd
-    nop                                        ; 00503f 10d7:1ecf
-    nop                                        ; 005040 10d7:1ed0
-    db 0x8a, 0xc6 ; 005041 10d7:1ed1: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 005043 10d7:1ed3
-    mov al,0x80                                ; 005045 10d7:1ed5
-    out byte 0x43,al                           ; 005047 10d7:1ed7
-    in al,byte 0x42                            ; 005049 10d7:1ed9
-    cmp al,0x28                                ; 00504b 10d7:1edb
-    ja short loc_005062                        ; 00504d 10d7:1edd
-    nop                                        ; 00504f 10d7:1edf
-    nop                                        ; 005050 10d7:1ee0
-    nop                                        ; 005051 10d7:1ee1
-    nop                                        ; 005052 10d7:1ee2
-loc_005053:
-    mov al,0x80                                ; 005053 10d7:1ee3
-    out byte 0x43,al                           ; 005055 10d7:1ee5
-    in al,byte 0x42                            ; 005057 10d7:1ee7
-    cmp al,0x28                                ; 005059 10d7:1ee9
-    jna short loc_005036                       ; 00505b 10d7:1eeb
-    jmp word near [cs:bx+0x109f]               ; 00505d 10d7:1eed
-loc_005062:
-    jmp short loc_005065                       ; 005062 10d7:1ef2
-    db 0x90 ; 005064 |.|
-loc_005065:
-    jmp short loc_005068                       ; 005065 10d7:1ef5
-    db 0x90 ; 005067 |.|
-loc_005068:
-    db 0x8a, 0xc4 ; 005068 10d7:1ef8: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 00506a 10d7:1efa: mov al,ah [alternate encoding required]
-    nop                                        ; 00506c 10d7:1efc
-    jmp word near [cs:bx+0x109f]               ; 00506d 10d7:1efd
-loc_005072:
-    jmp near loc_00429b                        ; 005072 10d7:1f02
-    db 0x8a, 0xc6 ; 005075 10d7:1f05: mov al,dh [alternate encoding required]
-    out byte 0x61,al                           ; 005077 10d7:1f07
-    jcxz loc_005072                            ; 005079 10d7:1f09
-    db 0x8a, 0xc4 ; 00507b 10d7:1f0b: mov al,ah [alternate encoding required]
-    and al,0xf0                                ; 00507d 10d7:1f0d
-    clc                                        ; 00507f 10d7:1f0f
-    rcr al,1                                   ; 005080 10d7:1f10
-    sar al,1                                   ; 005082 10d7:1f12
-    sar al,1                                   ; 005084 10d7:1f14
-    add al,0x20                                ; 005086 10d7:1f16
-    db 0x8a, 0xd8 ; 005088 10d7:1f18: mov bl,al [alternate encoding required]
-    db 0x8a, 0xc4 ; 00508a 10d7:1f1a: mov al,ah [alternate encoding required]
-    db 0x8a, 0xc4 ; 00508c 10d7:1f1c: mov al,ah [alternate encoding required]
-loc_00508e:
-    mov al,0x80                                ; 00508e 10d7:1f1e
-    out byte 0x43,al                           ; 005090 10d7:1f20
-    in al,byte 0x42                            ; 005092 10d7:1f22
-    cmp al,0x28                                ; 005094 10d7:1f24
-    ja short loc_00508e                        ; 005096 10d7:1f26
-loc_005098:
-    mov al,0x80                                ; 005098 10d7:1f28
-    out byte 0x43,al                           ; 00509a 10d7:1f2a
-    in al,byte 0x42                            ; 00509c 10d7:1f2c
-    cmp al,0x28                                ; 00509e 10d7:1f2e
-    jna short loc_005098                       ; 0050a0 10d7:1f30
-    jmp word near [cs:bx+0x109f]               ; 0050a2 10d7:1f32
+    db 0xf6, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x2d, 0xf9, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x8a ; 004965 |.......-....a...|
+    db 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4 ; 004975 |.$......... ....|
+    db 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xf6, 0xb0, 0x80, 0xe6, 0x43 ; 004985 |.....C.B<(w....C|
+    db 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xf6, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0xf8, 0xf8, 0x8a, 0xc6 ; 004995 |.B<(v...........|
+    db 0xe6, 0x61, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf3, 0x8a, 0xc2, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0 ; 0049a5 |.a...a.....a..$.|
+    db 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0x90 ; 0049b5 |........ .......|
+    db 0x90, 0x90, 0x90, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x33, 0xeb ; 0049c5 |........C.B<(v3.|
+    db 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42 ; 0049d5 |.....a...a...C.B|
+    db 0x3c, 0x28, 0x76, 0x3d, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6 ; 0049e5 |<(v=............|
+    db 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xd5, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 ; 0049f5 |...C.B<(w.......|
+    db 0x90, 0x90, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4 ; 004a05 |......a...a...C.|
+    db 0x42, 0x3c, 0x28, 0x77, 0x1b, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a, 0xc6, 0x8a ; 004a15 |B<(w............|
+    db 0xc6, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xd3, 0x2e, 0xff, 0xa7, 0x9f, 0x10 ; 004a25 |....C.B<(v......|
+    db 0xeb, 0x01, 0x90, 0xeb, 0x01, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7 ; 004a35 |................|
+    db 0x9f, 0x10, 0xe9, 0x51, 0xf8, 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xe3 ; 004a45 |...Q....a.....a.|
+    db 0xf1, 0x8a, 0xc2, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8 ; 004a55 |....a..$........|
+    db 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0xb0, 0x80 ; 004a65 |. ..............|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x2d, 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x90 ; 004a75 |.C.B<(v-......a.|
+    db 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x2f, 0x90 ; 004a85 |....a...C.B<(v/.|
+    db 0x90, 0x90, 0x90, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xdb, 0x90, 0x90, 0x90 ; 004a95 |......C.B<(w....|
+    db 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc2, 0xe6, 0x61 ; 004aa5 |.........a.....a|
+    db 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x13, 0x90, 0x90, 0x90, 0x90, 0xb0, 0x80 ; 004ab5 |...C.B<(w.......|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xd9, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xeb, 0x01, 0x90 ; 004ac5 |.C.B<(v.........|
+    db 0xeb, 0x01, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0xb6, 0xf7 ; 004ad5 |................|
+    db 0x8a, 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc2, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0 ; 004ae5 |...a.....a..$...|
+    db 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90 ; 004af5 |...... .........|
+    db 0x90, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90 ; 004b05 |.............a..|
+    db 0x8a, 0xc2, 0xe6, 0x61, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xe7 ; 004b15 |...a.....C.B<(w.|
+    db 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc2, 0xe6 ; 004b25 |..........a.....|
+    db 0x61, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xe7, 0x2e, 0xff, 0xa7 ; 004b35 |a.....C.B<(v....|
+    db 0x9f, 0x10, 0xe9, 0x51, 0xf7, 0x8a, 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x90, 0x90, 0x8a, 0xc4, 0x8a ; 004b45 |...Q....a.......|
+    db 0xc2, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20 ; 004b55 |..a..$......... |
+    db 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90 ; 004b65 |................|
+    db 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc2, 0x8a, 0xc2, 0xe6, 0x61, 0x8a, 0xc4 ; 004b75 |...a.........a..|
+    db 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xe3, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01 ; 004b85 |...C.B<(w.......|
+    db 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc2, 0xe6, 0x61, 0x8a ; 004b95 |....a.........a.|
+    db 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xe3, 0x2e, 0xff, 0xa7, 0x9f, 0x10 ; 004ba5 |....C.B<(v......|
+    db 0xe9, 0xe3, 0xf6, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8 ; 004bb5 |......a....$....|
+    db 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x14, 0x90, 0x8a ; 004bc5 |..... ..........|
+    db 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x20, 0x8a, 0xc6, 0x8a ; 004bd5 |..a...C.B<(v ...|
+    db 0xc6, 0x90, 0x90, 0x8a, 0xc6, 0x8a, 0xc6, 0xe6, 0x61, 0xeb, 0xe4, 0x8a, 0xc2, 0xe6, 0x61, 0xb0 ; 004be5 |........a.....a.|
+    db 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x0a, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc6, 0xe6 ; 004bf5 |..C.B<(w........|
+    db 0x61, 0xeb, 0xe8, 0x8a, 0xc6, 0xe6, 0x61, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e ; 004c05 |a.....a.........|
+    db 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x7f, 0xf6, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24 ; 004c15 |..........a....$|
+    db 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4 ; 004c25 |......... ......|
+    db 0xeb, 0x17, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42 ; 004c35 |.........a...C.B|
+    db 0x3c, 0x28, 0x76, 0x23, 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc6, 0xe6, 0x61 ; 004c45 |<(v#...........a|
+    db 0xeb, 0xe1, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c ; 004c55 |........a...C.B<|
+    db 0x28, 0x77, 0x0a, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xeb, 0xe5, 0x8a, 0xc6, 0xe6 ; 004c65 |(w........a.....|
+    db 0x61, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x15 ; 004c75 |a...............|
+    db 0xf6, 0x8a, 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8 ; 004c85 |....a....$......|
+    db 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x17, 0x90, 0xeb, 0x01, 0x90 ; 004c95 |... ............|
+    db 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x37, 0x8a, 0xc4 ; 004ca5 |...a...C.B<(v7..|
+    db 0x8a, 0xc4, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42 ; 004cb5 |.........a...C.B|
+    db 0x3c, 0x28, 0x77, 0xd9, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xb0 ; 004cc5 |<(w...........a.|
+    db 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x1f, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a ; 004cd5 |..C.B<(w........|
+    db 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c ; 004ce5 |........a...C.B<|
+    db 0x28, 0x76, 0xd5, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0x01, 0x90, 0xeb ; 004cf5 |(v.........a....|
+    db 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x87, 0xf5, 0x8a ; 004d05 |................|
+    db 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8 ; 004d15 |..a....$........|
+    db 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x17, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc6 ; 004d25 |. ..............|
+    db 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x3a, 0x8a, 0xc4, 0x8a, 0xc4 ; 004d35 |.a...C.B<(v:....|
+    db 0x90, 0x90, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4 ; 004d45 |..........a...C.|
+    db 0x42, 0x3c, 0x28, 0x77, 0xd6, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61 ; 004d55 |B<(w...........a|
+    db 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x22, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4 ; 004d65 |...C.B<(w"......|
+    db 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6 ; 004d75 |............a...|
+    db 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xd2, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xeb, 0x01, 0x90, 0x8a ; 004d85 |C.B<(v..........|
+    db 0xc2, 0xe6, 0x61, 0xeb, 0x01, 0x90, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff ; 004d95 |..a.............|
+    db 0xa7, 0x9f, 0x10, 0xe9, 0xf0, 0xf4, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0 ; 004da5 |.........a....$.|
+    db 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb ; 004db5 |........ .......|
+    db 0x17, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c ; 004dc5 |........a...C.B<|
+    db 0x28, 0x76, 0x37, 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc6, 0xe6, 0x61, 0xb0 ; 004dd5 |(v7...........a.|
+    db 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xd9, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90 ; 004de5 |..C.B<(w........|
+    db 0x8a, 0xc2, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x1f, 0x8a, 0xc4 ; 004df5 |...a...C.B<(w...|
+    db 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc4, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80 ; 004e05 |.............a..|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xd5, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0x8a, 0xc6, 0xe6 ; 004e15 |.C.B<(v.........|
+    db 0x61, 0xeb, 0x01, 0x90, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7, 0x9f ; 004e25 |a...............|
+    db 0x10, 0xe9, 0x62, 0xf4, 0x8a, 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0 ; 004e35 |..b....a....$...|
+    db 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x17, 0x90 ; 004e45 |...... .........|
+    db 0xeb, 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76 ; 004e55 |......a...C.B<(v|
+    db 0x23, 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0xe1, 0xeb ; 004e65 |#...........a...|
+    db 0x01, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x0a ; 004e75 |.....a...C.B<(w.|
+    db 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0xe5, 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0x01 ; 004e85 |.......a.....a..|
+    db 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0xf8, 0xf3, 0x8a, 0xc6 ; 004e95 |................|
+    db 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04 ; 004ea5 |.a....$.........|
+    db 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x14, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80 ; 004eb5 | ............a..|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x20, 0x8a, 0xc6, 0x8a, 0xc6, 0x90, 0x90, 0x8a, 0xc6 ; 004ec5 |.C.B<(v ........|
+    db 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0xe4, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42 ; 004ed5 |...a.....a...C.B|
+    db 0x3c, 0x28, 0x77, 0x0a, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0xeb, 0xe8, 0x8a, 0xc2 ; 004ee5 |<(w........a....|
+    db 0xe6, 0x61, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9 ; 004ef5 |.a..............|
+    db 0x94, 0xf3, 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc6, 0xe6, 0x61 ; 004f05 |.....a.........a|
+    db 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a ; 004f15 |..$......... ...|
+    db 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6 ; 004f25 |................|
+    db 0x61, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc2, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc4, 0xb0, 0x80, 0xe6 ; 004f35 |a.........a.....|
+    db 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xe3, 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc2 ; 004f45 |C.B<(w..........|
+    db 0xe6, 0x61, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc4, 0xb0, 0x80 ; 004f55 |.a.........a....|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xe3, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x26, 0xf3 ; 004f65 |.C.B<(v.......&.|
+    db 0x8a, 0xc2, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0 ; 004f75 |...a.....a..$...|
+    db 0xd8, 0xd0, 0xf8, 0xd0, 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90 ; 004f85 |...... .........|
+    db 0x90, 0x90, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0x90, 0x90 ; 004f95 |.............a..|
+    db 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xe7 ; 004fa5 |...a.....C.B<(w.|
+    db 0x90, 0x90, 0x90, 0x90, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc6, 0xe6 ; 004fb5 |..........a.....|
+    db 0x61, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xe7, 0x2e, 0xff, 0xa7 ; 004fc5 |a.....C.B<(v....|
+    db 0x9f, 0x10, 0xe9, 0xc1, 0xf2, 0x8a, 0xc2, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xe3 ; 004fd5 |........a.....a.|
+    db 0xf1, 0x8a, 0xc6, 0xe6, 0x61, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0, 0xf8 ; 004fe5 |....a..$........|
+    db 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xeb, 0x01, 0x90, 0x90, 0x8a, 0xc4, 0xb0, 0x80 ; 004ff5 |. ..............|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x2d, 0xeb, 0x01, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0x90 ; 005005 |.C.B<(v-......a.|
+    db 0x90, 0x8a, 0xc6, 0xe6, 0x61, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0x2f, 0x90 ; 005015 |....a...C.B<(v/.|
+    db 0x90, 0x90, 0x90, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0xdb, 0x90, 0x90, 0x90 ; 005025 |......C.B<(w....|
+    db 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x8a, 0xc2, 0xe6, 0x61, 0x90, 0x90, 0x8a, 0xc6, 0xe6, 0x61 ; 005035 |.........a.....a|
+    db 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x77, 0x13, 0x90, 0x90, 0x90, 0x90, 0xb0, 0x80 ; 005045 |...C.B<(w.......|
+    db 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xd9, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xeb, 0x01, 0x90 ; 005055 |.C.B<(v.........|
+    db 0xeb, 0x01, 0x90, 0x8a, 0xc4, 0x8a, 0xc4, 0x90, 0x2e, 0xff, 0xa7, 0x9f, 0x10, 0xe9, 0x26, 0xf2 ; 005065 |..............&.|
+    db 0x8a, 0xc6, 0xe6, 0x61, 0xe3, 0xf7, 0x8a, 0xc4, 0x24, 0xf0, 0xf8, 0xd0, 0xd8, 0xd0, 0xf8, 0xd0 ; 005075 |...a....$.......|
+    db 0xf8, 0x04, 0x20, 0x8a, 0xd8, 0x8a, 0xc4, 0x8a, 0xc4, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c ; 005085 |.. .........C.B<|
+    db 0x28, 0x77, 0xf6, 0xb0, 0x80, 0xe6, 0x43, 0xe4, 0x42, 0x3c, 0x28, 0x76, 0xf6, 0x2e, 0xff, 0xa7 ; 005095 |(w....C.B<(v....|
+    db 0x9f, 0x10 ; 0050a5 |..|
 
-; Ghidra 10d7:1f37: FUN_10d7_1f37
+; Ghidra 10d7:1f37: candidate_resident_0050a7
 fn_0050a7:
     push bp                                    ; 0050a7 10d7:1f37
     db 0x8b, 0xec ; 0050a8 10d7:1f38: mov bp,sp [alternate encoding required]
@@ -3988,8 +2933,8 @@ fn_00529e:
     db 0x8b, 0xec ; 00529f 10d7:212f: mov bp,sp [alternate encoding required]
     push si                                    ; 0052a1 10d7:2131
     push di                                    ; 0052a2 10d7:2132
-    mov es,word [0xd5af]                       ; 0052a3 10d7:2133
-    mov di,[0xd701]                            ; 0052a7 10d7:2137
+    mov es,word [0xd60d]                       ; 0052a3 10d7:2133
+    mov di,[0xd75f]                            ; 0052a7 10d7:2137
     mov si,[bp+0x6]                            ; 0052ab 10d7:213b
     mov ax,[bp+0x8]                            ; 0052ae 10d7:213e
     mov ds,ax                                  ; 0052b1 10d7:2141
@@ -4008,7 +2953,7 @@ loc_0052bf:
 loc_0052c7:
     pop di                                     ; 0052c7 10d7:2157
     db 0x03, 0xf3 ; 0052c8 10d7:2158: add si,bx [alternate encoding required]
-    add di,[ss:0xd6e8]                         ; 0052ca 10d7:215a
+    add di,[ss:0xd746]                         ; 0052ca 10d7:215a
     dec word [bp+0xa]                          ; 0052cf 10d7:215f
     jnz short loc_0052bc                       ; 0052d2 10d7:2162
     mov ax,ss                                  ; 0052d4 10d7:2164
@@ -4028,8 +2973,8 @@ fn_0052e1:
     db 0x8b, 0xec ; 0052e2 10d7:2172: mov bp,sp [alternate encoding required]
     push si                                    ; 0052e4 10d7:2174
     push di                                    ; 0052e5 10d7:2175
-    mov es,word [0xd5af]                       ; 0052e6 10d7:2176
-    mov di,[0xd701]                            ; 0052ea 10d7:217a
+    mov es,word [0xd60d]                       ; 0052e6 10d7:2176
+    mov di,[0xd75f]                            ; 0052ea 10d7:217a
     mov bh,[bp+0x6]                            ; 0052ee 10d7:217e
     mov bl,[bp+0x8]                            ; 0052f1 10d7:2181
     push ds                                    ; 0052f4 10d7:2184
@@ -4153,7 +3098,7 @@ loc_0053a7:
     mov [es:di],bh                             ; 0053a7 10d7:2237
 loc_0053aa:
     dec di                                     ; 0053aa 10d7:223a
-    add di,[ss:0xd6e8]                         ; 0053ab 10d7:223b
+    add di,[ss:0xd746]                         ; 0053ab 10d7:223b
     dec cx                                     ; 0053b0 10d7:2240
     jz short loc_0053b6                        ; 0053b1 10d7:2241
     jmp near loc_0052fe                        ; 0053b3 10d7:2243
@@ -4267,7 +3212,7 @@ loc_00544d:
     push ds                                    ; 00545e 10d7:22ee
     push si                                    ; 00545f 10d7:22ef
     push bx                                    ; 005460 10d7:22f0
-    call word 0x1484:word 0xe37                ; 005461 10d7:22f1
+    call word 0x147e:word 0xe35                ; 005461 10d7:22f1
     add sp,0x8                                 ; 005466 10d7:22f6
     pop es                                     ; 005469 10d7:22f9
     db 0x8b, 0xd0 ; 00546a 10d7:22fa: mov dx,ax [alternate encoding required]
@@ -4603,7 +3548,15 @@ fn_0056af:
 loc_0056bd:
     db 0x33, 0xc0 ; 0056bd 10d7:254d: xor ax,ax [alternate encoding required]
     retf                                       ; 0056bf 10d7:254f
-    db 0x8b, 0xdc, 0x0e, 0xe8, 0x87, 0xff, 0x0b, 0xc0, 0x7e, 0xf3, 0xb8, 0x01, 0x00, 0xcb ; 0056c0 |........~.....|
+    db 0x8b, 0xdc, 0x0e ; 0056c0 |...|
+
+; Ghidra 10d7:2553: caseD_0
+fn_0056c3:
+    call near loc_00564d                       ; 0056c3 10d7:2553
+    db 0x0b, 0xc0 ; 0056c6 10d7:2556: or ax,ax [alternate encoding required]
+    jng short loc_0056bd                       ; 0056c8 10d7:2558
+    mov ax,0x1                                 ; 0056ca 10d7:255a
+    retf                                       ; 0056cd 10d7:255d
 
 ; Ghidra 10d7:255e: FUN_10d7_255e
 fn_0056ce:
@@ -5009,11 +3962,11 @@ fn_005965:
     db 0x8b, 0xc3 ; 005986 10d7:2816: mov ax,bx [alternate encoding required]
     mov cl,0x4                                 ; 005988 10d7:2818
     shl ax,cl                                  ; 00598a 10d7:281a
-    mov [0xa698],ax                            ; 00598c 10d7:281c
+    mov [0xa6f2],ax                            ; 00598c 10d7:281c
     db 0x8b, 0xc3 ; 00598f 10d7:281f: mov ax,bx [alternate encoding required]
     rol ax,cl                                  ; 005991 10d7:2821
     db 0x25, 0x0f, 0x00 ; 005993 10d7:2823: and ax,0xf [alternate encoding required]
-    mov [0xa69a],ax                            ; 005996 10d7:2826
+    mov [0xa6f4],ax                            ; 005996 10d7:2826
     db 0x33, 0xc0 ; 005999 10d7:2829: xor ax,ax [alternate encoding required]
 loc_00599b:
     db 0x8b, 0xd0 ; 00599b 10d7:282b: mov dx,ax [alternate encoding required]

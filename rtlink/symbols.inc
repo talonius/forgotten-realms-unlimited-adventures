@@ -1,7 +1,7 @@
 ; Link-time offsets in the RTLink manager segment, unless noted.
 %ifndef RTLINK_SYMBOLS
 %define RTLINK_SYMBOLS
-manager_segment            equ 0x18e4
+manager_segment            equ 0x18de
 saved_dos_es               equ 0x0b0a
 saved_dos_ds               equ 0x0b0c
 private_stack_segment      equ 0x0c95

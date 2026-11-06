@@ -4,7 +4,6 @@
 ; not Turbo C's C0L: there is no exit chain, no floating-point hook and no null check.
 ; It sets up DGROUP and the stack, builds one command-line string and hands it to
 ; start_main (cmdargs.c), which splits it into argc/argv; then it exits with code 0.
-; v1.0 differs from v1.2 only in DGROUP (40f7), _BSS (a786, 3f69h bytes) and start_main.
 ;
 ;   1. DS = SS = DGROUP, _psp saved.  With 64K or more above DGROUP, SP = 0fffeh and
 ;      DOS shrinks the program's block to end there; otherwise SP is the top of memory.
@@ -23,8 +22,8 @@
 
                 LOCALS                          ; @@ labels are local
 
-BSS_START       equ     0A786h                  ; _BSS, DGROUP a786 ...
-BSS_BYTES       equ     3F69h                   ; ... e6ee; by words, so e6ee is left
+BSS_START       equ     0A7E4h                  ; _BSS, DGROUP a7e4 (cur_event) ...
+BSS_BYTES       equ     3F67h                   ; ... e74a; by words, so e74a is left
 
 _DATA           segment word public 'DATA'
                 extrn   __psp:word              ; DGROUP 0020, the PSP's segment
@@ -32,7 +31,7 @@ _DATA           segment word public 'DATA'
 _DATA           ends
 DGROUP          group   _DATA
 
-                extrn   _start_main:far         ; cmdargs.c, 2799:000d
+                extrn   _start_main:far         ; cmdargs.c, 2793:000b
 
 STARTUP_TEXT    segment byte public 'CODE'
                 assume  cs:STARTUP_TEXT, ds:DGROUP

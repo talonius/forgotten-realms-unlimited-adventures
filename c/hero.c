@@ -28,10 +28,6 @@
  * Turbo C far-calls a public function of this module that is not yet
  * defined and reaches it with `push cs; call near` once it is, so every
  * routine called ahead of its definition carries a prototype.
- *
- * This is the v1.0 build (CKIT.EXE of March 19, 1993): EXE 0x006100..0x008350,
- * _BSS at a796.  v1.0 lacks v1.2's cursor_obj[0x1d] guard in hero_damage, so
- * damage over 9 past zero (or to 0 at status 1) always sets status 6.
  */
 
 #include <stdlib.h>
@@ -917,7 +913,7 @@ void far hero_damage(struct Hero far *h, unsigned short dmg)     /* 13d0:1792 */
         hp = h->hp - dmg;
     else
         over = dmg - h->hp;
-    if (over > 9 || hp == 0 && h->status == 1)
+    if (cursor_obj[0x1d] == 0 && (over > 9 || hp == 0 && h->status == 1))
         h->status = 6;
     else if (over > 0) {
         h->status = 5;

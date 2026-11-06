@@ -1,9 +1,4 @@
-/* v1.0 BUILD (CKIT.EXE 1.0, March 19 1993), file offset 0x1b0fa (28cf:000a),
- * 319 code bytes, the same source as v1.2; only its frame moved, so the
- * switch table's paragraph-relative operands differ.  The addresses below
- * are v1.2's.
- *
- * CKIT.EXE resident module 28c9: str_to_num, reading a number whose radix
+/* CKIT.EXE resident module 28c9: str_to_num, reading a number whose radix
  * is named by a letter after its digits.  A trailing B, O, D or H (either
  * case) selects binary, octal, decimal or hexadecimal and is not read as a
  * digit; with any other last character the whole string is decimal.  Digits

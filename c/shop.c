@@ -1,9 +1,4 @@
-/* v1.0 BUILD (CKIT.EXE 1.0, March 19 1993), file offset 0x4cab7, 4,519 code
- * bytes.  The addresses and claims below are v1.2's.  v1.0 differs: shop_pick
- * does not call list_options_set(0, 0, 1) before its list_menu, and the shop menu's
- * node_prompt passes anim 0, not 1.
- *
- * CKIT.EXE overlay 10 module 2431: the shop and the vault.  Pricing the
+/* CKIT.EXE overlay 10 module 2431: the shop and the vault.  Pricing the
  * shop's stock and buying from it, the shop menu, the vault menu, selling
  * or identifying one of a member's items for platinum, and three routines
  * that make treasure: a scroll, one item from the item table, and the items
@@ -278,6 +273,7 @@ void far shop_pick(char far *key, struct Item far * far *pick,
     head = pool_items;
     ui_mode = 0;
     hotkey_reset(1);
+    list_options_set(0, 0, 1);
     *key = list_menu(items_title, buy_items, 1, 1, 0x26, 0x12,
                      (struct Node far *)head, 1, 0, &shop_redraw, top,
                      (struct Node far * far *)cursor);
@@ -432,7 +428,7 @@ void far shop_menu(void)                                         /* 3431:05b4 */
                     hotkey_add(i, &count);
         }
         ui_mode = state;
-        key = node_prompt(empty_text, shop_items, 1, 0);
+        key = node_prompt(empty_text, shop_items, 1, 1);
         state = ui_mode;
         if (menu_escaped) {
             switch (key) {

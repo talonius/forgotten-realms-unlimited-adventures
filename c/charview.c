@@ -1,11 +1,4 @@
-/* v1.0 BUILD (CKIT.EXE 1.0, March 19 1993), file offset 0x5dc50, 16,979 code
- * bytes.  The addresses and claims below are v1.2's.  v1.0 differs only in
- * items_menu: v1.2 saves confirm_anim and zeroes it for the whole menu,
- * v1.0 does so only around the Drop item's txt_lose_it confirm (case 4), so
- * every other confirm in the menu animates; its locals are declared in
- * another order (the frame differs).
- *
- * CKIT.EXE overlay 14 module 28aa: the character view.  The status page
+/* CKIT.EXE overlay 14 module 28aa: the character view.  The status page
  * (status, class, race, alignment, level, experience, the six abilities, the
  * money and the combat values), its menu of items, spells, trade, deposit or
  * drop, lay on hands and cure disease; the items menu (ready, use, trade,
@@ -685,18 +678,18 @@ done:
 
 void far items_menu(char far *done)                              /* 38aa:0f56 */
 {
+    struct Item far *item;
+    struct Item far *sel;
+    struct Hero far *h;
+    struct Item far *picked;
+    int index;
+    unsigned char count;
     unsigned char options;
     unsigned char ch;
+    char redraw;
     char need_redraw;
     char redraw_box;
     char anim;
-    struct Item far *item;
-    struct Item far *sel;
-    int index;
-    struct Hero far *h;
-    unsigned char count;
-    char redraw;
-    struct Item far *picked;
     register int n;
 
     h = cur_node;
@@ -706,6 +699,8 @@ void far items_menu(char far *done)                              /* 38aa:0f56 */
     need_redraw = 1;
     ch = 0xff;
     redraw = 1;
+    anim = confirm_anim;
+    confirm_anim = 0;
     while (ch != 9 && !*done && h->item_count > 0) {
         count = h->item_count;
         if (h->items) {
@@ -831,13 +826,10 @@ void far items_menu(char far *done)                              /* 38aa:0f56 */
                         item_name(h, sel, 0, 0, 0, 0);
                         text_wrap(1, 0x15, 0x26, 0x16, 0xb, 0, 1,
                                   msg_format("%s%s%s", your_text, sel->name, gone_text));
-                        anim = confirm_anim;
-                        confirm_anim = 0;
                         if (confirm(txt_lose_it, 0)) {
                             item_remove(cur_node, sel);
                             redraw_box = 1;
                         }
-                        confirm_anim = anim;
                         text_clear(1, 0x15, 0x26, 0x16);
                     } else
                         ch = 0xff;
@@ -863,6 +855,7 @@ void far items_menu(char far *done)                              /* 38aa:0f56 */
         if (h->item_count != count)
             redraw_box = 1;
     }
+    confirm_anim = anim;
 }
 
 void far item_effect(struct Item far *item, char on)             /* 38aa:16f0 */

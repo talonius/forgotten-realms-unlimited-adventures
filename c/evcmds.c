@@ -65,16 +65,6 @@
  * zero pad byte after the literals section 7 references at 72ae..73e0
  * (module 25e1's, not landed), and move.c's _DATA begins at 75dc.  The
  * module has no _BSS.
- *
- * This is the v1.0 build (CKIT.EXE 1.0): the module is file 0x041070..
- * 0x044819, TEXT 31d6:0000 at the start of section 8's payload, _DATA
- * DGROUP 73b0..75af (0x200 bytes); the addresses above are v1.2's.  What
- * differs from v1.2: menu_opts still has DQK's digit class -- it adds 0x20
- * to '0'..'9' as well as to capitals; event_combat's list[6] is an
- * initialized local (six zero bytes in _DATA, copied by SCOPY@) where
- * v1.2 clears it with 00d7:277b; event_walk does not set party_has_moved; and
- * event_pay charges the single byte ev[8] (no ev[9] high byte, no amount
- * local), its locals declared saved, paid, h.
  */
 
 struct Pool;                    /* strutil.c's                            */
@@ -331,6 +321,7 @@ extern char msg_buf[];                                          /* b259 */
 extern char pic_up;                                           /* b363 */
 extern char monster_table[12];                                       /* b369 */
 extern char step_back_due;                                           /* b375 */
+extern char party_has_moved;                                          /* b378 */
 extern struct Hero far *cur_node;                                /* b3dd */
 extern unsigned char next_monster_group;                                  /* b3e1 */
 extern char tick_slot;                                           /* b3f2 */
@@ -412,7 +403,7 @@ void far menu_opts(char far *menu, unsigned char far *count)     /* 31d4:0099 */
     n = 0;
     scratch_word = 0;
     for (i = 0; i < str_length(menu); i++) {
-        if (menu[i] >= 'A' && menu[i] <= 'Z' || menu[i] >= '0' && menu[i] <= '9')
+        if (menu[i] >= 'A' && menu[i] <= 'Z')
             menu[i] = menu[i] + 0x20;
         if (menu[i] == '~' || menu[i] == '^') {
             if (menu[i + 1] == '~' || menu[i + 1] == '^')
@@ -1005,9 +996,10 @@ void far event_combat(unsigned char far *ev, char random)        /* 31d4:1444 */
     char saved;
     char add;
     unsigned char n;
-    unsigned char list[6] = { 0 };
+    unsigned char list[6];
     unsigned char pick;
 
+    mem_fill(list, 6, 0);
     picture_hides_roster = 0;
     saved = exploration_menu_context;
     exploration_menu_context = 0;
@@ -1711,6 +1703,7 @@ void far event_walk(unsigned char far *ev)                       /* 31d4:2ab8 */
             view_update();
             party_info_display();
         }
+        party_has_moved = 1;
     }
 }
 
@@ -1833,9 +1826,10 @@ char far event_check(unsigned char far *ev)                      /* 31d4:2ef9 */
 
 char far event_pay(unsigned char far *ev)                        /* 31d4:321a */
 {
+    struct Hero far *h;
+    unsigned short amount;
     char saved;
     char paid;
-    struct Hero far *h;
 
     event_view_draw();
     saved = exploration_menu_context;
@@ -1843,6 +1837,7 @@ char far event_pay(unsigned char far *ev)                        /* 31d4:321a */
     character_select_failed = 0;
     exploration_menu_context = saved;
     h = cur_node;
+    amount = ev[8] + (ev[9] << 8);
     do {
         paid = 0;
         if (ev[6])
@@ -1864,22 +1859,22 @@ char far event_pay(unsigned char far *ev)                        /* 31d4:321a */
             h = (struct Hero far *)get_selected();
             switch ((ev[7] & 0xc) >> 2) {
             case 1:
-                if (h->coins[1] >= ev[8]) {
-                    h->coins[1] -= ev[8];
+                if (h->coins[1] >= amount) {
+                    h->coins[1] -= amount;
                     paid = 1;
                 } else
                     paid = 0;
                 break;
             case 2:
-                if (h->coins[2] >= ev[8]) {
-                    h->coins[2] -= ev[8];
+                if (h->coins[2] >= amount) {
+                    h->coins[2] -= amount;
                     paid = 1;
                 } else
                     paid = 0;
                 break;
             case 3:
-                if (h->coins[0] >= ev[8]) {
-                    h->coins[0] -= ev[8];
+                if (h->coins[0] >= amount) {
+                    h->coins[0] -= amount;
                     paid = 1;
                 } else
                     paid = 0;

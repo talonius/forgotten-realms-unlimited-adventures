@@ -95,7 +95,7 @@ rtlink_sections_body:
     call rtlink_open_file
 .notify_runtime:
     ; 1AE1:01B7 hands event 4 (AL=4) to the runtime's hook walker at 1AE1:01ED.
-    call 0x1ae8:0x1b1
+    call 0x1ae1:0x1b7
 .write_start_bound:
     ; Optional far output pointers receive the computed segment bounds.
     mov ax,[start_output_offset]

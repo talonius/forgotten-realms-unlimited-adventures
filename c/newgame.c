@@ -29,14 +29,6 @@
  *
  * _DATA is DGROUP 6b76..6bbe: color_table, alloc_next and five literals.
  * _BSS is empty: every other variable this module writes is declared extern.
- *
- * THIS IS THE v1.0 BUILD (CKIT.EXE "Version 1.0 March 19,1993"): the
- * addresses above are v1.2's; v1.0 places the module at file 0x0390ce
- * (320b:000e, _DATA 6b44).  Against v1.2, v1.0's game_init also calls the
- * empty resident routine v10_0cf6_0006 before debug_password_init and clears
- * v10_byte_caac (a v1.0-only byte, DGROUP caac) after no_study; game_init and game_reset
- * clear pending_load through mapevent.c's vector stub 18de:141d instead of
- * storing it directly.
  */
 
 struct Res;                     /* tiles.c's resource handle              */
@@ -84,7 +76,6 @@ extern void far frame_invalidate(void);                          /* 083a:0d3c */
 extern void far set_step_mode(char c);                           /* 083a:239f */
 extern void far sfx_setup(void);                               /* 0c8e:014e */
 extern void far sfx_init(void);                               /* 0c8e:014f */
-extern void far v10_0cf6_0006(void);                             /* v1.0 0cf6:0006, an empty routine */
 extern void far mem_zero(void far *p, int n);                   /* 0d48:0017 */
 extern void far text_print_at(int row, int col, int a, char far *fmt, ...); /* 0da7:0399 */
 extern void far file_open(char disk, char far *name, int flags,
@@ -104,7 +95,6 @@ extern void far *far slot_base(int slot);                        /* 1336:08fe */
 extern void far dl_init(int max);                                /* 15e5:11ea */
 extern void far ticks_start(void);   /* 18de:1931, vector to overlay 14 28aa:3a44 */
 extern void far area_alloc(void);   /* 18de:193b, vector to overlay 13 26e3:0557 */
-extern void far pending_load_set(char n); /* 18de:141d, vector to overlay 4 1cff:08e5, mapevent.c's pending_load setter */
 extern void far fx_install(void);   /* 18de:1945, vector to overlay 11 26e3:317e */
 extern void far spellfx_init(void);   /* 18de:194f, vector to overlay 12 26e3:44d2 */
 extern void far config_load(void);                               /* 21d4:0000 */
@@ -123,6 +113,7 @@ void far *far arena_alloc(int n);
 extern char byte_6723;                                           /* 6723 */
 extern char big_pic_shown;                                           /* 6724 */
 extern struct Event far *event_table;                                /* a7f0 */
+extern char pending_load;                                           /* b368 */
 extern struct Hero far *cur_node;                                /* b3dd */
 extern struct ItemType far *item_table;                          /* b40a */
 extern char view_kind;                                           /* b40e */
@@ -146,7 +137,6 @@ extern struct Item far *pool_items;                              /* b8e2 */
 extern char byte_bcef;                                           /* bcef */
 extern char encounter_sprite_shown;                                           /* bcf0 */
 extern char adventure_exit;                                           /* bcf6 */
-extern unsigned char v10_byte_caac;     /* v1.0 only: caac, also cleared by cmbsetup.c and view3d.c */
 extern struct Res far *big_res;                                  /* bcf7 */
 extern char no_study;                                            /* be68 */
 extern char year_rolled;                                         /* c354 */
@@ -247,7 +237,6 @@ void far game_init(void)                                         /* 3209:010d */
         pal_glyph(0, 0, 0);
     res_reset();
     button_hook_install();
-    v10_0cf6_0006();
     debug_password_init();
     mem_zero(combatants, sizeof(combatants));
     combatant_count = 0;
@@ -259,7 +248,7 @@ void far game_init(void)                                         /* 3209:010d */
     cursor_obj[0x22] = 1;
     byte_6723 = 0;
     big_pic_shown = 0;
-    pending_load_set(0);
+    pending_load = 0;
     vault_slot = 90;
     mem_zero(back_res, 4);
     res_alloc(&icon_res, 81);
@@ -311,7 +300,6 @@ void far game_init(void)                                         /* 3209:010d */
     saved_view_mode = 0;
     item_handler_active = 0;
     no_study = 0;
-    v10_byte_caac = 0;
     monsters_queued = 0;
     picture_hides_roster = 0;
     train_costs_waived = 0;
@@ -335,7 +323,7 @@ void far game_reset(void)                                        /* 3209:0448 */
     cursor_obj[0x22] = 1;
     byte_6723 = 0;
     big_pic_shown = 0;
-    pending_load_set(0);
+    pending_load = 0;
     vault_slot = 90;
     mem_fill(event_table, 2000, 0);
     mem_fill(&geo, 5, 0);

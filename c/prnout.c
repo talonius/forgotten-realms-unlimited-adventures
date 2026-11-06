@@ -1,12 +1,4 @@
-/* v1.0 build (CKIT.EXE "Version 1.0 March 19,1993"): this object is at EXE
- * 0x07f08a, 754 code bytes; _DATA at a62c, _BSS at e650.  The comment
- * below describes v1.2.  v1.0 differs: prn_eject ends a page with
- * prn_skip(0x42 - line_no) empty lines instead of a form feed; prn_line
- * ends a line with LF only (no CR), copies '\n' and '\f' through, and
- * puts the page number at 0x49 - title length with "%s%( %)Page %02d"
- * (no leading space); prn_center's buffer is 0x58 bytes, not 0x5c.
- *
- * CKIT.EXE overlay section 25, frame 2d91, second object: output to the
+/* CKIT.EXE overlay section 25, frame 2d91, second object: output to the
  * printer, a line at a time, with pages.  prn_open starts a job (the
  * printer's printer_begin, counters cleared, a header flag and a title
  * kept); prn_line formats a line with str_format's "%r" (a null format
@@ -125,8 +117,11 @@ void far prn_close(void)                                         /* 3d91:0a22 */
 
 void far prn_eject(void)                                         /* 3d91:0a2d */
 {
-    if (line_no)
-        prn_skip(0x42 - line_no);
+    if (line_no) {
+        printer_putc(0xc);
+        line_no = 0;
+        pages++;
+    }
 }
 
 char far prn_ready(void)                                         /* 3d91:0a49 */
@@ -163,7 +158,7 @@ void far prn_line(char far *fmt, ...)                            /* 3d91:0ae0 */
     if (!line_no && pages && banner) {
         line_no++;
         prn_skip(2);
-        prn_line("%s%( %)Page %02d", doc_title, 0x49 - str_len(doc_title), pages);
+        prn_line(" %s%( %)Page %2d", doc_title, 0x47 - str_len(doc_title), pages);
         prn_skip(3);
         line_no--;
     }
@@ -178,8 +173,11 @@ void far prn_line(char far *fmt, ...)                            /* 3d91:0ae0 */
             error_box("'%s'", buf + 0x3d);
         }
         for (p = buf; *p && prn_ready(); )
-            printer_putc(*p++);
+            if (*p != '\n' && *p != '\f')
+                printer_putc(*p++);
     }
+    if (prn_ready())
+        printer_putc('\r');
     if (prn_ready())
         printer_putc('\n');
     if (++line_no >= 0x42) {
@@ -190,7 +188,7 @@ void far prn_line(char far *fmt, ...)                            /* 3d91:0ae0 */
 
 void far prn_center(char far *fmt, ...)                          /* 3d91:0c50 */
 {
-    char buf[0x58];
+    char buf[0x5c];
     int pad;
 
     str_format(buf, "%r", fmt, (void far *)(&fmt + 1));
