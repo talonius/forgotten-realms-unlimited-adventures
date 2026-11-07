@@ -97,6 +97,13 @@
  * has set it from !f5.
  */
 
+struct Entry {                  /* one menu entry, 8 bytes, as menubox.c  */
+    char far *text;             /* +0                                     */
+    int val;                    /* +4                                     */
+    char key;                   /* +6                                     */
+    char flags;                 /* +7                                     */
+};
+
 struct EdEnv {                  /* editloop.c's, passed to every screen   */
     long bits;                  /* +0   a screen's result; signed here    */
     char shift;                 /* +4                                     */
@@ -282,7 +289,8 @@ extern void far ed_mode_get(unsigned char far *tool, unsigned char far *view);
 extern void far shown_clear(struct MapEd far *m);
                                 /* 18de:1f8f, vector to overlay 18 2cf5:0139 */
 
-extern char far *replace_all_text;                          /* 00fc  "Replace globally" */
+extern struct Entry util_items[];                            /* 00f4  the Utilities menu   */
+#define replace_all_text (util_items[1].text)                 /* "Replace globally"    */
 extern char far *col_row_fmt;                          /* 0148  "Col %2d Row %2d" */
 extern char far *tool_names[];                        /* 0154  "Wall", ...       */
 extern char far *access_text;                          /* 0204  "Access"          */

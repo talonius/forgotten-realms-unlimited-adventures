@@ -139,7 +139,8 @@ extern void far take_menu(void);                                 /* 21d4:0701 */
 extern void far pool_check(char far *has_coins, char far *has_items); /* 21d4:09ab */
 extern void far appraise(char far *done);                        /* 21d4:09fb */
 
-extern char far *spell_names[];                                  /* 2434 */
+extern char far *spell_name_table[];                             /* 2438 */
+#define spell_names (spell_name_table - 1)    /* spell numbers start at 1 */
 extern char far *cure_anyway_text;                               /* 3b8c */
 extern char far *not_blind_text;                                 /* 3b98 */
 extern char far *cannot_raise_text;                              /* 3ba0 */

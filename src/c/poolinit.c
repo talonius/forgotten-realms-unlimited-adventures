@@ -40,7 +40,8 @@ extern void far str_copy(char far *dst, char far *src);      /* 00d7:255e */
 extern void far *far mem_alloc(int n);                        /* 00d7:2669 */
 extern void far *far arena_alloc(int n);                     /* 2209:0606 */
 
-extern char far *boots_word;                                       /* 3db7 */
+extern char far *item_words[];                                   /* 3d03 */
+#define boots_word (item_words[45])                              /* "Boots" */
 extern char debug_word[];                                          /* b3f4 */
 extern struct Pool party_pool;                                    /* b76e */
 extern struct Pool patch_pool;                                    /* bb90 */

@@ -50,7 +50,7 @@ struct Map {
     unsigned char cell[25][50]; /* +9   tile_info index from 1, by row    */
 };
 
-struct Area {                   /* what cur_area_rec points at                */
+struct Area {                   /* what geo.area points at                    */
     char pad_0[2];              /* +0   not read here                     */
     unsigned char rows;         /* +2                                     */
     unsigned char cols;         /* +3                                     */
@@ -109,6 +109,8 @@ struct Geo {                    /* the party's place                      */
     char x;                     /* +0   d414                              */
     char y;                     /* +1   d415                              */
     unsigned char facing;       /* +2   d416                              */
+    char pad_3[5];              /* +3   not read here                     */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
 };
 
 struct Res;
@@ -186,7 +188,6 @@ extern struct Pool combat_pool;                                  /* ce72 */
 extern unsigned char rec_count;                                  /* cfd7 */
 extern struct Hero far *node_list;                               /* d129 */
 extern struct Geo geo;                                           /* d414 */
-extern struct Area far *cur_area_rec;                                /* d41c */
 
 static unsigned char mask_5908 = 2;
 static unsigned char side_dirs[4][4] = { /* by quarter: 8, then three directions */
@@ -256,7 +257,7 @@ static void cell_put(unsigned char dx, unsigned char dy,
 
 static int wall_at(char x, char y, char dir)                     /* 3482:0072 */
 {
-    if (x >= 0 && x <= cur_area_rec->cols - 1 && y >= 0 && y <= cur_area_rec->rows - 1) {
+    if (x >= 0 && x <= geo.area->cols - 1 && y >= 0 && y <= geo.area->rows - 1) {
         if (wall_passable(x, y, dir)) {
             if (wall_side(x, y, dir))
                 return 3;
@@ -745,7 +746,7 @@ static void map_build(void)                                      /* 3482:0e73 */
     }
     res_free(&res);
     if (cursor_obj[0x22]) {
-        set = cur_area_rec->combat_sets[combat_outdoors];
+        set = geo.area->combat_sets[combat_outdoors];
         if (set == 0)
             set = 1;
         if (combat_outdoors) {
@@ -755,7 +756,7 @@ static void map_build(void)                                      /* 3482:0e73 */
         } else
             pic_load("DungCom1", set, 0, 0x19);
     } else {
-        set = cur_area_rec->zone_wild_sets[cell_zone_at(cursor_obj[0x25], cursor_obj[0x26])];
+        set = geo.area->zone_wild_sets[cell_zone_at(cursor_obj[0x25], cursor_obj[0x26])];
         if (set == 0)
             set = 1;
         pic_load("WildCom1", set, 0, 0x27);

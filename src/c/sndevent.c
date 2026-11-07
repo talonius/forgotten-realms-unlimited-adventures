@@ -44,7 +44,13 @@ extern void far lib_open(char mode, char far *name, int slot);   /* 147e:00d1 */
 extern void far sample_library_set(int slot);                          /* 143b:0002 */
 extern void far sample_sequence_play(int count, ...);                    /* 143b:0012 */
 
-extern int sound_card;                                           /* b394 */
+struct Config {                 /* config.c's record                      */
+    int video;                  /* +0  0 VGA, 1 EGA, 2 Tandy 16-colour  */
+    int sound_card;             /* +2                                   */
+    unsigned char rest[0x46];
+};
+
+extern struct Config config;                                     /* b392 */
 
 static char music_ok = 0;                                        /* 1dfa */
 static char sfx_ok = 0;                                          /* 1dfb */
@@ -81,10 +87,10 @@ int far sound_open(char far *digital)                            /* 1c3f:0003 */
     register int card;
     register int rc;
 
-    if (sound_card == 5)
+    if (config.sound_card == 5)
         goto off;
     sound_live = 1;
-    card = sound_card;
+    card = config.sound_card;
     str_copy(music_drv, card_music_drv[card]);
     str_copy(voc_drv, card_voc_drv[card]);
     want = (*music_drv ? 1 : 0) + (*voc_drv ? 1 : 0);

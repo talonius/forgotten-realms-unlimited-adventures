@@ -172,7 +172,7 @@ extern char far area_cell_at(char x, char y);
                                 /* 18de:15ad, vector to overlay 13 26e3:0ae7 */
 extern void far geo_load(unsigned char pic);
                                 /* 18de:15e9, vector to overlay 13 26e3:1750 */
-extern void far mod18de_1783(void);
+extern void far labels_134f(void);
                                 /* 18de:1783, vector to overlay 5 1e8f:134f */
 extern void far cur_area_set(unsigned char n);
                                 /* 18de:17b5, vector to overlay 5 1e8f:0e91 */
@@ -342,7 +342,7 @@ void far area_open(int view, int a)                     /* 3d91:041b */
     geo.pos.event = area_cell_at(0, 0) & 0xff;
     geo_load(a & 0x3f);
     cur_area_set(a & 0x3f);
-    mod18de_1783();
+    labels_134f();
     edit_dirty_clear();
     if (changed) {
         if (start_area == a)
@@ -367,7 +367,7 @@ void far area_save(int view, int n)                              /* 3d91:04cb */
         label_get(n, 11, name);
         if (str_cmp(geo.area->hdr.name, name))
             label_set(n, 11, geo.area->hdr.name);
-        mod18de_1783();
+        labels_134f();
         edit_dirty_clear();
     }
 }

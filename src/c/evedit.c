@@ -240,7 +240,7 @@ extern int  far ui_query(int id, int what);                      /* 15e5:1936 */
 extern int  far str_format(char far *buf, char far *fmt, ...);   /* 1860:0037 */
 extern void far mode_change(int n);
                                 /* 18de:10cb, vector to overlay 3 1b41:02fe */
-extern void far mod18de_1391(char c);
+extern void far glbdata_012b(char c);
                                 /* 18de:1391, vector to overlay 3 1b41:012b */
 extern void far scroll_make(struct ItemRec far *rec);
                                 /* 18de:1733, vector to overlay 10 2431:0fe1 */
@@ -1193,7 +1193,7 @@ int far event_edit(int ret, long far *result, struct EdLink far *link, int kind,
 
     s = link;
     mode_change(4);
-    mod18de_1391(0);
+    glbdata_012b(0);
     set_open_mode(0x33);
     lib_open(0x33, "script", 0x18);
     ed_page = db_buffer();
@@ -1477,6 +1477,6 @@ retry:
     slot_close(0x18);
     if (rc != 3)
         s->next = s->ret;
-    mod18de_1391(1);
+    glbdata_012b(1);
     return rc;
 }

@@ -77,7 +77,7 @@ struct Spot {                   /* a place in an area                     */
     unsigned char which;        /* +3   not read here                     */
 };
 
-struct Area {                   /* what cur_area_rec points at                */
+struct Area {                   /* what geo.area points at                    */
     char pad_0[7];              /* +0   not read here                     */
     unsigned char flags;        /* +7   bit 0                             */
     char pad_8[6];              /* +8   not read here                     */
@@ -95,6 +95,7 @@ struct Geo {                    /* the party's place and the view state   */
     char event;                 /* +4   d418                              */
     char pad_5[2];              /* +5   not read here                     */
     char show_map;              /* +7   d41b                              */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
 };
 
 struct Effect {                 /* 10 bytes, from effect_pool               */
@@ -365,7 +366,6 @@ extern struct Hero far *node_list;                               /* d129 */
 extern unsigned char encounter_npc_count;                                  /* d135 */
 extern unsigned char encounter_images_shown[2];                                /* d139 */
 extern struct Geo geo;                                           /* d414 */
-extern struct Area far *cur_area_rec;                                /* d41c */
 
 static unsigned char encounter_surprise = 0xff;                           /* 73e2 */
 unsigned char encounter_range = 0xff;                                  /* 73e3 */
@@ -384,7 +384,7 @@ void far event_init(void)                                        /* 31d4:0001 */
     turn_done = 0;
     mem_fill(combat_outcome, 4, 0);
     cursor_obj[0x2c] = 0;
-    if (cur_area_rec->flags & 1)
+    if (geo.area->flags & 1)
         cursor_obj[0x1a] = 0;
     else
         cursor_obj[0x1a] = 1;
@@ -696,9 +696,9 @@ void far area_enter(char n)                                      /* 31d4:0a33 */
     if (cursor_obj[0x86] == 0) {
         if (!test_mode) {
             geo_load(cur_level);
-            geo.x = cur_area_rec->spots[entry_spot].x;
-            geo.y = cur_area_rec->spots[entry_spot].y;
-            geo.facing = cur_area_rec->spots[entry_spot].facing & 7;
+            geo.x = geo.area->spots[entry_spot].x;
+            geo.y = geo.area->spots[entry_spot].y;
+            geo.facing = geo.area->spots[entry_spot].facing & 7;
         }
         if (cur_level <= 4) {
             cursor_obj[0x25] = geo.x;
@@ -872,12 +872,12 @@ void far wander_load(void)                                       /* 31d4:0fd0 */
     struct Effect far *prev_fx;
     struct Effect far *fx_head;
 
-    if (cur_area_rec->wander_id) {
+    if (geo.area->wander_id) {
         saved = cur_node;
         copies = 1;
         tail = 0;
         clone = 0;
-        id = cur_area_rec->wander_id;
+        id = geo.area->wander_id;
         hero_load(id, &cr, &items, &fx, 0);
         cr->status = 9;
         cr->control = cr->control | 0x32;
@@ -1010,7 +1010,7 @@ void far event_combat(unsigned char far *ev, char random)        /* 31d4:1444 */
     case 2: add = 0xa; break;
     case 3: add = 0x29; break;
     }
-    cursor_obj[0xf] = cur_area_rec->level + add;
+    cursor_obj[0xf] = geo.area->level + add;
     cursor_obj[2] = ev[0xe] & 0x80;
     combat_outdoors = 0;
     if (cursor_obj[0x22]) {

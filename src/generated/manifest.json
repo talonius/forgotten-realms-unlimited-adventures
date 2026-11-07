@@ -3,13 +3,13 @@
   "size": 587843,
   "table": {
     "format": 1,
-    "digest": "375cbace22379f41945d886af86646a2d8059ef8cbdd407270422171eb7be364",
+    "digest": "65b066769ca25373b2b8db42b60c19f591550929325c2256d0f3ab6f23969d99",
     "inputs": {
       "data_sections": "b0d939fe538f1949286b919bd2f533ff3e2eb9d4d3e315fd5649a6cfe63cf946",
       "exe": "f1d68440990f298e85dee07ed928d1cfb051ec7677a0de2f2b89ffdc26c4536c",
-      "manager_code": "4683c8e4f0cde3b8d4610e9978d584eba24cd091172b523576a39216c9f5022e",
+      "manager_code": "cf8fde12914a9b3ed6fbe76c4e0f908b4be050197f679ff4c5bcb9833fcc9794",
       "manager_data": "80686961c1b5a444ed1b450af2e0c576aeafbd6551fa15da22c353b4e62d484f",
-      "manager_names": "b44ebbbb699abbca0c5f235759e3a6a278d291bf52bdeb0a6f7c24d69e22bcde",
+      "manager_names": "1704c0fdf686b0bd8b913519d7ff03268f484f300d14272707b2558ae9a79ed8",
       "reviewed": "6810923c2df5cc0fcaea6001e906afc9bf5a80a485ab9fe01914ae0dceb52b6c",
       "reviewed_dir": "bac313cf04068292d7105b192c5d27912036d468ec99531ba7f61d42b52eac33",
       "sections": "59e19706d51d39f66711c2653cd7eb1291c94d9b55eb14bda74ce4dc636d015a",
@@ -19,9 +19,52 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 44,
+        "file_offset": 9216,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "startdat",
+        "place": {
+          "DATA": "0",
+          "DGROUP": "40f4",
+          "TEXT": "1000:0000"
+        },
+        "section": null,
+        "size": 0,
+        "source": "src/c/startdat.c",
+        "syms": {
+          "_bss_end": "e746"
+        },
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
+        "data_size": 7157,
+        "file_offset": 62213,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "gametext",
+        "place": {
+          "DATA": "38e8",
+          "DGROUP": "40f4",
+          "TEXT": "1cf0:0005"
+        },
+        "section": null,
+        "size": 0,
+        "source": "src/c/gametext.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 5,
         "file_offset": 62213,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "packtext",
         "place": {
@@ -45,6 +88,7 @@
         "data_size": 87,
         "file_offset": 86317,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "glyphfx",
         "place": {
@@ -81,6 +125,7 @@
         "data_size": 108,
         "file_offset": 97226,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "libedit",
         "place": {
@@ -115,6 +160,7 @@
         "data_size": 0,
         "file_offset": 108882,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "strscan",
         "place": {
@@ -135,6 +181,7 @@
         "data_size": 0,
         "file_offset": 109057,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "fmtout",
         "place": {
@@ -156,6 +203,7 @@
         "data_size": 369,
         "file_offset": 87918,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "fcache",
         "place": {
@@ -200,6 +248,7 @@
         "data_size": 38,
         "file_offset": 66319,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "prompt",
         "place": {
@@ -235,6 +284,7 @@
         "data_size": 692,
         "file_offset": 82296,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "glyph",
         "place": {
@@ -298,6 +348,7 @@
         "data_size": 275,
         "file_offset": 53293,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "sound",
         "place": {
@@ -341,6 +392,7 @@
           "_AIL_timbre_request": "100c:0c11",
           "_archive_open": "1e23:01eb",
           "_arg_hex": "28de:10c1",
+          "_config": "b392",
           "_dos_io": "10d7:26e9",
           "_file_open": "1e23:03fa",
           "_file_read": "2336:000e",
@@ -358,7 +410,6 @@
           "_slot_release": "2336:0708",
           "_slot_reserve": "2336:0a04",
           "_slot_used": "2336:0921",
-          "_sound_card": "b394",
           "_str_cmp": "10d7:24db",
           "_str_copy": "10d7:255e",
           "_timer_rehook": "207e:0047",
@@ -373,6 +424,7 @@
         "data_size": 17,
         "file_offset": 65141,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "sysutil",
         "place": {
@@ -434,6 +486,7 @@
         "data_size": 3,
         "file_offset": 52061,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "strutil",
         "place": {
@@ -470,6 +523,7 @@
         "data_size": 136,
         "file_offset": 67133,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "diskfile",
         "place": {
@@ -518,6 +572,7 @@
         "data_size": 455,
         "file_offset": 93155,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "library",
         "place": {
@@ -561,6 +616,7 @@
         "data_size": 21,
         "file_offset": 80253,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "palette",
         "place": {
@@ -587,6 +643,7 @@
         "data_size": 0,
         "file_offset": 105518,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "sfxslots",
         "place": {
@@ -610,6 +667,7 @@
         "data_size": 1,
         "file_offset": 106809,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "pathutil",
         "place": {
@@ -634,9 +692,29 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 3452,
+        "file_offset": 33627,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "chartab",
+        "place": {
+          "DATA": "ec6",
+          "TEXT": "15f5:000b"
+        },
+        "section": null,
+        "size": 0,
+        "source": "src/c/chartab.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 39,
         "file_offset": 33627,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "tiles",
         "place": {
@@ -713,6 +791,7 @@
         "data_size": 4,
         "file_offset": 63624,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "misc",
         "place": {
@@ -750,6 +829,7 @@
         "data_size": 54,
         "file_offset": 37010,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "textwin",
         "place": {
@@ -802,6 +882,7 @@
         "data_size": 144,
         "file_offset": 98906,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "dialog",
         "place": {
@@ -849,6 +930,7 @@
         "data_size": 4,
         "file_offset": 108007,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "dirfind",
         "place": {
@@ -875,6 +957,7 @@
         "data_size": 13,
         "file_offset": 64087,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "frame",
         "place": {
@@ -914,6 +997,7 @@
         "data_size": 57,
         "file_offset": 76769,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "lowio",
         "place": {
@@ -955,6 +1039,7 @@
         "data_size": 14,
         "file_offset": 106009,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "pathfind",
         "place": {
@@ -980,6 +1065,7 @@
         "data_size": 8,
         "file_offset": 78728,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "scrfont",
         "place": {
@@ -1023,6 +1109,7 @@
         "data_size": 0,
         "file_offset": 105787,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cmdargs",
         "place": {
@@ -1044,6 +1131,7 @@
         "data_size": 0,
         "file_offset": 105691,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "inpglue",
         "place": {
@@ -1068,6 +1156,7 @@
         "data_size": 62,
         "file_offset": 42921,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "menu",
         "place": {
@@ -1159,9 +1248,30 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 5274,
+        "file_offset": 61270,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "spelltab",
+        "place": {
+          "DATA": "2438",
+          "DGROUP": "40f4",
+          "TEXT": "1cb5:0006"
+        },
+        "section": null,
+        "size": 0,
+        "source": "src/c/spelltab.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 22,
         "file_offset": 61270,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "charpic",
         "place": {
@@ -1198,6 +1308,7 @@
         "data_size": 48,
         "file_offset": 79803,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "speaker",
         "place": {
@@ -1221,6 +1332,7 @@
         "data_size": 3,
         "file_offset": 39612,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "listbox",
         "place": {
@@ -1257,6 +1369,7 @@
         "data_size": 0,
         "file_offset": 109172,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "textfmt",
         "place": {
@@ -1274,9 +1387,30 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 3626,
+        "file_offset": 24832,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "edtext",
+        "place": {
+          "DATA": "2c",
+          "DGROUP": "40f4",
+          "TEXT": "13d0:0000"
+        },
+        "section": null,
+        "size": 0,
+        "source": "src/c/edtext.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 111,
         "file_offset": 24832,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "hero",
         "place": {
@@ -1295,7 +1429,6 @@
           "_byte_6723": "6723",
           "_byte_str": "1d48:0181",
           "_combat_pool": "ce72",
-          "_cur_area_rec": "d41c",
           "_cur_item": "bcfd",
           "_cur_node": "b3dd",
           "_cursor_obj": "b75b",
@@ -1303,6 +1436,7 @@
           "_event_table": "a7f0",
           "_frame_border": "1d65:002a",
           "_frame_main": "1d65:00de",
+          "_geo": "d414",
           "_helpless_kinds": "616d",
           "_icon_clear": "1cb5:004d",
           "_int_max": "10d7:2625",
@@ -1337,7 +1471,7 @@
           "_resting": "b4eb",
           "_shop_temple_frame": "c672",
           "_side_count": "b8d1",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_status_names": "39b0",
           "_status_printf": "16c9:0044",
           "_step_ec6": "ec6",
@@ -1359,6 +1493,7 @@
         "data_size": 1473,
         "file_offset": 59379,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "sndevent",
         "place": {
@@ -1369,11 +1504,11 @@
         "size": 1275,
         "source": "src/c/sndevent.c",
         "syms": {
+          "_config": "b392",
           "_lib_open": "247e:00d1",
           "_sample_library_set": "243b:0002",
           "_sample_sequence_play": "243b:0012",
           "_slot_close": "2336:06fb",
-          "_sound_card": "b394",
           "_sound_init": "1ac2:000d",
           "_sound_play": "1ac2:026a",
           "_sound_shutdown": "1ac2:0182",
@@ -1391,6 +1526,7 @@
         "data_size": 0,
         "file_offset": 110744,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "numparse",
         "place": {
@@ -1408,6 +1544,7 @@
         "data_size": 123,
         "file_offset": 60654,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "sfxctl",
         "place": {
@@ -1420,9 +1557,9 @@
         "source": "src/c/sfxctl.c",
         "syms": {
           "_clear_screen": "1da7:029d",
+          "_config": "b392",
           "_key_wait": "1da7:00f5",
           "_slot_used": "2336:0921",
-          "_sound_card": "b394",
           "_sound_close": "1c3f:015c",
           "_sound_event": "1c3f:016e",
           "_sound_open": "1c3f:0003",
@@ -1441,6 +1578,7 @@
         "data_size": 1,
         "file_offset": 92080,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "digisnd",
         "place": {
@@ -1472,6 +1610,7 @@
         "data_size": 0,
         "file_offset": 68857,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "scroll",
         "place": {
@@ -1506,6 +1645,7 @@
         "data_size": 1756,
         "file_offset": 72166,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "vidmouse",
         "place": {
@@ -1556,6 +1696,7 @@
         "data_size": 0,
         "file_offset": 106755,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "printer",
         "place": {
@@ -1575,6 +1716,7 @@
         "data_size": 0,
         "file_offset": 24282,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "textbank",
         "place": {
@@ -1603,6 +1745,7 @@
         "data_size": 116,
         "file_offset": 454640,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "rest",
         "place": {
@@ -1620,7 +1763,6 @@
           "_cell_zone_at": "28de:1355",
           "_combat_text_clear": "13d0:1657",
           "_confirm": "183a:044d",
-          "_cur_area_rec": "d41c",
           "_cur_event": "a7e4",
           "_cur_node": "b3dd",
           "_cursor_obj": "b75b",
@@ -1655,7 +1797,7 @@
           "_saved_event": "a7e8",
           "_saved_view_mode": "b433",
           "_screen_sync": "1a75:0362",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_status_printf": "16c9:0044",
           "_str_format": "2860:0037",
           "_study_wait": "cfde",
@@ -1674,6 +1816,7 @@
         "data_size": 0,
         "file_offset": 155210,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cbview",
         "place": {
@@ -1723,6 +1866,7 @@
         "data_size": 550,
         "file_offset": 286672,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "camp",
         "place": {
@@ -1809,7 +1953,7 @@
           "_speed_text": "3b24",
           "_speed_title": "3c00",
           "_spell_cast": "28de:1175",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_list_build": "28de:1ad5",
           "_spell_menu": "28de:1305",
           "_spell_remove_curse": "28de:1afd",
@@ -1836,6 +1980,7 @@
         "data_size": 202,
         "file_offset": 232864,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "config",
         "place": {
@@ -1871,6 +2016,7 @@
         "data_size": 0,
         "file_offset": 233473,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "poolinit",
         "place": {
@@ -1881,11 +2027,11 @@
         "source": "src/c/poolinit.c",
         "syms": {
           "_arena_alloc": "3209:0606",
-          "_boots_word": "3db7",
           "_combat_pool": "ce72",
           "_debug_word": "b3f4",
           "_effect_pool": "c3c4",
           "_item_record_pool": "cb0e",
+          "_item_words": "3d03",
           "_mem_alloc": "10d7:2669",
           "_node_pool": "ce5d",
           "_npc_pool": "bd01",
@@ -1901,6 +2047,7 @@
         "data_size": 301,
         "file_offset": 458606,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "fxcore",
         "place": {
@@ -1987,6 +2134,7 @@
         "data_size": 880,
         "file_offset": 347824,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "spellfx",
         "place": {
@@ -2096,7 +2244,8 @@
           "_spell_duration": "3b69:10d7",
           "_spell_effect_apply": "3b69:1e6f",
           "_spell_fn": "b4f0",
-          "_spell_names": "2434",
+          "_spell_info_table": "2660",
+          "_spell_name_table": "2438",
           "_spell_path_targets": "3b69:1a61",
           "_status_printf": "16c9:0044",
           "_step_count": "ca10",
@@ -2113,9 +2262,7 @@
           "_txt_hot_cold": "3c44",
           "_view_cx": "c39f",
           "_view_cy": "c3bc",
-          "_view_mode": "b421",
-          "_word_stun_fx": "3066",
-          "_word_stun_save": "3062"
+          "_view_mode": "b421"
         },
         "toolchain": "TC-2-01"
       },
@@ -2125,6 +2272,7 @@
         "data_size": 490,
         "file_offset": 326384,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "effects",
         "place": {
@@ -2142,7 +2290,6 @@
           "_attacks_used": "b8e8",
           "_bonus_slots": "ca09",
           "_calc_move": "13d0:0a38",
-          "_camp_menus": "3ce3",
           "_class_bit": "6252",
           "_class_level": "13d0:2177",
           "_class_update": "28de:1729",
@@ -2223,6 +2370,7 @@
           "_item_record_pool": "cb0e",
           "_item_remove": "13d0:13c4",
           "_item_table": "b40a",
+          "_item_words": "3d03",
           "_level_xp_threshold": "13d0:21cc",
           "_mem_zero": "1d48:0017",
           "_mirror_image_bypass": "ca08",
@@ -2241,7 +2389,7 @@
           "_save_bonus": "b8d3",
           "_save_succeeded": "b721",
           "_side_count": "b8d1",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_path_targets": "28de:1ca1",
           "_step_count": "ca10",
           "_steps": "ca2b",
@@ -2267,6 +2415,7 @@
         "data_size": 259,
         "file_offset": 340836,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "fxcombat",
         "place": {
@@ -2345,6 +2494,7 @@
         "data_size": 201,
         "file_offset": 129572,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cbtutil",
         "place": {
@@ -2411,6 +2561,7 @@
         "data_size": 579,
         "file_offset": 366364,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "spellcst",
         "place": {
@@ -2485,9 +2636,9 @@
           "_selected_target": "cc6f",
           "_sfx_play": "1c8e:000e",
           "_spell_fn": "b4f0",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_mark": "13d0:1381",
-          "_spell_names": "2434",
+          "_spell_name_table": "2438",
           "_status_printf": "16c9:0044",
           "_step_count": "ca10",
           "_steps": "ca2b",
@@ -2527,6 +2678,7 @@
         "data_size": 126,
         "file_offset": 123568,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "combat",
         "place": {
@@ -2682,6 +2834,7 @@
         "data_size": 714,
         "file_offset": 133781,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cbaction",
         "place": {
@@ -2810,7 +2963,7 @@
           "_set_menu_kind": "183a:13f2",
           "_sfx_play": "1c8e:000e",
           "_spell_cast": "28de:1175",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_mark": "13d0:1381",
           "_spell_menu": "28de:1305",
           "_spell_range": "28de:12fb",
@@ -2841,9 +2994,29 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 24,
+        "file_offset": 176668,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "dirnames",
+        "place": {
+          "DATA": "5fb2",
+          "TEXT": "3632:000c"
+        },
+        "section": 2,
+        "size": 0,
+        "source": "src/c/dirnames.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 9,
         "file_offset": 176668,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "approach",
         "place": {
@@ -2873,6 +3046,7 @@
         "data_size": 0,
         "file_offset": 285316,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cursor",
         "place": {
@@ -2895,6 +3069,7 @@
         "data_size": 8,
         "file_offset": 235307,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "titleseq",
         "place": {
@@ -2944,6 +3119,7 @@
         "data_size": 14,
         "file_offset": 184263,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "lineedit",
         "place": {
@@ -2981,6 +3157,7 @@
         "data_size": 93,
         "file_offset": 180208,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "glbdata",
         "place": {
@@ -3016,6 +3193,7 @@
         "data_size": 97,
         "file_offset": 304464,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "money",
         "place": {
@@ -3087,6 +3265,7 @@
         "data_size": 118,
         "file_offset": 309007,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "postcmbt",
         "place": {
@@ -3190,6 +3369,7 @@
         "data_size": 26,
         "file_offset": 181351,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "gamemain",
         "place": {
@@ -3272,6 +3452,7 @@
         "data_size": 26,
         "file_offset": 182187,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "picview",
         "place": {
@@ -3321,6 +3502,7 @@
         "data_size": 170,
         "file_offset": 161680,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "cmbsetup",
         "place": {
@@ -3349,7 +3531,6 @@
           "_combatant_x": "32fa:0ab5",
           "_combatant_y": "32fa:0ae4",
           "_combatants": "cc7c",
-          "_cur_area_rec": "d41c",
           "_cur_map": "c66b",
           "_cur_node": "b3dd",
           "_current_spell": "be64",
@@ -3401,6 +3582,7 @@
         "data_size": 162,
         "file_offset": 169744,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "aiturn",
         "place": {
@@ -3476,7 +3658,7 @@
           "_recalc_stats": "13d0:0b88",
           "_screen_sync": "1a75:0362",
           "_spell_cast": "28de:1175",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_target_rating": "2dbf:4530",
           "_status_printf": "16c9:0044",
           "_tile_info": "5ff5",
@@ -3492,6 +3674,7 @@
         "data_size": 423,
         "file_offset": 298346,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "party",
         "place": {
@@ -3607,6 +3790,7 @@
         "data_size": 1191,
         "file_offset": 235941,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "copyprot",
         "place": {
@@ -3640,6 +3824,7 @@
         "data_size": 88,
         "file_offset": 187184,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "roster",
         "place": {
@@ -3686,9 +3871,30 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 2978,
+        "file_offset": 233726,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "combtab",
+        "place": {
+          "DATA": "5fd4",
+          "DGROUP": "40f4",
+          "TEXT": "3209:000e"
+        },
+        "section": 6,
+        "size": 0,
+        "source": "src/c/combtab.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 73,
         "file_offset": 233726,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "newgame",
         "place": {
@@ -3812,9 +4018,29 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 16,
+        "file_offset": 201337,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "perm16",
+        "place": {
+          "DATA": "5d44",
+          "TEXT": "2ffa:0009"
+        },
+        "section": 4,
+        "size": 0,
+        "source": "src/c/perm16.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 269,
         "file_offset": 201337,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "saveload",
         "place": {
@@ -3913,6 +4139,7 @@
         "data_size": 104,
         "file_offset": 236679,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "modify",
         "place": {
@@ -3952,7 +4179,7 @@
           "_recalc_stats": "13d0:0b88",
           "_screen_sync": "1a75:0362",
           "_show_hp": "13d0:0789",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_slots": "28de:196d",
           "_stat_show": "28de:1995",
           "_status_char": "16c9:059a",
@@ -3972,6 +4199,7 @@
         "data_size": 34,
         "file_offset": 242409,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "dispinit",
         "place": {
@@ -4024,6 +4252,7 @@
         "data_size": 80,
         "file_offset": 280590,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "move",
         "place": {
@@ -4045,7 +4274,6 @@
           "_char_view": "28de:114d",
           "_clock_advance": "28de:11bb",
           "_combat_text_clear": "13d0:1657",
-          "_cur_area_rec": "d41c",
           "_cur_node": "b3dd",
           "_cursor_hide": "3673:0067",
           "_cursor_obj": "b75b",
@@ -4121,6 +4349,7 @@
         "data_size": 915,
         "file_offset": 314149,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "shop",
         "place": {
@@ -4191,7 +4420,7 @@
           "_shop_items": "3c98",
           "_shop_temple_frame": "c672",
           "_spaces": "3c9c",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_status_printf": "16c9:0044",
           "_str_copy": "10d7:255e",
           "_str_format": "2860:0037",
@@ -4220,6 +4449,7 @@
         "data_size": 0,
         "file_offset": 183186,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "poolfile",
         "place": {
@@ -4252,6 +4482,7 @@
         "data_size": 517,
         "file_offset": 189135,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "mapevent",
         "place": {
@@ -4285,7 +4516,6 @@
           "_combat_text_clear": "13d0:1657",
           "_confirm": "183a:044d",
           "_confirm_anim": "b42a",
-          "_cur_area_rec": "d41c",
           "_cur_event": "a7e4",
           "_cur_level": "6719",
           "_cur_node": "b3dd",
@@ -4395,6 +4625,7 @@
         "data_size": 402,
         "file_offset": 318686,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "temple",
         "place": {
@@ -4455,7 +4686,7 @@
           "_pool_money": "31d4:00f6",
           "_press_return_wait": "183a:054a",
           "_share_money": "31d4:01ee",
-          "_spell_names": "2434",
+          "_spell_name_table": "2438",
           "_spell_remove_curse": "28de:1afd",
           "_spell_run": "28de:1ae9",
           "_spell_target": "cfe7",
@@ -4478,6 +4709,7 @@
         "data_size": 469,
         "file_offset": 243968,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "create",
         "place": {
@@ -4557,7 +4789,7 @@
           "_set_extra_row": "183a:23ae",
           "_set_open_mode": "15f5:01d3",
           "_sex_names": "399c",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_start_ages": "10d4",
           "_start_gear": "ba3a",
           "_start_gems": "ba30",
@@ -4590,6 +4822,7 @@
         "data_size": 1106,
         "file_offset": 384224,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "charview",
         "place": {
@@ -4615,6 +4848,7 @@
           "_class_hit_dice": "6269",
           "_class_level": "13d0:2177",
           "_class_names": "3914",
+          "_class_spell_rows": "139d",
           "_coin_names": "39a4",
           "_coin_title": "3a24",
           "_combat_actions_end": "28de:1139",
@@ -4681,7 +4915,6 @@
           "_menu_escaped": "ca2a",
           "_menu_run": "183a:1fb3",
           "_msg_format": "1a75:03fa",
-          "_mu_spell_row": "13a2",
           "_must_ready_text": "3a48",
           "_node_list": "d129",
           "_node_menu": "183a:197d",
@@ -4710,7 +4943,7 @@
           "_show_ac": "13d0:06f9",
           "_show_hp": "13d0:0789",
           "_spell_cast": "28de:1175",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_menu": "28de:1305",
           "_spell_slots_by_level": "14f4",
           "_status_char": "16c9:059a",
@@ -4749,6 +4982,7 @@
         "data_size": 0,
         "file_offset": 401180,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "herostat",
         "place": {
@@ -4767,10 +5001,9 @@
           "_item_equip_toggle": "38aa:19bf",
           "_item_table": "b40a",
           "_mem_fill": "10d7:277b",
-          "_mu_spell_row": "13a2",
           "_old_class_abilities_available": "13d0:2100",
           "_save_table": "1916",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_slots_by_level": "14f4",
           "_thief_dex_adjust": "633d",
           "_thief_race_adjust": "630d",
@@ -4784,6 +5017,7 @@
         "data_size": 110,
         "file_offset": 375360,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "view3d",
         "place": {
@@ -4855,6 +5089,7 @@
         "data_size": 506,
         "file_offset": 266384,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "evcmds",
         "place": {
@@ -4886,7 +5121,6 @@
           "_confirm_anim": "b42a",
           "_continue_items": "390c",
           "_continue_prompt": "16c9:0932",
-          "_cur_area_rec": "d41c",
           "_cur_level": "6719",
           "_cur_node": "b3dd",
           "_cursor_obj": "b75b",
@@ -5034,9 +5268,29 @@
       {
         "bin": "",
         "cc": "tcc",
+        "data_size": 5,
+        "file_offset": 224185,
+        "flags": "-ml -O -Z -d",
+        "includes": [],
+        "load_base": "1000",
+        "name": "fieldvar",
+        "place": {
+          "DATA": "5eca",
+          "TEXT": "2ff3:0009"
+        },
+        "section": 5,
+        "size": 0,
+        "source": "src/c/fieldvar.c",
+        "syms": {},
+        "toolchain": "TC-2-01"
+      },
+      {
+        "bin": "",
+        "cc": "tcc",
         "data_size": 19,
         "file_offset": 224185,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "menubox",
         "place": {
@@ -5091,6 +5345,7 @@
         "data_size": 4,
         "file_offset": 230974,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "menuops",
         "place": {
@@ -5118,6 +5373,7 @@
         "data_size": 307,
         "file_offset": 260574,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "train",
         "place": {
@@ -5188,6 +5444,7 @@
         "data_size": 93,
         "file_offset": 218494,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "labels",
         "place": {
@@ -5281,6 +5538,7 @@
         "data_size": 10,
         "file_offset": 210144,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "textedit",
         "place": {
@@ -5326,6 +5584,7 @@
         "data_size": 0,
         "file_offset": 323554,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "editloop",
         "place": {
@@ -5368,6 +5627,7 @@
         "data_size": 54,
         "file_offset": 404608,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "numfield",
         "place": {
@@ -5409,6 +5669,7 @@
         "data_size": 37,
         "file_offset": 408439,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "menubar",
         "place": {
@@ -5449,6 +5710,7 @@
         "data_size": 85,
         "file_offset": 410896,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "mapedit",
         "place": {
@@ -5548,6 +5810,7 @@
         "data_size": 84,
         "file_offset": 425872,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "evedit",
         "place": {
@@ -5581,6 +5844,7 @@
           "_field_proc": "28de:175b",
           "_fill_rect": "1f5e:0040",
           "_frame_border": "1d65:002a",
+          "_glbdata_012b": "28de:1391",
           "_hotkey_add": "183a:0009",
           "_icon_clear": "1cb5:004d",
           "_icon_load": "1cb5:0093",
@@ -5601,7 +5865,6 @@
           "_mem_scan": "10d7:27b1",
           "_menu_line_key": "183a:1e2d",
           "_menu_line_show": "183a:1e9a",
-          "_mod18de_1391": "28de:1391",
           "_mode_change": "28de:10cb",
           "_mouse_fake": "1f5e:10d5",
           "_mouse_move_to": "1f5e:10a3",
@@ -5649,6 +5912,7 @@
         "data_size": 5,
         "file_offset": 452159,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "edscreen",
         "place": {
@@ -5719,6 +5983,7 @@
         "data_size": 240,
         "file_offset": 439840,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "artpick",
         "place": {
@@ -5736,7 +6001,6 @@
           "_art_unimport": "28de:1f17",
           "_art_word": "448",
           "_back_draw": "28de:17fb",
-          "_backdrop_text": "158",
           "_big_open": "28de:146d",
           "_big_res": "bcf7",
           "_cancel_text": "3c8",
@@ -5786,6 +6050,7 @@
           "_label_entry": "28de:1869",
           "_label_list": "28de:17ab",
           "_label_nth": "28de:1873",
+          "_labels_134f": "28de:1783",
           "_labels_load": "28de:185f",
           "_labels_save": "28de:1855",
           "_leave_text": "3c0",
@@ -5800,14 +6065,12 @@
           "_menu_escaped": "ca2a",
           "_menu_line_key": "183a:1e2d",
           "_menu_line_show": "183a:1e9a",
-          "_mod18de_1783": "28de:1783",
           "_mode_change": "28de:10cb",
           "_monst_default": "28de:1f21",
           "_monst_listed": "28de:187d",
           "_monst_load": "28de:1f35",
           "_monst_save": "28de:1f2b",
           "_monst_unlisted": "28de:1f0d",
-          "_monster_editor_text": "1f8",
           "_monster_text": "338",
           "_msg_box": "28de:1841",
           "_msg_format": "1a75:03fa",
@@ -5830,6 +6093,7 @@
           "_screen_draw_begin": "15f5:0671",
           "_screen_flush": "15f5:0756",
           "_screen_flush_mode_set": "15f5:069d",
+          "_screen_titles": "1dc",
           "_select_word": "3bc",
           "_slot_text": "444",
           "_str_cat": "10d7:24b6",
@@ -5841,6 +6105,7 @@
           "_text_xy": "207e:04a7",
           "_tick_slot": "b3f2",
           "_to_text": "374",
+          "_tool_names": "154",
           "_txt_pack": "1cf0:00ab",
           "_txt_unpack": "1cf0:01c2",
           "_ui_add": "25e5:1293",
@@ -5863,6 +6128,7 @@
         "data_size": 0,
         "file_offset": 469600,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "areaed",
         "place": {
@@ -6001,6 +6267,7 @@
         "data_size": 86,
         "file_offset": 483056,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "evchain",
         "place": {
@@ -6080,6 +6347,7 @@
         "data_size": 0,
         "file_offset": 491883,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "evscreen",
         "place": {
@@ -6105,6 +6373,7 @@
         "data_size": 71,
         "file_offset": 493456,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "areafile",
         "place": {
@@ -6135,9 +6404,9 @@
           "_geo_load": "28de:15e9",
           "_label_get": "28de:1819",
           "_label_set": "28de:180f",
+          "_labels_134f": "28de:1783",
           "_labels_forget": "28de:184b",
           "_mem_move": "10d7:2741",
-          "_mod18de_1783": "28de:1783",
           "_start_area": "ba38",
           "_start_entry": "ba39",
           "_str_cmp": "10d7:24db",
@@ -6157,6 +6426,7 @@
         "data_size": 0,
         "file_offset": 495654,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "modclear",
         "place": {
@@ -6186,6 +6456,7 @@
         "data_size": 100,
         "file_offset": 496232,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "areatool",
         "place": {
@@ -6281,7 +6552,6 @@
           "_place_text": "358",
           "_pointer_hide": "10d7:0141",
           "_pointer_show": "1f5e:0d1c",
-          "_replace_all_text": "fc",
           "_replace_text": "35c",
           "_scratch_buf": "c3c8",
           "_screen_draw_begin": "15f5:0671",
@@ -6301,6 +6571,7 @@
           "_total_text": "214",
           "_ui_add": "25e5:1293",
           "_ui_poll": "25e5:15e6",
+          "_util_items": "f4",
           "_wait_ticks": "1da7:0151",
           "_wall_info_draw": "28de:1d37",
           "_wall_text": "34c",
@@ -6315,6 +6586,7 @@
         "data_size": 61,
         "file_offset": 508140,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "slotsave",
         "place": {
@@ -6343,6 +6615,7 @@
         "data_size": 153,
         "file_offset": 508464,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "glyphcut",
         "place": {
@@ -6386,6 +6659,7 @@
         "data_size": 30,
         "file_offset": 513970,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "ilbm",
         "place": {
@@ -6431,6 +6705,7 @@
         "data_size": 53,
         "file_offset": 516152,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "pcx",
         "place": {
@@ -6469,6 +6744,7 @@
         "data_size": 110,
         "file_offset": 505264,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "artimp",
         "place": {
@@ -6540,6 +6816,7 @@
         "data_size": 90,
         "file_offset": 518080,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "mapprint",
         "place": {
@@ -6592,6 +6869,7 @@
         "data_size": 87,
         "file_offset": 520634,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "prnout",
         "place": {
@@ -6628,6 +6906,7 @@
         "data_size": 95,
         "file_offset": 521424,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "monedit",
         "place": {
@@ -6690,6 +6969,7 @@
         "data_size": 0,
         "file_offset": 524332,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "areasize",
         "place": {
@@ -6724,6 +7004,7 @@
         "data_size": 0,
         "file_offset": 526285,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "gameset",
         "place": {
@@ -6746,6 +7027,7 @@
         "data_size": 254,
         "file_offset": 528144,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "design",
         "place": {
@@ -6824,6 +7106,7 @@
         "data_size": 89,
         "file_offset": 530766,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "edpick",
         "place": {
@@ -6905,6 +7188,7 @@
           "_text_print_at": "1da7:0399",
           "_text_xy": "207e:04a7",
           "_tick_slot": "b3f2",
+          "_tool_names": "154",
           "_ui_add": "25e5:1293",
           "_ui_mark": "25e5:1894",
           "_ui_poll": "25e5:15e6",
@@ -6913,8 +7197,7 @@
           "_wall_obstruction_text": "390",
           "_wall_text": "34c",
           "_which_text": "398",
-          "_zone_default_fmt": "420",
-          "_zone_text": "15c"
+          "_zone_default_fmt": "420"
         },
         "toolchain": "TC-2-01"
       },
@@ -6924,6 +7207,7 @@
         "data_size": 565,
         "file_offset": 537138,
         "flags": "-ml -O -Z -d",
+        "includes": [],
         "load_base": "1000",
         "name": "evextra",
         "place": {
@@ -6975,7 +7259,7 @@
           "_select_word": "3bc",
           "_show_slots": "28de:1aad",
           "_slots_left": "28de:1ac1",
-          "_spell_info": "264a",
+          "_spell_info_table": "2660",
           "_spell_menu": "28de:1305",
           "_str_copy": "10d7:255e",
           "_str_format": "2860:0037",
@@ -6989,6 +7273,42 @@
       }
     ],
     "asm_modules": [
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 119321,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "rtlerr",
+        "place": {
+          "TEXT": "2ae1:0009"
+        },
+        "section": null,
+        "size": 642,
+        "source": "src/asm/rtlerr.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 119963,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "rtlfind",
+        "place": {
+          "TEXT": "2ae1:028b"
+        },
+        "section": null,
+        "size": 870,
+        "source": "src/asm/rtlfind.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
       {
         "bin": "BIN",
         "cc": "tasm",
@@ -7036,6 +7356,422 @@
       {
         "bin": "BIN",
         "cc": "tasm",
+        "data_size": 1,
+        "file_offset": 12665,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "lowlevel",
+        "place": {
+          "DATA": "a6dd",
+          "TEXT": "10d7:0009"
+        },
+        "section": null,
+        "size": 3368,
+        "source": "src/asm/lowlevel.asm",
+        "syms": {
+          "_base_offset": "d75a",
+          "_buttons_now": "d763",
+          "_column_mouse": "d72f",
+          "_draw_seg": "d60d",
+          "_extent_text": "d75d",
+          "_fire_latch": "d98c",
+          "_hide_count": "d731",
+          "_joy_last_ail": "2a",
+          "_mouse_event": "1f5e:073c",
+          "_mousey_now": "d751",
+          "_pointer_erase": "1f5e:0dfb",
+          "_pointer_follow": "1f5e:0821",
+          "_screen_addr": "d75f",
+          "_show_count": "d74a",
+          "_text_bytes": "d746",
+          "_ticks": "d980"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 16033,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "gfxutil",
+        "place": {
+          "TEXT": "10d7:0d31"
+        },
+        "section": null,
+        "size": 260,
+        "source": "src/asm/gfxutil.asm",
+        "syms": {
+          "_base_offset": "d75a",
+          "_draw_seg": "d60d",
+          "_extent_text": "d75d",
+          "_screen_addr": "d75f",
+          "_text_bytes": "d746"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 16293,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "dissolve",
+        "place": {
+          "TEXT": "10d7:0e35"
+        },
+        "section": null,
+        "size": 618,
+        "source": "src/asm/dissolve.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 16911,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "pcmplay",
+        "place": {
+          "TEXT": "10d7:109f"
+        },
+        "section": null,
+        "size": 3736,
+        "source": "src/asm/pcmplay.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 20647,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "pixrow",
+        "place": {
+          "TEXT": "10d7:1f37"
+        },
+        "section": null,
+        "size": 447,
+        "source": "src/asm/pixrow.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 21094,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "vgadraw",
+        "place": {
+          "TEXT": "10d7:20f6"
+        },
+        "section": null,
+        "size": 341,
+        "source": "src/asm/vgadraw.asm",
+        "syms": {
+          "_draw_seg": "d60d",
+          "_screen_addr": "d75f",
+          "_text_bytes": "d746"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 21435,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "lzcodec",
+        "place": {
+          "TEXT": "10d7:224b"
+        },
+        "section": null,
+        "size": 510,
+        "source": "src/asm/lzcodec.asm",
+        "syms": {
+          "_lzw_prune": "247e:0e35"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 21945,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "conio",
+        "place": {
+          "TEXT": "10d7:2449"
+        },
+        "section": null,
+        "size": 109,
+        "source": "src/asm/conio.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 22054,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "strings",
+        "place": {
+          "TEXT": "10d7:24b6"
+        },
+        "section": null,
+        "size": 435,
+        "source": "src/asm/strings.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 22489,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "dosio",
+        "place": {
+          "TEXT": "10d7:2669"
+        },
+        "section": null,
+        "size": 216,
+        "source": "src/asm/dosio.asm",
+        "syms": {
+          "_far_alloc": "10d7:27f5",
+          "_heap_brk": "22"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 22705,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "memops",
+        "place": {
+          "TEXT": "10d7:2741"
+        },
+        "section": null,
+        "size": 180,
+        "source": "src/asm/memops.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 4,
+        "file_offset": 22885,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "farmem",
+        "place": {
+          "DATA": "a6f2",
+          "TEXT": "10d7:27f5"
+        },
+        "section": null,
+        "size": 149,
+        "source": "src/asm/farmem.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23034,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "sysint",
+        "place": {
+          "TEXT": "10d7:288a"
+        },
+        "section": null,
+        "size": 221,
+        "source": "src/asm/sysint.asm",
+        "syms": {
+          "__psp": "20"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23255,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "bios",
+        "place": {
+          "TEXT": "10d7:2967"
+        },
+        "section": null,
+        "size": 224,
+        "source": "src/asm/bios.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23479,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "ldiv",
+        "place": {
+          "TEXT": "10d7:2a47"
+        },
+        "section": null,
+        "size": 135,
+        "source": "src/asm/ldiv.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23614,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "lxmul",
+        "place": {
+          "TEXT": "10d7:2ace"
+        },
+        "section": null,
+        "size": 20,
+        "source": "src/asm/lxmul.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23634,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "llsh",
+        "place": {
+          "TEXT": "10d7:2ae2"
+        },
+        "section": null,
+        "size": 31,
+        "source": "src/asm/llsh.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23665,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "lrsh",
+        "place": {
+          "TEXT": "10d7:2b01"
+        },
+        "section": null,
+        "size": 30,
+        "source": "src/asm/lrsh.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23695,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "lursh",
+        "place": {
+          "TEXT": "10d7:2b1f"
+        },
+        "section": null,
+        "size": 31,
+        "source": "src/asm/lursh.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23726,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "scopy",
+        "place": {
+          "TEXT": "10d7:2b3e"
+        },
+        "section": null,
+        "size": 43,
+        "source": "src/asm/scopy.asm",
+        "syms": {},
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
+        "data_size": 0,
+        "file_offset": 23769,
+        "flags": "/ml",
+        "includes": [],
+        "load_base": "1000",
+        "name": "envget",
+        "place": {
+          "TEXT": "10d7:2b69"
+        },
+        "section": null,
+        "size": 106,
+        "source": "src/asm/envget.asm",
+        "syms": {
+          "__psp": "20"
+        },
+        "toolchain": "BC31"
+      },
+      {
+        "bin": "BIN",
+        "cc": "tasm",
         "data_size": 0,
         "file_offset": 23875,
         "flags": "/ml",
@@ -7071,6 +7807,29 @@
       "source": "src/generated/mz-padding.asm",
       "file_offset": 9122,
       "size": 94
+    },
+    {
+      "name": "c-startdat",
+      "source": "src/c/startdat.c",
+      "file_offset": 9216,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=0000",
+          "DGROUP=40f4",
+          "TEXT=1000:0000"
+        ],
+        "syms": [
+          "_bss_end=e746"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
     },
     {
       "name": "asm-startup",
@@ -7125,10 +7884,441 @@
       }
     },
     {
-      "name": "resident-003179",
-      "source": "src/generated/resident-003179.asm",
+      "name": "asm-lowlevel",
+      "source": "src/asm/lowlevel.asm",
       "file_offset": 12665,
-      "size": 11210
+      "size": 3368,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "DATA=a6dd",
+          "TEXT=10d7:0009"
+        ],
+        "syms": [
+          "_base_offset=d75a",
+          "_buttons_now=d763",
+          "_column_mouse=d72f",
+          "_draw_seg=d60d",
+          "_extent_text=d75d",
+          "_fire_latch=d98c",
+          "_hide_count=d731",
+          "_joy_last_ail=002a",
+          "_mouse_event=1f5e:073c",
+          "_mousey_now=d751",
+          "_pointer_erase=1f5e:0dfb",
+          "_pointer_follow=1f5e:0821",
+          "_screen_addr=d75f",
+          "_show_count=d74a",
+          "_text_bytes=d746",
+          "_ticks=d980"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-gfxutil",
+      "source": "src/asm/gfxutil.asm",
+      "file_offset": 16033,
+      "size": 260,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:0d31"
+        ],
+        "syms": [
+          "_base_offset=d75a",
+          "_draw_seg=d60d",
+          "_extent_text=d75d",
+          "_screen_addr=d75f",
+          "_text_bytes=d746"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-dissolve",
+      "source": "src/asm/dissolve.asm",
+      "file_offset": 16293,
+      "size": 618,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:0e35"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-pcmplay",
+      "source": "src/asm/pcmplay.asm",
+      "file_offset": 16911,
+      "size": 3736,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:109f"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-pixrow",
+      "source": "src/asm/pixrow.asm",
+      "file_offset": 20647,
+      "size": 447,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:1f37"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-vgadraw",
+      "source": "src/asm/vgadraw.asm",
+      "file_offset": 21094,
+      "size": 341,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:20f6"
+        ],
+        "syms": [
+          "_draw_seg=d60d",
+          "_screen_addr=d75f",
+          "_text_bytes=d746"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-lzcodec",
+      "source": "src/asm/lzcodec.asm",
+      "file_offset": 21435,
+      "size": 510,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:224b"
+        ],
+        "syms": [
+          "_lzw_prune=247e:0e35"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-conio",
+      "source": "src/asm/conio.asm",
+      "file_offset": 21945,
+      "size": 109,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2449"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-strings",
+      "source": "src/asm/strings.asm",
+      "file_offset": 22054,
+      "size": 435,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:24b6"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-dosio",
+      "source": "src/asm/dosio.asm",
+      "file_offset": 22489,
+      "size": 216,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2669"
+        ],
+        "syms": [
+          "_far_alloc=10d7:27f5",
+          "_heap_brk=0022"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-memops",
+      "source": "src/asm/memops.asm",
+      "file_offset": 22705,
+      "size": 180,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2741"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-farmem",
+      "source": "src/asm/farmem.asm",
+      "file_offset": 22885,
+      "size": 149,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "DATA=a6f2",
+          "TEXT=10d7:27f5"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-sysint",
+      "source": "src/asm/sysint.asm",
+      "file_offset": 23034,
+      "size": 221,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:288a"
+        ],
+        "syms": [
+          "__psp=0020"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-bios",
+      "source": "src/asm/bios.asm",
+      "file_offset": 23255,
+      "size": 224,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2967"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-ldiv",
+      "source": "src/asm/ldiv.asm",
+      "file_offset": 23479,
+      "size": 135,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2a47"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-lxmul",
+      "source": "src/asm/lxmul.asm",
+      "file_offset": 23614,
+      "size": 20,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2ace"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-llsh",
+      "source": "src/asm/llsh.asm",
+      "file_offset": 23634,
+      "size": 31,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2ae2"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-lrsh",
+      "source": "src/asm/lrsh.asm",
+      "file_offset": 23665,
+      "size": 30,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2b01"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-lursh",
+      "source": "src/asm/lursh.asm",
+      "file_offset": 23695,
+      "size": 31,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2b1f"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-scopy",
+      "source": "src/asm/scopy.asm",
+      "file_offset": 23726,
+      "size": 43,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2b3e"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-envget",
+      "source": "src/asm/envget.asm",
+      "file_offset": 23769,
+      "size": 106,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=10d7:2b69"
+        ],
+        "syms": [
+          "__psp=0020"
+        ],
+        "includes": [],
+        "segment": "TEXT"
+      }
     },
     {
       "name": "asm-pixels",
@@ -7175,6 +8365,28 @@
           "_txt_get=1cf0:046e",
           "_txt_init=1cf0:02b4"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-edtext",
+      "source": "src/c/edtext.c",
+      "file_offset": 24832,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=002c",
+          "DGROUP=40f4",
+          "TEXT=13d0:0000"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7202,7 +8414,6 @@
           "_byte_6723=6723",
           "_byte_str=1d48:0181",
           "_combat_pool=ce72",
-          "_cur_area_rec=d41c",
           "_cur_item=bcfd",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -7210,6 +8421,7 @@
           "_event_table=a7f0",
           "_frame_border=1d65:002a",
           "_frame_main=1d65:00de",
+          "_geo=d414",
           "_helpless_kinds=616d",
           "_icon_clear=1cb5:004d",
           "_int_max=10d7:2625",
@@ -7244,7 +8456,7 @@
           "_resting=b4eb",
           "_shop_temple_frame=c672",
           "_side_count=b8d1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_names=39b0",
           "_status_printf=16c9:0044",
           "_step_ec6=0ec6",
@@ -7258,6 +8470,27 @@
           "_view_mode=b421",
           "_view_refresh=28de:1053"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-chartab",
+      "source": "src/c/chartab.c",
+      "file_offset": 33627,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=0ec6",
+          "TEXT=15f5:000b"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7335,6 +8568,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7388,6 +8622,7 @@
           "_timer_ticks=207e:00c0",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7425,6 +8660,7 @@
           "_ui_mark=25e5:1894",
           "_win_scroll=20f8:0008"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7520,6 +8756,7 @@
           "_view_kind=b40e",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7557,6 +8794,7 @@
           "_text_format=2867:011a",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7609,6 +8847,7 @@
           "_AIL_timbre_request=100c:0c11",
           "_archive_open=1e23:01eb",
           "_arg_hex=28de:10c1",
+          "_config=b392",
           "_dos_io=10d7:26e9",
           "_file_open=1e23:03fa",
           "_file_read=2336:000e",
@@ -7626,13 +8865,13 @@
           "_slot_release=2336:0708",
           "_slot_reserve=2336:0a04",
           "_slot_used=2336:0921",
-          "_sound_card=b394",
           "_str_cmp=10d7:24db",
           "_str_copy=10d7:255e",
           "_timer_rehook=207e:0047",
           "_timer_tick=10d7:0009",
           "_timer_unhook=207e:007f"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7652,11 +8891,11 @@
           "TEXT=1c3f:0003"
         ],
         "syms": [
+          "_config=b392",
           "_lib_open=247e:00d1",
           "_sample_library_set=243b:0002",
           "_sample_sequence_play=243b:0012",
           "_slot_close=2336:06fb",
-          "_sound_card=b394",
           "_sound_init=1ac2:000d",
           "_sound_play=1ac2:026a",
           "_sound_shutdown=1ac2:0182",
@@ -7666,6 +8905,7 @@
           "_str_copy=10d7:255e",
           "_str_format=2860:0037"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7687,9 +8927,9 @@
         ],
         "syms": [
           "_clear_screen=1da7:029d",
+          "_config=b392",
           "_key_wait=1da7:00f5",
           "_slot_used=2336:0921",
-          "_sound_card=b394",
           "_sound_close=1c3f:015c",
           "_sound_event=1c3f:016e",
           "_sound_open=1c3f:0003",
@@ -7700,6 +8940,28 @@
           "_timer_ticks=207e:00c0",
           "_voice_set=213b:007b"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-spelltab",
+      "source": "src/c/spelltab.c",
+      "file_offset": 61270,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=2438",
+          "DGROUP=40f4",
+          "TEXT=1cb5:0006"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7737,6 +8999,28 @@
           "_substr=1a75:0027",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-gametext",
+      "source": "src/c/gametext.c",
+      "file_offset": 62213,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=38e8",
+          "DGROUP=40f4",
+          "TEXT=1cf0:0005"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7761,6 +9045,7 @@
           "_mem_move=10d7:2741",
           "_str_len=10d7:2577"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7799,6 +9084,7 @@
           "_str_format=2860:0037",
           "_sys_shutdown=1da7:006c"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7839,6 +9125,7 @@
           "_text_clear=16c9:0994",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7901,6 +9188,7 @@
           "_video_restore=1f5e:0006",
           "_voice_set=213b:007b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7937,6 +9225,7 @@
           "_text_xy_to=207e:04f8",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -7986,6 +9275,7 @@
           "_to_upper=10d7:25bc",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8021,6 +9311,7 @@
           "_timer_ticks=207e:00c0",
           "_ui_item_proc=25e5:01c3"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8072,6 +9363,7 @@
           "_video_bios=10d7:297b",
           "_xvga_char=10d7:2171"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8114,6 +9406,7 @@
           "_txthigh_dots=d97a",
           "_video_bios=10d7:297b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8158,6 +9451,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8182,6 +9476,7 @@
           "_is_pcjr=28de:202f",
           "_is_tandy=28de:2025"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8209,6 +9504,7 @@
           "_random_int=1da7:022d",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8273,6 +9569,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8310,6 +9607,7 @@
           "_row_recolor=10d7:2046",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8355,6 +9653,7 @@
           "_text_print_at=1da7:0399",
           "_video_mode=d61b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8387,6 +9686,7 @@
           "_swap16=10d7:098b",
           "_swap32=10d7:0994"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8431,6 +9731,7 @@
           "_slot_used=2336:0921",
           "_str_copy=10d7:255e"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8466,6 +9767,7 @@
           "_slot_insert_delete=2336:0b35",
           "_slot_open=2336:025c"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8514,6 +9816,7 @@
           "_timer_ticks=207e:00c0",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8538,6 +9841,7 @@
           "_speaker_init=213b:000b",
           "_speaker_silence=213b:005d"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8563,6 +9867,7 @@
           "_mouse_pos=1f5e:100f",
           "_mouse_press=1f5e:0ee9"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8585,6 +9890,7 @@
           "_game_main=28de:13d7",
           "_heap_brk=0022"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8611,6 +9917,7 @@
           "_str_copy=10d7:255e",
           "_str_len=10d7:2577"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8631,6 +9938,7 @@
         "syms": [
           "_dos_call=10d7:2697"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8659,6 +9967,7 @@
           "_str_len=10d7:2577",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8686,6 +9995,7 @@
           "_str_find=10d7:258e",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8707,6 +10017,7 @@
           "_str_find=10d7:258e",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8729,6 +10040,7 @@
           "_con_putc=10d7:247d",
           "_text_format=2867:011a"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8750,6 +10062,7 @@
           "LUDIV@=10d7:2a4b",
           "LUMOD@=10d7:2a55"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8768,6 +10081,7 @@
           "TEXT=28c9:0008"
         ],
         "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -8802,7 +10116,45 @@
       "name": "resident-01bb4b",
       "source": "src/generated/resident-01bb4b.asm",
       "file_offset": 113483,
-      "size": 7350
+      "size": 5838
+    },
+    {
+      "name": "asm-rtlerr",
+      "source": "src/asm/rtlerr.asm",
+      "file_offset": 119321,
+      "size": 642,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=2ae1:0009"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "asm-rtlfind",
+      "source": "src/asm/rtlfind.asm",
+      "file_offset": 119963,
+      "size": 870,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "TEXT=2ae1:028b"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "TEXT"
+      }
     },
     {
       "name": "overlay-alignment",
@@ -8969,6 +10321,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9036,6 +10389,7 @@
           "_view_cy=c3bc",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9173,7 +10527,7 @@
           "_set_menu_kind=183a:13f2",
           "_sfx_play=1c8e:000e",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_mark=13d0:1381",
           "_spell_menu=28de:1305",
           "_spell_range=28de:12fb",
@@ -9199,6 +10553,7 @@
           "_view_cx=c39f",
           "_view_cy=c3bc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9249,6 +10604,7 @@
           "_tile_info=5ff5",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9292,7 +10648,6 @@
           "_combatant_x=32fa:0ab5",
           "_combatant_y=32fa:0ae4",
           "_combatants=cc7c",
-          "_cur_area_rec=d41c",
           "_cur_map=c66b",
           "_cur_node=b3dd",
           "_current_spell=be64",
@@ -9336,6 +10691,7 @@
           "_wall_passable=28de:134b",
           "_wall_side=28de:1341"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9432,7 +10788,7 @@
           "_recalc_stats=13d0:0b88",
           "_screen_sync=1a75:0362",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_target_rating=2dbf:4530",
           "_status_printf=16c9:0044",
           "_tile_info=5ff5",
@@ -9440,6 +10796,27 @@
           "_turn_target_find=2dbf:1229",
           "_turn_undead=2dbf:0fec"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-dirnames",
+      "source": "src/c/dirnames.c",
+      "file_offset": 176668,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5fb2",
+          "TEXT=3632:000c"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9470,6 +10847,7 @@
           "_steps=ca2b",
           "_tile_info=5ff5"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9518,6 +10896,7 @@
           "_str_upr=10d7:25f5",
           "_wall_sets_free=28de:13af"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9601,6 +10980,7 @@
           "_view_mode=b421",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9651,6 +11031,7 @@
           "_view_flag=b40f",
           "_view_kind=b40e"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9684,6 +11065,7 @@
           "_tick_slot=b3f2",
           "_treasure_has_items=ca15"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9722,6 +11104,7 @@
           "_win_row=96ae",
           "_win_top=96aa"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9784,6 +11167,7 @@
           "_view_mode=b421",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -9826,7 +11210,6 @@
           "_combat_text_clear=13d0:1657",
           "_confirm=183a:044d",
           "_confirm_anim=b42a",
-          "_cur_area_rec=d41c",
           "_cur_event=a7e4",
           "_cur_level=6719",
           "_cur_node=b3dd",
@@ -9928,6 +11311,27 @@
           "_view_update=28de:1549",
           "_wall_kind=28de:1567"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-perm16",
+      "source": "src/c/perm16.c",
+      "file_offset": 201337,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5d44",
+          "TEXT=2ffa:0009"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10027,6 +11431,7 @@
           "_view_mode=b421",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10085,6 +11490,7 @@
           "_ui_item_proc=25e5:01c3",
           "_ui_send=25e5:18f0"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10179,6 +11585,27 @@
           "_wall_sets_free=28de:13af",
           "_wall_sets_load=28de:1891"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-fieldvar",
+      "source": "src/c/fieldvar.c",
+      "file_offset": 224185,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5eca",
+          "TEXT=2ff3:0009"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10234,6 +11661,7 @@
           "_video_planes=1f5e:05dc",
           "_win_scroll=20f8:0008"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10262,6 +11690,7 @@
           "_text_xy_to=207e:04f8",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10310,6 +11739,7 @@
           "_to_upper=10d7:25bc",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10329,11 +11759,11 @@
         ],
         "syms": [
           "_arena_alloc=3209:0606",
-          "_boots_word=3db7",
           "_combat_pool=ce72",
           "_debug_word=b3f4",
           "_effect_pool=c3c4",
           "_item_record_pool=cb0e",
+          "_item_words=3d03",
           "_mem_alloc=10d7:2669",
           "_node_pool=ce5d",
           "_npc_pool=bd01",
@@ -10341,6 +11771,28 @@
           "_patch_pool=bb90",
           "_str_copy=10d7:255e"
         ],
+        "includes": [],
+        "segment": "TEXT"
+      }
+    },
+    {
+      "name": "c-combtab",
+      "source": "src/c/combtab.c",
+      "file_offset": 233726,
+      "size": 0,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5fd4",
+          "DGROUP=40f4",
+          "TEXT=3209:000e"
+        ],
+        "syms": [],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10468,6 +11920,7 @@
           "_word_b738=b738",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10518,6 +11971,7 @@
           "_ticks_now=16c9:096c",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10552,6 +12006,7 @@
           "_str_same=10d7:253f",
           "_text_clear=16c9:0994"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10600,7 +12055,7 @@
           "_recalc_stats=13d0:0b88",
           "_screen_sync=1a75:0362",
           "_show_hp=13d0:0789",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_slots=28de:196d",
           "_stat_show=28de:1995",
           "_status_char=16c9:059a",
@@ -10612,6 +12067,7 @@
           "_tick_slot=b3f2",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10665,6 +12121,7 @@
           "_video_plane_set=1f5e:05ef",
           "_visible_on=d726"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10765,7 +12222,7 @@
           "_set_extra_row=183a:23ae",
           "_set_open_mode=15f5:01d3",
           "_sex_names=399c",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_start_ages=10d4",
           "_start_gear=ba3a",
           "_start_gems=ba30",
@@ -10790,6 +12247,7 @@
           "_ui_run=25e5:1589",
           "_xp_input=28de:19f9"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10861,6 +12319,7 @@
           "_training_done=b722",
           "_ulong_str=1d48:01b6"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -10913,7 +12372,6 @@
           "_confirm_anim=b42a",
           "_continue_items=390c",
           "_continue_prompt=16c9:0932",
-          "_cur_area_rec=d41c",
           "_cur_level=6719",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -11056,6 +12514,7 @@
           "_wall_side=28de:1341",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11086,7 +12545,6 @@
           "_char_view=28de:114d",
           "_clock_advance=28de:11bb",
           "_combat_text_clear=13d0:1657",
-          "_cur_area_rec=d41c",
           "_cur_node=b3dd",
           "_cursor_hide=3673:0067",
           "_cursor_obj=b75b",
@@ -11154,6 +12612,7 @@
           "_word_b8d4=b8d4",
           "_word_be66=be66"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11177,6 +12636,7 @@
           "_rows_restore=15f5:0bc3",
           "_rows_save=15f5:0af4"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11284,7 +12744,7 @@
           "_speed_text=3b24",
           "_speed_title=3c00",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_list_build=28de:1ad5",
           "_spell_menu=28de:1305",
           "_spell_remove_curse=28de:1afd",
@@ -11303,6 +12763,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11419,6 +12880,7 @@
           "_view_kind=b40e",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11503,6 +12965,7 @@
           "_weight_add=28de:1b11",
           "_weight_sub=28de:1b1b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11607,6 +13070,7 @@
           "_view_redraw=13d0:1a72",
           "_xp_text=3b80"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11686,7 +13150,7 @@
           "_shop_items=3c98",
           "_shop_temple_frame=c672",
           "_spaces=3c9c",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_printf=16c9:0044",
           "_str_copy=10d7:255e",
           "_str_format=2860:0037",
@@ -11707,6 +13171,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11776,7 +13241,7 @@
           "_pool_money=31d4:00f6",
           "_press_return_wait=183a:054a",
           "_share_money=31d4:01ee",
-          "_spell_names=2434",
+          "_spell_name_table=2438",
           "_spell_remove_curse=28de:1afd",
           "_spell_run=28de:1ae9",
           "_spell_target=cfe7",
@@ -11791,6 +13256,7 @@
           "_text_wrap=16c9:030f",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11834,6 +13300,7 @@
           "_shift_key_down=28de:1823",
           "_wall_screen=28de:1c0b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -11872,7 +13339,6 @@
           "_attacks_used=b8e8",
           "_bonus_slots=ca09",
           "_calc_move=13d0:0a38",
-          "_camp_menus=3ce3",
           "_class_bit=6252",
           "_class_level=13d0:2177",
           "_class_update=28de:1729",
@@ -11953,6 +13419,7 @@
           "_item_record_pool=cb0e",
           "_item_remove=13d0:13c4",
           "_item_table=b40a",
+          "_item_words=3d03",
           "_level_xp_threshold=13d0:21cc",
           "_mem_zero=1d48:0017",
           "_mirror_image_bypass=ca08",
@@ -11971,7 +13438,7 @@
           "_save_bonus=b8d3",
           "_save_succeeded=b721",
           "_side_count=b8d1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_path_targets=28de:1ca1",
           "_step_count=ca10",
           "_steps=ca2b",
@@ -11989,6 +13456,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12068,6 +13536,7 @@
           "_view_cy=c3bc",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12198,7 +13667,8 @@
           "_spell_duration=3b69:10d7",
           "_spell_effect_apply=3b69:1e6f",
           "_spell_fn=b4f0",
-          "_spell_names=2434",
+          "_spell_info_table=2660",
+          "_spell_name_table=2438",
           "_spell_path_targets=3b69:1a61",
           "_status_printf=16c9:0044",
           "_step_count=ca10",
@@ -12215,10 +13685,9 @@
           "_txt_hot_cold=3c44",
           "_view_cx=c39f",
           "_view_cy=c3bc",
-          "_view_mode=b421",
-          "_word_stun_fx=3066",
-          "_word_stun_save=3062"
+          "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12302,9 +13771,9 @@
           "_selected_target=cc6f",
           "_sfx_play=1c8e:000e",
           "_spell_fn=b4f0",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_mark=13d0:1381",
-          "_spell_names=2434",
+          "_spell_name_table=2438",
           "_status_printf=16c9:0044",
           "_step_count=ca10",
           "_steps=ca2b",
@@ -12336,6 +13805,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12420,6 +13890,7 @@
           "_txt_touch=1cf0:0338",
           "_wall_set_res=caf8"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12466,6 +13937,7 @@
           "_class_hit_dice=6269",
           "_class_level=13d0:2177",
           "_class_names=3914",
+          "_class_spell_rows=139d",
           "_coin_names=39a4",
           "_coin_title=3a24",
           "_combat_actions_end=28de:1139",
@@ -12532,7 +14004,6 @@
           "_menu_escaped=ca2a",
           "_menu_run=183a:1fb3",
           "_msg_format=1a75:03fa",
-          "_mu_spell_row=13a2",
           "_must_ready_text=3a48",
           "_node_list=d129",
           "_node_menu=183a:197d",
@@ -12561,7 +14032,7 @@
           "_show_ac=13d0:06f9",
           "_show_hp=13d0:0789",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_menu=28de:1305",
           "_spell_slots_by_level=14f4",
           "_status_char=16c9:059a",
@@ -12592,6 +14063,7 @@
           "_view_redraw=13d0:1a72",
           "_your_text=3a40"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12619,15 +14091,15 @@
           "_item_equip_toggle=38aa:19bf",
           "_item_table=b40a",
           "_mem_fill=10d7:277b",
-          "_mu_spell_row=13a2",
           "_old_class_abilities_available=13d0:2100",
           "_save_table=1916",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_slots_by_level=14f4",
           "_thief_dex_adjust=633d",
           "_thief_race_adjust=630d",
           "_thief_skill_base=627d"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12682,6 +14154,7 @@
           "_ui_item_proc=25e5:01c3",
           "_ui_send=25e5:18f0"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12723,6 +14196,7 @@
           "_text_xy_to=207e:04f8",
           "_ui_item_proc=25e5:01c3"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12835,6 +14309,7 @@
           "_wild_pic_open=36e3:17e2",
           "_zone_default_fmt=0420"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12889,6 +14364,7 @@
           "_field_proc=28de:175b",
           "_fill_rect=1f5e:0040",
           "_frame_border=1d65:002a",
+          "_glbdata_012b=28de:1391",
           "_hotkey_add=183a:0009",
           "_icon_clear=1cb5:004d",
           "_icon_load=1cb5:0093",
@@ -12909,7 +14385,6 @@
           "_mem_scan=10d7:27b1",
           "_menu_line_key=183a:1e2d",
           "_menu_line_show=183a:1e9a",
-          "_mod18de_1391=28de:1391",
           "_mode_change=28de:10cb",
           "_mouse_fake=1f5e:10d5",
           "_mouse_move_to=1f5e:10a3",
@@ -12949,6 +14424,7 @@
           "_var_name=28de:1a99",
           "_var_pick=28de:1ec7"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -12987,7 +14463,6 @@
           "_art_unimport=28de:1f17",
           "_art_word=0448",
           "_back_draw=28de:17fb",
-          "_backdrop_text=0158",
           "_big_open=28de:146d",
           "_big_res=bcf7",
           "_cancel_text=03c8",
@@ -13037,6 +14512,7 @@
           "_label_entry=28de:1869",
           "_label_list=28de:17ab",
           "_label_nth=28de:1873",
+          "_labels_134f=28de:1783",
           "_labels_load=28de:185f",
           "_labels_save=28de:1855",
           "_leave_text=03c0",
@@ -13051,14 +14527,12 @@
           "_menu_escaped=ca2a",
           "_menu_line_key=183a:1e2d",
           "_menu_line_show=183a:1e9a",
-          "_mod18de_1783=28de:1783",
           "_mode_change=28de:10cb",
           "_monst_default=28de:1f21",
           "_monst_listed=28de:187d",
           "_monst_load=28de:1f35",
           "_monst_save=28de:1f2b",
           "_monst_unlisted=28de:1f0d",
-          "_monster_editor_text=01f8",
           "_monster_text=0338",
           "_msg_box=28de:1841",
           "_msg_format=1a75:03fa",
@@ -13081,6 +14555,7 @@
           "_screen_draw_begin=15f5:0671",
           "_screen_flush=15f5:0756",
           "_screen_flush_mode_set=15f5:069d",
+          "_screen_titles=01dc",
           "_select_word=03bc",
           "_slot_text=0444",
           "_str_cat=10d7:24b6",
@@ -13092,6 +14567,7 @@
           "_text_xy=207e:04a7",
           "_tick_slot=b3f2",
           "_to_text=0374",
+          "_tool_names=0154",
           "_txt_pack=1cf0:00ab",
           "_txt_unpack=1cf0:01c2",
           "_ui_add=25e5:1293",
@@ -13106,6 +14582,7 @@
           "_wall_sets_free=36e3:1721",
           "_with_text=0380"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13177,6 +14654,7 @@
           "_util_menu=0134",
           "_view_attrs=36e3:0572"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13215,7 +14693,6 @@
           "_cell_zone_at=28de:1355",
           "_combat_text_clear=13d0:1657",
           "_confirm=183a:044d",
-          "_cur_area_rec=d41c",
           "_cur_event=a7e4",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -13250,7 +14727,7 @@
           "_saved_event=a7e8",
           "_saved_view_mode=b433",
           "_screen_sync=1a75:0362",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_printf=16c9:0044",
           "_str_format=2860:0037",
           "_study_wait=cfde",
@@ -13261,6 +14738,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13348,6 +14826,7 @@
           "_view_center=28de:1193",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13356,18 +14835,6 @@
       "source": "src/generated/overlay-19-072618.asm",
       "file_offset": 468504,
       "size": 8
-    },
-    {
-      "name": "overlay-20-relocations",
-      "source": "src/generated/overlay-20-relocations.asm",
-      "file_offset": 468512,
-      "size": 0
-    },
-    {
-      "name": "overlay-20",
-      "source": "src/generated/overlay-20.asm",
-      "file_offset": 468512,
-      "size": 0
     },
     {
       "name": "overlay-21-relocations",
@@ -13511,6 +14978,7 @@
           "_wait_or_key=1da7:0106",
           "_wait_ticks=1da7:0151"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13603,6 +15071,7 @@
           "_ui_poll=25e5:15e6",
           "_used_text=0490"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13629,6 +15098,7 @@
           "_event_edit=28de:1ea9",
           "_int_max=10d7:2625"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13680,9 +15150,9 @@
           "_geo_load=28de:15e9",
           "_label_get=28de:1819",
           "_label_set=28de:180f",
+          "_labels_134f=28de:1783",
           "_labels_forget=28de:184b",
           "_mem_move=10d7:2741",
-          "_mod18de_1783=28de:1783",
           "_start_area=ba38",
           "_start_entry=ba39",
           "_str_cmp=10d7:24db",
@@ -13694,6 +15164,7 @@
           "_txt_touch=1cf0:0338",
           "_wall_sets_free=28de:13af"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13724,6 +15195,7 @@
           "_text_pool_block=a7ec",
           "_txt_init=1cf0:02b4"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13828,7 +15300,6 @@
           "_place_text=0358",
           "_pointer_hide=10d7:0141",
           "_pointer_show=1f5e:0d1c",
-          "_replace_all_text=00fc",
           "_replace_text=035c",
           "_scratch_buf=c3c8",
           "_screen_draw_begin=15f5:0671",
@@ -13848,12 +15319,14 @@
           "_total_text=0214",
           "_ui_add=25e5:1293",
           "_ui_poll=25e5:15e6",
+          "_util_items=00f4",
           "_wait_ticks=1da7:0151",
           "_wall_info_draw=28de:1d37",
           "_wall_text=034c",
           "_with_text=0380",
           "_zone_info_draw=28de:1d4b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13938,6 +15411,7 @@
           "_str_len=10d7:2577",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -13967,6 +15441,7 @@
           "_huge_move=10d7:08c2",
           "_slot_of=e564"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14011,6 +15486,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14057,6 +15533,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14096,6 +15573,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14161,6 +15639,7 @@
           "_timer_ticks=207e:00c0",
           "_txt_get=1cf0:046e"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14198,6 +15677,7 @@
           "_timer_ticks=207e:00c0",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14261,6 +15741,7 @@
           "_train_hero=28de:19db",
           "_training_done=b722"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14296,6 +15777,7 @@
           "_mem_fill=10d7:277b",
           "_mem_move=10d7:2741"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14319,6 +15801,7 @@
           "_game_rec=ba08",
           "_geo=d414"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14404,6 +15887,7 @@
           "_version_text=3bc8",
           "_view3d_noop=28de:1cf1"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14494,6 +15978,7 @@
           "_text_print_at=1da7:0399",
           "_text_xy=207e:04a7",
           "_tick_slot=b3f2",
+          "_tool_names=0154",
           "_ui_add=25e5:1293",
           "_ui_mark=25e5:1894",
           "_ui_poll=25e5:15e6",
@@ -14502,9 +15987,9 @@
           "_wall_obstruction_text=0390",
           "_wall_text=034c",
           "_which_text=0398",
-          "_zone_default_fmt=0420",
-          "_zone_text=015c"
+          "_zone_default_fmt=0420"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14565,7 +16050,7 @@
           "_select_word=03bc",
           "_show_slots=28de:1aad",
           "_slots_left=28de:1ac1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_menu=28de:1305",
           "_str_copy=10d7:255e",
           "_str_format=2860:0037",
@@ -14575,6 +16060,7 @@
           "_treasure_mask_add=28de:15cb",
           "_ui_mark=25e5:1894"
         ],
+        "includes": [],
         "segment": "TEXT"
       }
     },
@@ -14585,10 +16071,48 @@
       "size": 4128
     },
     {
-      "name": "overlay-27",
-      "source": "src/generated/overlay-27.asm",
+      "name": "c-startdat-data",
+      "source": "src/c/startdat.c",
       "file_offset": 544864,
-      "size": 3670
+      "size": 44,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=0000",
+          "DGROUP=40f4",
+          "TEXT=1000:0000"
+        ],
+        "syms": [
+          "_bss_end=e746"
+        ],
+        "includes": [],
+        "segment": "DATA"
+      }
+    },
+    {
+      "name": "c-edtext-data",
+      "source": "src/c/edtext.c",
+      "file_offset": 544908,
+      "size": 3626,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=002c",
+          "DGROUP=40f4",
+          "TEXT=13d0:0000"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-hero-data",
@@ -14614,7 +16138,6 @@
           "_byte_6723=6723",
           "_byte_str=1d48:0181",
           "_combat_pool=ce72",
-          "_cur_area_rec=d41c",
           "_cur_item=bcfd",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -14622,6 +16145,7 @@
           "_event_table=a7f0",
           "_frame_border=1d65:002a",
           "_frame_main=1d65:00de",
+          "_geo=d414",
           "_helpless_kinds=616d",
           "_icon_clear=1cb5:004d",
           "_int_max=10d7:2625",
@@ -14656,7 +16180,7 @@
           "_resting=b4eb",
           "_shop_temple_frame=c672",
           "_side_count=b8d1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_names=39b0",
           "_status_printf=16c9:0044",
           "_step_ec6=0ec6",
@@ -14670,6 +16194,7 @@
           "_view_mode=b421",
           "_view_refresh=28de:1053"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -14677,7 +16202,27 @@
       "name": "overlay-27-085f25",
       "source": "src/generated/overlay-27-085f25.asm",
       "file_offset": 548645,
-      "size": 3453
+      "size": 1
+    },
+    {
+      "name": "c-chartab-data",
+      "source": "src/c/chartab.c",
+      "file_offset": 548646,
+      "size": 3452,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=0ec6",
+          "TEXT=15f5:000b"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-tiles-data",
@@ -14753,6 +16298,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -14812,6 +16358,7 @@
           "_timer_ticks=207e:00c0",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -14849,6 +16396,7 @@
           "_ui_mark=25e5:1894",
           "_win_scroll=20f8:0008"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -14950,6 +16498,7 @@
           "_view_kind=b40e",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -14987,6 +16536,7 @@
           "_text_format=2867:011a",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15045,6 +16595,7 @@
           "_AIL_timbre_request=100c:0c11",
           "_archive_open=1e23:01eb",
           "_arg_hex=28de:10c1",
+          "_config=b392",
           "_dos_io=10d7:26e9",
           "_file_open=1e23:03fa",
           "_file_read=2336:000e",
@@ -15062,13 +16613,13 @@
           "_slot_release=2336:0708",
           "_slot_reserve=2336:0a04",
           "_slot_used=2336:0921",
-          "_sound_card=b394",
           "_str_cmp=10d7:24db",
           "_str_copy=10d7:255e",
           "_timer_rehook=207e:0047",
           "_timer_tick=10d7:0009",
           "_timer_unhook=207e:007f"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15094,11 +16645,11 @@
           "TEXT=1c3f:0003"
         ],
         "syms": [
+          "_config=b392",
           "_lib_open=247e:00d1",
           "_sample_library_set=243b:0002",
           "_sample_sequence_play=243b:0012",
           "_slot_close=2336:06fb",
-          "_sound_card=b394",
           "_sound_init=1ac2:000d",
           "_sound_play=1ac2:026a",
           "_sound_shutdown=1ac2:0182",
@@ -15108,6 +16659,7 @@
           "_str_copy=10d7:255e",
           "_str_format=2860:0037"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15135,9 +16687,9 @@
         ],
         "syms": [
           "_clear_screen=1da7:029d",
+          "_config=b392",
           "_key_wait=1da7:00f5",
           "_slot_used=2336:0921",
-          "_sound_card=b394",
           "_sound_close=1c3f:015c",
           "_sound_event=1c3f:016e",
           "_sound_open=1c3f:0003",
@@ -15148,6 +16700,7 @@
           "_timer_ticks=207e:00c0",
           "_voice_set=213b:007b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15155,7 +16708,28 @@
       "name": "overlay-27-087497",
       "source": "src/generated/overlay-27-087497.asm",
       "file_offset": 554135,
-      "size": 5275
+      "size": 1
+    },
+    {
+      "name": "c-spelltab-data",
+      "source": "src/c/spelltab.c",
+      "file_offset": 554136,
+      "size": 5274,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=2438",
+          "DGROUP=40f4",
+          "TEXT=1cb5:0006"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-charpic-data",
@@ -15191,14 +16765,36 @@
           "_substr=1a75:0027",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
     {
-      "name": "overlay-27-088948",
-      "source": "src/generated/overlay-27-088948.asm",
+      "name": "c-gametext-data",
+      "source": "src/c/gametext.c",
       "file_offset": 559432,
-      "size": 7158
+      "size": 7157,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=38e8",
+          "DGROUP=40f4",
+          "TEXT=1cf0:0005"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
+    },
+    {
+      "name": "overlay-27-08a53d",
+      "source": "src/generated/overlay-27-08a53d.asm",
+      "file_offset": 566589,
+      "size": 1
     },
     {
       "name": "c-packtext-data",
@@ -15221,6 +16817,7 @@
           "_mem_move=10d7:2741",
           "_str_len=10d7:2577"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15265,6 +16862,7 @@
           "_str_format=2860:0037",
           "_sys_shutdown=1da7:006c"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15305,6 +16903,7 @@
           "_text_clear=16c9:0994",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15467,6 +17066,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15534,6 +17134,7 @@
           "_view_cy=c3bc",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15677,7 +17278,7 @@
           "_set_menu_kind=183a:13f2",
           "_sfx_play=1c8e:000e",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_mark=13d0:1381",
           "_spell_menu=28de:1305",
           "_spell_range=28de:12fb",
@@ -15703,6 +17304,7 @@
           "_view_cx=c39f",
           "_view_cy=c3bc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15740,7 +17342,6 @@
           "_combatant_x=32fa:0ab5",
           "_combatant_y=32fa:0ae4",
           "_combatants=cc7c",
-          "_cur_area_rec=d41c",
           "_cur_map=c66b",
           "_cur_node=b3dd",
           "_current_spell=be64",
@@ -15784,6 +17385,7 @@
           "_wall_passable=28de:134b",
           "_wall_side=28de:1341"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15868,7 +17470,7 @@
           "_recalc_stats=13d0:0b88",
           "_screen_sync=1a75:0362",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_target_rating=2dbf:4530",
           "_status_printf=16c9:0044",
           "_tile_info=5ff5",
@@ -15876,6 +17478,7 @@
           "_turn_target_find=2dbf:1229",
           "_turn_undead=2dbf:0fec"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -15912,6 +17515,7 @@
           "_str_upr=10d7:25f5",
           "_wall_sets_free=28de:13af"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16001,6 +17605,7 @@
           "_view_mode=b421",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16051,6 +17656,7 @@
           "_view_flag=b40f",
           "_view_kind=b40e"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16101,6 +17707,7 @@
           "_view_mode=b421",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16143,7 +17750,6 @@
           "_combat_text_clear=13d0:1657",
           "_confirm=183a:044d",
           "_confirm_anim=b42a",
-          "_cur_area_rec=d41c",
           "_cur_event=a7e4",
           "_cur_level=6719",
           "_cur_node=b3dd",
@@ -16245,6 +17851,7 @@
           "_view_update=28de:1549",
           "_wall_kind=28de:1567"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16252,7 +17859,27 @@
       "name": "overlay-27-08ada3",
       "source": "src/generated/overlay-27-08ada3.asm",
       "file_offset": 568739,
-      "size": 17
+      "size": 1
+    },
+    {
+      "name": "c-perm16-data",
+      "source": "src/c/perm16.c",
+      "file_offset": 568740,
+      "size": 16,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5d44",
+          "TEXT=2ffa:0009"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-saveload-data",
@@ -16350,6 +17977,7 @@
           "_view_mode=b421",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16402,6 +18030,7 @@
           "_ui_item_proc=25e5:01c3",
           "_ui_send=25e5:18f0"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16496,6 +18125,7 @@
           "_wall_sets_free=28de:13af",
           "_wall_sets_load=28de:1891"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16503,7 +18133,33 @@
       "name": "overlay-27-08af29",
       "source": "src/generated/overlay-27-08af29.asm",
       "file_offset": 569129,
-      "size": 7
+      "size": 1
+    },
+    {
+      "name": "c-fieldvar-data",
+      "source": "src/c/fieldvar.c",
+      "file_offset": 569130,
+      "size": 5,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5eca",
+          "TEXT=2ff3:0009"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
+    },
+    {
+      "name": "overlay-27-08af2f",
+      "source": "src/generated/overlay-27-08af2f.asm",
+      "file_offset": 569135,
+      "size": 1
     },
     {
       "name": "c-menubox-data",
@@ -16557,6 +18213,7 @@
           "_video_planes=1f5e:05dc",
           "_win_scroll=20f8:0008"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16591,6 +18248,7 @@
           "_text_xy_to=207e:04f8",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16627,14 +18285,29 @@
           "_to_upper=10d7:25bc",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
     {
-      "name": "overlay-27-08b012",
-      "source": "src/generated/overlay-27-08b012.asm",
+      "name": "c-dirnames-data",
+      "source": "src/c/dirnames.c",
       "file_offset": 569362,
-      "size": 24
+      "size": 24,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5fb2",
+          "TEXT=3632:000c"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-approach-data",
@@ -16663,6 +18336,7 @@
           "_steps=ca2b",
           "_tile_info=5ff5"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16670,7 +18344,28 @@
       "name": "overlay-27-08b033",
       "source": "src/generated/overlay-27-08b033.asm",
       "file_offset": 569395,
-      "size": 2979
+      "size": 1
+    },
+    {
+      "name": "c-combtab-data",
+      "source": "src/c/combtab.c",
+      "file_offset": 569396,
+      "size": 2978,
+      "c": {
+        "toolchain": "TC-2-01",
+        "bin": "",
+        "cc": "tcc",
+        "flags": "-ml -O -Z -d",
+        "load_base": "1000",
+        "place": [
+          "DATA=5fd4",
+          "DGROUP=40f4",
+          "TEXT=3209:000e"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-newgame-data",
@@ -16796,6 +18491,7 @@
           "_word_b738=b738",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16852,6 +18548,7 @@
           "_ticks_now=16c9:096c",
           "_tile_open_file=15f5:01de"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16886,6 +18583,7 @@
           "_str_same=10d7:253f",
           "_text_clear=16c9:0994"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -16940,7 +18638,7 @@
           "_recalc_stats=13d0:0b88",
           "_screen_sync=1a75:0362",
           "_show_hp=13d0:0789",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_slots=28de:196d",
           "_stat_show=28de:1995",
           "_status_char=16c9:059a",
@@ -16952,6 +18650,7 @@
           "_tick_slot=b3f2",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17040,7 +18739,7 @@
           "_set_extra_row=183a:23ae",
           "_set_open_mode=15f5:01d3",
           "_sex_names=399c",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_start_ages=10d4",
           "_start_gear=ba3a",
           "_start_gems=ba30",
@@ -17065,6 +18764,7 @@
           "_ui_run=25e5:1589",
           "_xp_input=28de:19f9"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17142,6 +18842,7 @@
           "_training_done=b722",
           "_ulong_str=1d48:01b6"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17188,7 +18889,6 @@
           "_confirm_anim=b42a",
           "_continue_items=390c",
           "_continue_prompt=16c9:0932",
-          "_cur_area_rec=d41c",
           "_cur_level=6719",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -17331,6 +19031,7 @@
           "_wall_side=28de:1341",
           "_wild_pic_open=28de:14a9"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17361,7 +19062,6 @@
           "_char_view=28de:114d",
           "_clock_advance=28de:11bb",
           "_combat_text_clear=13d0:1657",
-          "_cur_area_rec=d41c",
           "_cur_node=b3dd",
           "_cursor_hide=3673:0067",
           "_cursor_obj=b75b",
@@ -17429,6 +19129,7 @@
           "_word_b8d4=b8d4",
           "_word_be66=be66"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17524,7 +19225,7 @@
           "_speed_text=3b24",
           "_speed_title=3c00",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_list_build=28de:1ad5",
           "_spell_menu=28de:1305",
           "_spell_remove_curse=28de:1afd",
@@ -17543,6 +19244,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17659,6 +19361,7 @@
           "_view_kind=b40e",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17737,6 +19440,7 @@
           "_weight_add=28de:1b11",
           "_weight_sub=28de:1b1b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17847,6 +19551,7 @@
           "_view_redraw=13d0:1a72",
           "_xp_text=3b80"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -17926,7 +19631,7 @@
           "_shop_items=3c98",
           "_shop_temple_frame=c672",
           "_spaces=3c9c",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_printf=16c9:0044",
           "_str_copy=10d7:255e",
           "_str_format=2860:0037",
@@ -17947,6 +19652,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18022,7 +19728,7 @@
           "_pool_money=31d4:00f6",
           "_press_return_wait=183a:054a",
           "_share_money=31d4:01ee",
-          "_spell_names=2434",
+          "_spell_name_table=2438",
           "_spell_remove_curse=28de:1afd",
           "_spell_run=28de:1ae9",
           "_spell_target=cfe7",
@@ -18037,6 +19743,7 @@
           "_text_wrap=16c9:030f",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18063,7 +19770,6 @@
           "_attacks_used=b8e8",
           "_bonus_slots=ca09",
           "_calc_move=13d0:0a38",
-          "_camp_menus=3ce3",
           "_class_bit=6252",
           "_class_level=13d0:2177",
           "_class_update=28de:1729",
@@ -18144,6 +19850,7 @@
           "_item_record_pool=cb0e",
           "_item_remove=13d0:13c4",
           "_item_table=b40a",
+          "_item_words=3d03",
           "_level_xp_threshold=13d0:21cc",
           "_mem_zero=1d48:0017",
           "_mirror_image_bypass=ca08",
@@ -18162,7 +19869,7 @@
           "_save_bonus=b8d3",
           "_save_succeeded=b721",
           "_side_count=b8d1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_path_targets=28de:1ca1",
           "_step_count=ca10",
           "_steps=ca2b",
@@ -18180,6 +19887,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18259,6 +19967,7 @@
           "_view_cy=c3bc",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18383,7 +20092,8 @@
           "_spell_duration=3b69:10d7",
           "_spell_effect_apply=3b69:1e6f",
           "_spell_fn=b4f0",
-          "_spell_names=2434",
+          "_spell_info_table=2660",
+          "_spell_name_table=2438",
           "_spell_path_targets=3b69:1a61",
           "_status_printf=16c9:0044",
           "_step_count=ca10",
@@ -18400,10 +20110,9 @@
           "_txt_hot_cold=3c44",
           "_view_cx=c39f",
           "_view_cy=c3bc",
-          "_view_mode=b421",
-          "_word_stun_fx=3066",
-          "_word_stun_save=3062"
+          "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18487,9 +20196,9 @@
           "_selected_target=cc6f",
           "_sfx_play=1c8e:000e",
           "_spell_fn=b4f0",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_mark=13d0:1381",
-          "_spell_names=2434",
+          "_spell_name_table=2438",
           "_status_printf=16c9:0044",
           "_step_count=ca10",
           "_steps=ca2b",
@@ -18521,6 +20230,7 @@
           "_view_mode=b421",
           "_view_redraw=13d0:1a72"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18599,6 +20309,7 @@
           "_txt_touch=1cf0:0338",
           "_wall_set_res=caf8"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18633,6 +20344,7 @@
           "_class_hit_dice=6269",
           "_class_level=13d0:2177",
           "_class_names=3914",
+          "_class_spell_rows=139d",
           "_coin_names=39a4",
           "_coin_title=3a24",
           "_combat_actions_end=28de:1139",
@@ -18699,7 +20411,6 @@
           "_menu_escaped=ca2a",
           "_menu_run=183a:1fb3",
           "_msg_format=1a75:03fa",
-          "_mu_spell_row=13a2",
           "_must_ready_text=3a48",
           "_node_list=d129",
           "_node_menu=183a:197d",
@@ -18728,7 +20439,7 @@
           "_show_ac=13d0:06f9",
           "_show_hp=13d0:0789",
           "_spell_cast=28de:1175",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_menu=28de:1305",
           "_spell_slots_by_level=14f4",
           "_status_char=16c9:059a",
@@ -18759,6 +20470,7 @@
           "_view_redraw=13d0:1a72",
           "_your_text=3a40"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18801,6 +20513,7 @@
           "_ui_item_proc=25e5:01c3",
           "_ui_send=25e5:18f0"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18901,6 +20614,7 @@
           "_wild_pic_open=36e3:17e2",
           "_zone_default_fmt=0420"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -18949,6 +20663,7 @@
           "_field_proc=28de:175b",
           "_fill_rect=1f5e:0040",
           "_frame_border=1d65:002a",
+          "_glbdata_012b=28de:1391",
           "_hotkey_add=183a:0009",
           "_icon_clear=1cb5:004d",
           "_icon_load=1cb5:0093",
@@ -18969,7 +20684,6 @@
           "_mem_scan=10d7:27b1",
           "_menu_line_key=183a:1e2d",
           "_menu_line_show=183a:1e9a",
-          "_mod18de_1391=28de:1391",
           "_mode_change=28de:10cb",
           "_mouse_fake=1f5e:10d5",
           "_mouse_move_to=1f5e:10a3",
@@ -19009,6 +20723,7 @@
           "_var_name=28de:1a99",
           "_var_pick=28de:1ec7"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19035,7 +20750,6 @@
           "_art_unimport=28de:1f17",
           "_art_word=0448",
           "_back_draw=28de:17fb",
-          "_backdrop_text=0158",
           "_big_open=28de:146d",
           "_big_res=bcf7",
           "_cancel_text=03c8",
@@ -19085,6 +20799,7 @@
           "_label_entry=28de:1869",
           "_label_list=28de:17ab",
           "_label_nth=28de:1873",
+          "_labels_134f=28de:1783",
           "_labels_load=28de:185f",
           "_labels_save=28de:1855",
           "_leave_text=03c0",
@@ -19099,14 +20814,12 @@
           "_menu_escaped=ca2a",
           "_menu_line_key=183a:1e2d",
           "_menu_line_show=183a:1e9a",
-          "_mod18de_1783=28de:1783",
           "_mode_change=28de:10cb",
           "_monst_default=28de:1f21",
           "_monst_listed=28de:187d",
           "_monst_load=28de:1f35",
           "_monst_save=28de:1f2b",
           "_monst_unlisted=28de:1f0d",
-          "_monster_editor_text=01f8",
           "_monster_text=0338",
           "_msg_box=28de:1841",
           "_msg_format=1a75:03fa",
@@ -19129,6 +20842,7 @@
           "_screen_draw_begin=15f5:0671",
           "_screen_flush=15f5:0756",
           "_screen_flush_mode_set=15f5:069d",
+          "_screen_titles=01dc",
           "_select_word=03bc",
           "_slot_text=0444",
           "_str_cat=10d7:24b6",
@@ -19140,6 +20854,7 @@
           "_text_xy=207e:04a7",
           "_tick_slot=b3f2",
           "_to_text=0374",
+          "_tool_names=0154",
           "_txt_pack=1cf0:00ab",
           "_txt_unpack=1cf0:01c2",
           "_ui_add=25e5:1293",
@@ -19154,6 +20869,7 @@
           "_wall_sets_free=36e3:1721",
           "_with_text=0380"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19225,6 +20941,7 @@
           "_util_menu=0134",
           "_view_attrs=36e3:0572"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19257,7 +20974,6 @@
           "_cell_zone_at=28de:1355",
           "_combat_text_clear=13d0:1657",
           "_confirm=183a:044d",
-          "_cur_area_rec=d41c",
           "_cur_event=a7e4",
           "_cur_node=b3dd",
           "_cursor_obj=b75b",
@@ -19292,7 +21008,7 @@
           "_saved_event=a7e8",
           "_saved_view_mode=b433",
           "_screen_sync=1a75:0362",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_status_printf=16c9:0044",
           "_str_format=2860:0037",
           "_study_wait=cfde",
@@ -19303,6 +21019,7 @@
           "_view_mode=b421",
           "_year_rolled=c354"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19390,6 +21107,7 @@
           "_view_center=28de:1193",
           "_view_mode=b421"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19476,6 +21194,7 @@
           "_ui_poll=25e5:15e6",
           "_used_text=0490"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19515,9 +21234,9 @@
           "_geo_load=28de:15e9",
           "_label_get=28de:1819",
           "_label_set=28de:180f",
+          "_labels_134f=28de:1783",
           "_labels_forget=28de:184b",
           "_mem_move=10d7:2741",
-          "_mod18de_1783=28de:1783",
           "_start_area=ba38",
           "_start_entry=ba39",
           "_str_cmp=10d7:24db",
@@ -19529,6 +21248,7 @@
           "_txt_touch=1cf0:0338",
           "_wall_sets_free=28de:13af"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19639,7 +21359,6 @@
           "_place_text=0358",
           "_pointer_hide=10d7:0141",
           "_pointer_show=1f5e:0d1c",
-          "_replace_all_text=00fc",
           "_replace_text=035c",
           "_scratch_buf=c3c8",
           "_screen_draw_begin=15f5:0671",
@@ -19659,12 +21378,14 @@
           "_total_text=0214",
           "_ui_add=25e5:1293",
           "_ui_poll=25e5:15e6",
+          "_util_items=00f4",
           "_wait_ticks=1da7:0151",
           "_wall_info_draw=28de:1d37",
           "_wall_text=034c",
           "_with_text=0380",
           "_zone_info_draw=28de:1d4b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19737,6 +21458,7 @@
           "_str_len=10d7:2577",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19790,6 +21512,7 @@
           "_timer_ticks=207e:00c0",
           "_txt_get=1cf0:046e"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19853,6 +21576,7 @@
           "_train_hero=28de:19db",
           "_training_done=b722"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -19938,6 +21662,7 @@
           "_version_text=3bc8",
           "_view3d_noop=28de:1cf1"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20028,6 +21753,7 @@
           "_text_print_at=1da7:0399",
           "_text_xy=207e:04a7",
           "_tick_slot=b3f2",
+          "_tool_names=0154",
           "_ui_add=25e5:1293",
           "_ui_mark=25e5:1894",
           "_ui_poll=25e5:15e6",
@@ -20036,9 +21762,9 @@
           "_wall_obstruction_text=0390",
           "_wall_text=034c",
           "_which_text=0398",
-          "_zone_default_fmt=0420",
-          "_zone_text=015c"
+          "_zone_default_fmt=0420"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20105,7 +21831,7 @@
           "_select_word=03bc",
           "_show_slots=28de:1aad",
           "_slots_left=28de:1ac1",
-          "_spell_info=264a",
+          "_spell_info_table=2660",
           "_spell_menu=28de:1305",
           "_str_copy=10d7:255e",
           "_str_format=2860:0037",
@@ -20115,6 +21841,7 @@
           "_treasure_mask_add=28de:15cb",
           "_ui_mark=25e5:1894"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20183,6 +21910,7 @@
           "_video_restore=1f5e:0006",
           "_voice_set=213b:007b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20227,6 +21955,7 @@
           "_win_row=96ae",
           "_win_top=96aa"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20263,6 +21992,7 @@
           "_text_xy_to=207e:04f8",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20312,6 +22042,7 @@
           "_to_upper=10d7:25bc",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20353,6 +22084,7 @@
           "_text_xy_to=207e:04f8",
           "_ui_item_proc=25e5:01c3"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20412,6 +22144,7 @@
           "_video_plane_set=1f5e:05ef",
           "_visible_on=d726"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20463,6 +22196,7 @@
           "_video_bios=10d7:297b",
           "_xvga_char=10d7:2171"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20505,6 +22239,7 @@
           "_txthigh_dots=d97a",
           "_video_bios=10d7:297b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20555,6 +22290,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20579,6 +22315,7 @@
           "_is_pcjr=28de:202f",
           "_is_tandy=28de:2025"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20606,6 +22343,7 @@
           "_random_int=1da7:022d",
           "_timer_ticks=207e:00c0"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20676,6 +22414,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20713,6 +22452,7 @@
           "_row_recolor=10d7:2046",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20764,6 +22504,7 @@
           "_text_print_at=1da7:0399",
           "_video_mode=d61b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20799,6 +22540,7 @@
           "_huge_move=10d7:08c2",
           "_slot_of=e564"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20837,6 +22579,7 @@
           "_swap16=10d7:098b",
           "_swap32=10d7:0994"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20887,6 +22630,7 @@
           "_slot_used=2336:0921",
           "_str_copy=10d7:255e"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20928,6 +22672,7 @@
           "_slot_insert_delete=2336:0b35",
           "_slot_open=2336:025c"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -20976,6 +22721,7 @@
           "_timer_ticks=207e:00c0",
           "_to_lower=10d7:25ab"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -21013,14 +22759,46 @@
           "_timer_ticks=207e:00c0",
           "_win_text_printf=1df0:017b"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
     {
-      "name": "overlay-27-08f73d",
-      "source": "src/generated/overlay-27-08f73d.asm",
+      "name": "asm-lowlevel-data",
+      "source": "src/asm/lowlevel.asm",
       "file_offset": 587581,
-      "size": 1
+      "size": 1,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "DATA=a6dd",
+          "TEXT=10d7:0009"
+        ],
+        "syms": [
+          "_base_offset=d75a",
+          "_buttons_now=d763",
+          "_column_mouse=d72f",
+          "_draw_seg=d60d",
+          "_extent_text=d75d",
+          "_fire_latch=d98c",
+          "_hide_count=d731",
+          "_joy_last_ail=002a",
+          "_mouse_event=1f5e:073c",
+          "_mousey_now=d751",
+          "_pointer_erase=1f5e:0dfb",
+          "_pointer_follow=1f5e:0821",
+          "_screen_addr=d75f",
+          "_show_count=d74a",
+          "_text_bytes=d746",
+          "_ticks=d980"
+        ],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-pathfind-data",
@@ -21045,6 +22823,7 @@
           "_str_copy=10d7:255e",
           "_str_len=10d7:2577"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -21073,6 +22852,7 @@
           "_str_len=10d7:2577",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -21106,14 +22886,29 @@
           "_str_find=10d7:258e",
           "_to_upper=10d7:25bc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
     {
-      "name": "overlay-27-08f752",
-      "source": "src/generated/overlay-27-08f752.asm",
+      "name": "asm-farmem-data",
+      "source": "src/asm/farmem.asm",
       "file_offset": 587602,
-      "size": 4
+      "size": 4,
+      "asm": {
+        "toolchain": "BC31",
+        "bin": "BIN",
+        "cc": "tasm",
+        "flags": "/ml",
+        "load_base": "1000",
+        "place": [
+          "DATA=a6f2",
+          "TEXT=10d7:27f5"
+        ],
+        "syms": [],
+        "includes": [],
+        "segment": "DATA"
+      }
     },
     {
       "name": "c-glyphcut-data",
@@ -21156,6 +22951,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -21208,6 +23004,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     },
@@ -21247,6 +23044,7 @@
           "_video_plane_set=1f5e:05ef",
           "_video_planes=1f5e:05dc"
         ],
+        "includes": [],
         "segment": "DATA"
       }
     }

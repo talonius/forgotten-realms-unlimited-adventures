@@ -190,7 +190,8 @@ extern char far *an_text;                          /* 0368  "an"           */
 extern char far *please_text;                          /* 03a4  "Please"       */
 extern char far *memorize_items;                          /* 03ac  "Memorize Forget Leave" */
 extern char far *select_word;                          /* 03bc  "Select"       */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *class_names[];                                  /* 3914 */
 extern char far *empty_text;                                     /* 3bc0 */
 extern unsigned char item_classes[16][20];                       /* 7ad2 */

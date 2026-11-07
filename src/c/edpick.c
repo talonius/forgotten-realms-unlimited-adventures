@@ -222,7 +222,8 @@ extern char far area_overland(void);
                                 /* 18de:1e63, vector to overlay 16 29f4:378b */
 extern char far design_pick(void);                               /* 2d91:0000 */
 
-extern char far *zone_text;                          /* 015c  "Zone"         */
+extern char far *tool_names[];                               /* 0154  "Wall", ...     */
+#define zone_text (tool_names[2])                             /* "Zone"                */
 extern char far *wall_kind_names[];                        /* 016c  "Open", ...    */
 extern char far *art_names[];                       /* 01b4  "No art", ...  */
 extern char far *screen_titles[];                        /* 01dc  "", "AD&D Unlimited Adventures", ... */

@@ -280,7 +280,8 @@ extern struct AgeRoll start_ages[][7];                           /* 10d4 */
 extern struct AgeLimits age_limits[];                            /* 117c */
 extern struct ClassMins class_mins[];                            /* 11b8 */
 extern struct ClassAligns class_aligns[];                        /* 121e */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *class_names[];                                  /* 3914 */
 extern char far *race_names[];                                   /* 395c */
 extern char far *sex_names[];                                    /* 399c */

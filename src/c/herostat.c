@@ -111,10 +111,11 @@ extern unsigned char far class_level(struct Hero far *h, int cls); /* 03d0:2177 
 extern void far item_equip_toggle(struct Item far *item);            /* 28aa:19bf */
 
 extern unsigned char class_spell_rows[];        /* 139d  a spell_slots_by_level row by class   */
-extern unsigned char mu_spell_row;         /* 13a2  class_spell_rows[5], magic-user   */
+#define mu_spell_row (class_spell_rows[5])   /* the magic-user's row         */
 extern unsigned char spell_slots_by_level[][29][9];                          /* 14f4 */
 extern unsigned char save_table[][22][5];                          /* 1916 */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern unsigned char attack_scores_by_level[][22];                             /* 61b1 */
 extern unsigned char class_mask_bits[];                                 /* 624b */
 extern unsigned char thief_skill_base[][8];                              /* 627d */

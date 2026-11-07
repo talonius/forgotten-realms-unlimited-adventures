@@ -152,6 +152,16 @@ struct Hero {
     unsigned char movement;         /* +18c */
 };
 
+struct Area {                   /* what geo.area points at                    */
+    char pad_0[0x120];          /* +0    not read here                    */
+    unsigned char pics[2];      /* +120  picture numbers; 0 is the stock  */
+};                              /*       0x80 / 0x81                       */
+
+struct Geo {                    /* the party's place and the view state   */
+    char pad_0[8];              /* +0   not read here                     */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
+};
+
 struct Pic;                         /* picview.c's picture window state */
 
 struct Event {                      /* 0x14 bytes */
@@ -197,11 +207,13 @@ extern void far big_redraw(void);                              /* 18de:107b */
 extern long step_ec6[];                                          /* 0ec6 */
 extern long level_xp_table[][12];                                       /* 13a4 */
 extern unsigned char max_level[][7];                             /* 1c18 */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *status_names[];                                 /* 39b0 */
 extern char far *item_words[];                                   /* 3d03 */
 extern char helpless_kinds[4];                                   /* 616d */
 extern char byte_6723;                                           /* 6723 */
+extern struct Geo geo;                                           /* d414 */
 extern struct Event far *event_table;                               /* a7f0 */
 extern struct Hero far *cur_node;                                /* b3dd */
 extern char tick_slot;                                           /* b3f2 */
@@ -225,7 +237,6 @@ extern struct Pool item_record_pool;                                    /* cb0e 
 extern struct Pool combat_pool;                                  /* ce72 */
 extern char panel_dirty;                                         /* d0fb */
 extern struct Hero far *node_list;                               /* d129 */
-extern unsigned char far *cur_area_rec;                              /* d41c */
 
 void far hero_text(struct Hero far *h, char far *s, char row, char pause);
 char far is_helpless(struct Hero far *h);
@@ -1008,10 +1019,10 @@ void far view_redraw(void)                                         /* 13d0:1a72 
             break;
         case 2:
             frame_main();
-            if (cur_area_rec[0x120] == 0)
+            if (geo.area->pics[0] == 0)
                 pic_open("PIC", 0x80, 0, &pic);
             else
-                pic_open("PIC", cur_area_rec[0x120], 0, &pic);
+                pic_open("PIC", geo.area->pics[0], 0, &pic);
             goto redraw_pic;                  /* shipped jumps back into case 1 (1aef) */
         case 4:
             frame_main();
@@ -1023,10 +1034,10 @@ void far view_redraw(void)                                         /* 13d0:1a72 
             break;
         case 6:
             frame_main();
-            if (cur_area_rec[0x121] == 0)
+            if (geo.area->pics[1] == 0)
                 pic_open("PIC", 0x81, 0, &pic);
             else
-                pic_open("PIC", cur_area_rec[0x121], 0, &pic);
+                pic_open("PIC", geo.area->pics[1], 0, &pic);
             pic_open("PIC", 0x81, 0, &pic);
             pic_frame(3, 3, 1, 0);
             party_display(cur_node);

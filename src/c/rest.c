@@ -78,7 +78,7 @@ struct Encounter {              /* one row an area                        */
     unsigned char chance;       /* +3  percent; 0x80 up: tried every call */
 };
 
-struct Area {                   /* what cur_area_rec points at                */
+struct Area {                   /* what geo.area points at                    */
     char pad_0[0x2e];           /* +0  not read here                      */
     struct Encounter rest_enc_wide[0x3c]; /* +2e the count is not bounded here      */
 };
@@ -86,6 +86,8 @@ struct Area {                   /* what cur_area_rec points at                */
 struct Geo {
     char x;                     /* +0  d414                               */
     char y;                     /* +1  d415                               */
+    char pad_2[6];              /* +2   not read here                     */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
 };
 
 extern void far mem_fill(void far *p, int n, int c);         /* 00d7:277b */
@@ -118,7 +120,8 @@ extern void far item_spend(struct Hero far *hero, struct Item far *item,
 extern void far cast_announce(struct Hero far *hero, char far *fmt,
                              char spell);            /* 18de:1cc9, vector to overlay 12 26e3:4235 */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *empty_text;                                     /* 3bc0 */
 extern char far *rest_items;                                     /* 3c50 */
 extern unsigned time_units[7];                                   /* 61a3 */
@@ -143,7 +146,6 @@ extern unsigned char study_wait[];                               /* cfde */
 extern char ui_mode;                                             /* d128 */
 extern struct Hero far *node_list;                               /* d129 */
 extern struct Geo geo;                                           /* d414 */
-extern struct Area far *cur_area_rec;                                /* d41c */
 
 static char fx_live[0x45];                                       /* d450 */
 
@@ -536,18 +538,18 @@ char far encounter_roll(unsigned char area)                      /* 3d91:0bc4 */
     met = 0;
     encounter_ticks += 5;
     saved_event = cur_event;
-    cur_event = &event_table[cur_area_rec->rest_enc_wide[area].event - 1];
-    if (cur_area_rec->rest_enc_wide[area].chance >= 0x80 && event_test(cur_area_rec->rest_enc_wide[area].event, 1))
+    cur_event = &event_table[geo.area->rest_enc_wide[area].event - 1];
+    if (geo.area->rest_enc_wide[area].chance >= 0x80 && event_test(geo.area->rest_enc_wide[area].event, 1))
         met = 1;
-    else if (cur_area_rec->rest_enc_wide[area].chance > 0 && cur_area_rec->rest_enc_wide[area].event != 0 &&
-             cur_area_rec->rest_enc_wide[area].ticks <= encounter_ticks) {
-        rolls = encounter_ticks / cur_area_rec->rest_enc_wide[area].ticks;
+    else if (geo.area->rest_enc_wide[area].chance > 0 && geo.area->rest_enc_wide[area].event != 0 &&
+             geo.area->rest_enc_wide[area].ticks <= encounter_ticks) {
+        rolls = encounter_ticks / geo.area->rest_enc_wide[area].ticks;
         while (rolls > 0 && !met) {
-            if (fx_roll_dice(1, 100) <= cur_area_rec->rest_enc_wide[area].chance &&
-                event_test(cur_area_rec->rest_enc_wide[area].event, 1))
+            if (fx_roll_dice(1, 100) <= geo.area->rest_enc_wide[area].chance &&
+                event_test(geo.area->rest_enc_wide[area].event, 1))
                 met = 1;
             rolls--;
-            encounter_ticks -= cur_area_rec->rest_enc_wide[area].ticks;
+            encounter_ticks -= geo.area->rest_enc_wide[area].ticks;
         }
     }
     cur_event = saved_event;
@@ -613,7 +615,7 @@ char far camp_rest(char interactive)                             /* 3d91:0d37 */
                     result = 1;
                     msg_pause();
                     combat_text_clear();
-                    events_run(cur_area_rec->rest_enc_wide[area].event);
+                    events_run(geo.area->rest_enc_wide[area].event);
                 }
             }
         }

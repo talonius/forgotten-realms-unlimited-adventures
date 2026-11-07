@@ -343,7 +343,8 @@ extern void far view_center(struct Hero far *h, unsigned char margin, char curso
 extern unsigned char far combatant_direction(struct Hero far *from, struct Hero far *to);
                                                                  /* 22fa:166c */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *ally_prompt;                                    /* 3b30 */
 extern char far *range_text;                                     /* 3b34 */
 extern char far *blank_text;                                     /* 3c04 */

@@ -177,7 +177,7 @@ extern struct Entry map_items[9];                   /* 0098  "3-D view", ...   *
 extern struct Menu map_menu;                        /* 00e0  "Map"             */
 extern struct Entry util_items[8];                  /* 00f4  "Display access", ... */
 extern struct Menu util_menu;                       /* 0134  "Utilities"       */
-extern char far *undo_names;                          /* 024c  "Undo"            */
+extern char far *undo_names[];                        /* 024c  "Undo", "Un*do"   */
 extern char far *ed_bar_items;                          /* 0404  "Select Left Place Right Undo  Mark" */
 extern char far *empty_text;                                     /* 3bc0 */
 extern char tick_slot;                                           /* b3f2 */
@@ -220,7 +220,7 @@ void far ed_defaults(struct EdState far *e)                      /* 3cf5:006f */
 {
     set_open_mode(0x32);
     view_attrs(0xf, 0, 0, 8);
-    str_copy(edit_undo, undo_names);
+    str_copy(edit_undo, undo_names[0]);
     ed_mode_get(&e->tool, &e->view);
     e->move = 1;
     for (tick_slot = 0; tick_slot < 7; tick_slot++)

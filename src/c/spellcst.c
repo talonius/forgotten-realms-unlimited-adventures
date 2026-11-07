@@ -230,8 +230,10 @@ extern void far cast_announce(struct Hero far *h, char far *text, unsigned char 
                                                                  /* 26e3:4235 */
 void far spell_run(unsigned char spell);
 
-extern char far *spell_names[];                                  /* 2434 */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern char far *spell_name_table[];                             /* 2438 */
+#define spell_names (spell_name_table - 1)    /* spell numbers start at 1 */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *txt_lose_it;                                    /* 39e4 */
 extern char far *txt_cant_cast_here;                             /* 39e8 */
 extern char far *txt_that_item;                                  /* 39ec */

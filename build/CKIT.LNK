@@ -1,0 +1,151 @@
+# CKIT.EXE: Forgotten Realms: Unlimited Adventures, v12
+# Generated from goldbox.toml and the shipped section table.
+
+MIXCASE
+CODECLASS CODE
+RELOAD FAR 100
+OUTPUT ckit
+MAP = ckit S,N,A,X
+
+# resident
+FILE startdat
+FILE startup
+FILE ail
+FILE lowlevel
+FILE gfxutil
+FILE dissolve
+FILE pcmplay
+FILE pixrow
+FILE vgadraw
+FILE lzcodec
+FILE conio
+FILE strings
+FILE dosio
+FILE memops
+FILE farmem
+FILE sysint
+FILE bios
+FILE ldiv
+FILE lxmul
+FILE llsh
+FILE lrsh
+FILE lursh
+FILE scopy
+FILE envget
+FILE pixels
+FILE textbank
+FILE edtext
+FILE hero
+FILE chartab
+FILE tiles
+FILE textwin
+FILE listbox
+FILE menu
+FILE strutil
+FILE sound
+FILE sndevent
+FILE sfxctl
+FILE spelltab
+FILE charpic
+FILE gametext
+FILE packtext
+FILE misc
+FILE frame
+FILE sysutil
+FILE prompt
+FILE diskfile
+FILE scroll
+FILE vidmouse
+FILE lowio
+FILE scrfont
+FILE speaker
+FILE palette
+FILE glyph
+FILE glyphfx
+FILE fcache
+FILE digisnd
+FILE library
+FILE libedit
+FILE dialog
+FILE sfxslots
+FILE inpglue
+FILE cmdargs
+FILE pathfind
+FILE printer
+FILE pathutil
+FILE dirfind
+FILE strscan
+FILE fmtout
+FILE textfmt
+FILE numparse
+FILE dgdata
+FILE dgbss
+
+BEGINAREA
+  # section 0, link segment 1b41
+  SECTION FILE combat, cbtutil, cbaction, cbview
+    BEGINAREA
+      # section 1, link segment 2482
+      SECTION FILE cmbsetup
+      # section 2, link segment 2482
+      SECTION FILE aiturn, dirnames, approach
+    ENDAREA
+  # section 3, link segment 1b41
+  SECTION FILE glbdata, gamemain, picview, poolfile, lineedit
+    BEGINAREA
+      # section 4, link segment 1c86
+      SECTION FILE roster, mapevent, perm16, saveload
+      # section 5, link segment 1c86
+      SECTION FILE textedit, labels, fieldvar, menubox, menuops
+    ENDAREA
+    BEGINAREA
+      # section 6, link segment 21d4
+      SECTION FILE config, poolinit, combtab, newgame, titleseq, copyprot, modify, dispinit
+      # section 7, link segment 21d4
+      SECTION FILE create, train
+      # section 8, link segment 21d4
+      SECTION FILE evcmds, move, cursor
+      # section 9, link segment 21d4
+      SECTION FILE camp, party
+      # section 10, link segment 21d4
+      SECTION FILE money, postcmbt, shop, temple, editloop
+    ENDAREA
+ENDAREA
+BEGINAREA
+  # section 11, link segment 26e3
+  SECTION FILE effects, fxcombat
+  # section 12, link segment 26e3
+  SECTION FILE spellfx, spellcst
+  # section 13, link segment 26e3
+  SECTION FILE view3d
+    BEGINAREA
+      # section 14, link segment 28aa
+      SECTION FILE charview, herostat
+      # section 15, link segment 28aa
+      SECTION FILE numfield, menubar
+        BEGINAREA
+          # section 16, link segment 29f4
+          SECTION FILE mapedit
+          # section 17, link segment 29f4
+          SECTION FILE evedit
+          # section 18, link segment 29f4
+          SECTION FILE artpick, edscreen
+        ENDAREA
+    ENDAREA
+ENDAREA
+BEGINAREA
+  # section 19, link segment 2d91
+  SECTION FILE rest, fxcore
+  # section 21, link segment 2d91
+  SECTION FILE areaed
+  # section 22, link segment 2d91
+  SECTION FILE evchain, evscreen
+  # section 23, link segment 2d91
+  SECTION FILE areafile, modclear, areatool
+  # section 24, link segment 2d91
+  SECTION FILE artimp, slotsave, glyphcut, ilbm, pcx
+  # section 25, link segment 2d91
+  SECTION FILE mapprint, prnout, monedit, areasize, gameset
+  # section 26, link segment 2d91
+  SECTION FILE design, edpick, evextra
+ENDAREA

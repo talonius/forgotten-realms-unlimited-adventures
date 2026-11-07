@@ -37,7 +37,7 @@
  * variables and the literals, 14 distinct stored as 13 -- -d stores "" on
  * the terminator of the north door text (5b89).  5d43 is zero, and
  * 5d44..5d53 hold 0..15 in a shuffled order that nothing in the image
- * reads, before module 1ffa's _DATA at 5d54; no module is known to own it.  _BSS is b254..b378,
+ * reads (perm16.c's), before module 1ffa's _DATA at 5d54.  _BSS is b254..b378,
  * after module 1bfb's records (b252) and before module 1ffa's b37a; 14
  * variables in the order their names give (Turbo C's symbol-table order),
  * chosen with goldbox.bss_order.  Nothing in the image reads tmp_b258,
@@ -82,7 +82,7 @@ struct Encounter {
     unsigned char chance;       /* +3                                     */
 };
 
-struct Area {                   /* what cur_area_rec points at                */
+struct Area {                   /* what geo.area points at                    */
     char pad_0[2];              /* +0   not read here                     */
     unsigned char rows;         /* +2                                     */
     unsigned char cols;         /* +3                                     */
@@ -95,6 +95,8 @@ struct Geo {
     char x;                     /* +0   d414                              */
     char y;                     /* +1   d415                              */
     unsigned char facing;       /* +2   d416                              */
+    char pad_3[5];              /* +3   not read here                     */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
 };
 
 struct Event {                  /* one event_table record, 0x14 bytes        */
@@ -264,7 +266,6 @@ extern char ui_mode;                                             /* d128 */
 extern struct Hero far *node_list;                               /* d129 */
 extern unsigned char encounter_images_shown[2];                                /* d139 */
 extern struct Geo geo;                                           /* d414 */
-extern struct Area far *cur_area_rec;                                /* d41c */
 
 
 void far event_view_draw(void);
@@ -343,8 +344,8 @@ char far event_outcome(unsigned char far *ev, char alt)          /* 2cff:00b5 */
             r = ev[0x10];
             break;
         case 2:
-            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols - 1);
-            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows - 1);
+            transfer_dest_x = int_min(ev[0x11], geo.area->cols - 1);
+            transfer_dest_y = int_min(ev[0x12], geo.area->rows - 1);
             geo.facing = (ev[0xa] & 0x30) >> 3;
             party_pos_set();
             event_view_draw();
@@ -366,8 +367,8 @@ char far event_outcome(unsigned char far *ev, char alt)          /* 2cff:00b5 */
             r = ev[0xf];
             break;
         case 2:
-            transfer_dest_x = int_min(ev[0x11], cur_area_rec->cols - 1);
-            transfer_dest_y = int_min(ev[0x12], cur_area_rec->rows - 1);
+            transfer_dest_x = int_min(ev[0x11], geo.area->cols - 1);
+            transfer_dest_y = int_min(ev[0x12], geo.area->rows - 1);
             geo.facing = (ev[0xa] & 0x30) >> 3;
             party_pos_set();
             event_view_draw();
@@ -651,7 +652,7 @@ void far enter_camp(char check)                               /* 2cff:08f4 */
         cell = cell_zone_at(cursor_obj[0x25], cursor_obj[0x26]);
     else
         cell = cell_zone_at(geo.x, geo.y);
-    if (check && (cur_area_rec->rest_enc_head[cell].chance & 0x80))
+    if (check && (geo.area->rest_enc_head[cell].chance & 0x80))
         cursor_obj[0x2c] = 100;
     else
         cursor_obj[0x2c] = 0;
@@ -1154,22 +1155,22 @@ void far event_transfer(unsigned char far *ev, char kind)         /* 2cff:1597 *
                 view_3d();
             event_init();
             if (drow) {
-                transfer_dest_x = int_min(x, cur_area_rec->cols - 1);
-                transfer_dest_y = int_min(y, cur_area_rec->rows - 1);
+                transfer_dest_x = int_min(x, geo.area->cols - 1);
+                transfer_dest_y = int_min(y, geo.area->rows - 1);
                 geo.facing = dir;
             } else {
-                transfer_dest_x = int_min(cur_area_rec->spots[slot - 1].x, cur_area_rec->cols - 1);
-                transfer_dest_y = int_min(cur_area_rec->spots[slot - 1].y, cur_area_rec->rows - 1);
-                geo.facing = cur_area_rec->spots[slot - 1].facing & 7;
+                transfer_dest_x = int_min(geo.area->spots[slot - 1].x, geo.area->cols - 1);
+                transfer_dest_y = int_min(geo.area->spots[slot - 1].y, geo.area->rows - 1);
+                geo.facing = geo.area->spots[slot - 1].facing & 7;
             }
         } else if (ev[0xc] & 1) {
             slot = ev[0xd];
-            transfer_dest_x = int_min(cur_area_rec->spots[slot - 1].x, cur_area_rec->cols - 1);
-            transfer_dest_y = int_min(cur_area_rec->spots[slot - 1].y, cur_area_rec->rows - 1);
-            geo.facing = cur_area_rec->spots[slot - 1].facing & 7;
+            transfer_dest_x = int_min(geo.area->spots[slot - 1].x, geo.area->cols - 1);
+            transfer_dest_y = int_min(geo.area->spots[slot - 1].y, geo.area->rows - 1);
+            geo.facing = geo.area->spots[slot - 1].facing & 7;
         } else {
-            transfer_dest_x = int_min(ev[9], cur_area_rec->cols - 1);
-            transfer_dest_y = int_min(ev[8], cur_area_rec->rows - 1);
+            transfer_dest_x = int_min(ev[9], geo.area->cols - 1);
+            transfer_dest_y = int_min(ev[8], geo.area->rows - 1);
             geo.facing = (ev[7] & 0xc) >> 1;
         }
         party_pos_set();
