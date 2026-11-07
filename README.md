@@ -67,7 +67,7 @@ The build in this repository links the same sources with **RTLink/Plus 4.14**. T
 
 - Its DGROUP is the shipped DGROUP: every initialized byte is equal, apart from the segment word of each of the 1,029 far pointers.
 - Driven from boot through the same keys (the title, the Rule Book copy protection, the design menu, game settings, the art gallery, the monster editor, the design list, the load-game prompt and the map editor on Dungeon 01), it shows pixel-identical screens to the shipped executable, for both versions.
-- A character can be created, saved and added to a party, and *Heirs to Skull Crag* plays: its opening events, treasure, movement in the 3D view, the area map, the character sheet and camp.
+- A character can be created, saved and added to a party, and *Heirs to Skull Crag* plays: its opening events, treasure, movement in the 3D view, the area map, the character sheet, camp, and a tavern brawl fought to the end in combat.
 
 The right RTLink/Plus version, if it turns up, should link the same objects into the shipped executable byte for byte.
 
