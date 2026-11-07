@@ -316,10 +316,11 @@ extern void far fx_spell_gaze(struct Hero far *h, struct Effect far *fx, char re
 extern void far fx_breath_weapon(struct Hero far *h, struct Effect far *fx, char removed);
                                                                  /* 2a6a:1004 */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *game_text[];                                    /* 38e8 */
 extern char far *txt_gains;                                      /* 39d4 */
-extern char far *camp_menus[];                                   /* 3ce3 */
+extern char far *item_words[];                                   /* 3d03 */
 extern unsigned char class_bit[7];                               /* 6252 */
 extern char far *fx_names[];                                     /* 6379 */
 extern struct Hero far *cur_node;                                /* b3dd */
@@ -1411,27 +1412,27 @@ void far fx_vary_primary_attack_damage(struct Hero far *h, struct Effect far *fx
     switch (attacks_used) {
     case 1:
         damage = fx_roll_dice(1, 10) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[28], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[20], item_words[114]));
         break;
     case 2:
         damage = fx_roll_dice(2, 4) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[24], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[16], item_words[114]));
         break;
     case 3:
         damage = fx_roll_dice(1, 8) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[26], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[18], item_words[114]));
         break;
     case 4:
         damage = fx_roll_dice(1, 8) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[21], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[13], item_words[114]));
         break;
     case 5:
         damage = fx_roll_dice(1, 4) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[12], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[4], item_words[114]));
         break;
     case 6:
         damage = fx_roll_dice(1, 6) + bonus + 4;
-        str_copy(text, msg_format("%s%s", camp_menus[22], camp_menus[122]));
+        str_copy(text, msg_format("%s%s", item_words[14], item_words[114]));
         break;
     }
     text_wrap(0x17, 7, 0x26, 9, 7, 0, 1, text);

@@ -228,7 +228,8 @@ extern unsigned char far combatant_direction(struct Hero far *from, struct Hero 
 extern char far line_clear(char x, char y, char far *tx, char far *ty,
                            unsigned short far *cost);            /* 2632:0325 */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern struct TileInfo tile_info[];                              /* 5ff5 */
 extern struct ItemType far *item_table;                          /* b40a */
 extern char turn_done;                                           /* b414 */

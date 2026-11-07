@@ -142,7 +142,8 @@ extern void far combat_show(void);
 
 extern struct RaceLimits race_limits[];                          /* 0fd2 */
 extern struct ClassMins class_mins[];                            /* 11b8 */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *cant_modify_text;                               /* 3ab0 */
 extern unsigned char hit_dice_level_limit[];                                 /* 6262 */
 extern unsigned char bit_mask[8];                                /* 6711 */

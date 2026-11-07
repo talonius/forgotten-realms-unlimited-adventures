@@ -25,11 +25,44 @@
 BSS_START       equ     0A7E4h                  ; _BSS, DGROUP a7e4 (cur_event) ...
 BSS_BYTES       equ     3F67h                   ; ... e74a; by words, so e74a is left
 
+; RELINK (tasm /dRELINK) builds the variant a real link needs: the shipped bytes
+; take _BSS's bounds from the constants above, which only hold for the shipped
+; layout.  With RELINK this module comes first in the link and so declares the
+; segment order -- code, then DGROUP, so that DGROUP is the image's last part (the
+; 4Ah resize below keeps DGROUP + 64K and frees the rest).  DGORDER.INC, which the
+; relink generates from the shipped image, declares every DGROUP segment in shipped
+; order (each C module's data under its own name, -zRD_<MOD> -zDB_<MOD>), so DGROUP
+; comes out of the link laid out exactly as it shipped.  _BSS's bounds are the
+; labels bss_start and bss_end.  A small stack segment is RTLink's own until this
+; code moves SS to DGROUP.
+
+IFDEF RELINK
+STARTUP_TEXT    segment byte public 'CODE'
+STARTUP_TEXT    ends
+                include dgorder.inc             ; every DGROUP segment, in shipped order
+ENDIF
+
 _DATA           segment word public 'DATA'
                 extrn   __psp:word              ; DGROUP 0020, the PSP's segment
                 extrn   _stack_top:word         ; DGROUP 0026, SP once the stack is set
 _DATA           ends
+
+IFDEF RELINK
+_BSS            segment word public 'BSS'
+                public  _bss_start
+_bss_start      label   byte                    ; first in the link, so first in _BSS
+_BSS            ends
+_BSSEND         segment byte public 'BSSEND'
+                public  _bss_end
+_bss_end        label   byte                    ; the heap starts here (heap_brk)
+_BSSEND         ends
+_STACK          segment para stack 'STACK'
+                db      200h dup (?)
+_STACK          ends
+DGROUP          group   _DATA, _BSS, _BSSEND
+ELSE
 DGROUP          group   _DATA
+ENDIF
 
                 extrn   _start_main:far         ; cmdargs.c, 2793:000b
 
@@ -119,10 +152,18 @@ start:          mov     ax,DGROUP
                 push    ax
                 mov     ax,ds
                 mov     es,ax
+IFDEF RELINK
+                mov     cx,offset DGROUP:_bss_end
+                mov     di,offset DGROUP:_bss_start
+                sub     cx,di                   ; _BSS's size, by words as shipped
+ELSE
                 mov     cx,BSS_BYTES
+ENDIF
                 shr     cx,1
                 jz      @@cleared
+IFNDEF RELINK
                 mov     di,BSS_START
+ENDIF
                 xor     ax,ax
                 rep     stosw
 @@cleared:      call    _start_main
@@ -130,4 +171,9 @@ start:          mov     ax,DGROUP
                 int     21h
 
 STARTUP_TEXT    ends
-                end
+IFDEF RELINK
+ENTRY_POINT     equ     <start>                 ; the program's entry point
+ELSE
+ENTRY_POINT     equ     <>                      ; none: RTLink's entry jumps to start
+ENDIF
+                end     ENTRY_POINT             ; one END, outside the conditional

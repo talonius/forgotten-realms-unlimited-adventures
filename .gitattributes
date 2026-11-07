@@ -1,0 +1,4 @@
+# Turbo C 2.01 reads an LF-only file as one line, and DOS batch and response files
+# want CRLF: these are stored and checked out byte for byte.
+src/c/*.c -text
+build/* -text

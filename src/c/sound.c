@@ -131,7 +131,13 @@ extern void far file_open(char disk, char far *name, int flags,
 extern char far key_pressed(void);                               /* 0da7:009a */
 extern void far key_flush(void);                                 /* 0da7:00bd */
 
-extern int sound_card;                                           /* b394 */
+struct Config {                 /* config.c's record                      */
+    int video;                  /* +0  0 VGA, 1 EGA, 2 Tandy 16-colour  */
+    int sound_card;             /* +2                                   */
+    unsigned char rest[0x46];
+};
+
+extern struct Config config;                                     /* b392 */
 
 static int driver_load(struct SoundDev far *dev, char far *path);
 static int driver_read(struct SoundDev far *dev, char far *path);
@@ -613,11 +619,11 @@ static int driver_start(struct SoundDev far *dev)                /* 1ac2:0d2d */
         rc = 0;                         /* and desc is stored unset below */
     else {
         desc = AIL_describe_driver(dev->driver);
-        if ((sound_card == 3 || sound_card == 4) && dev->kind == 0)
+        if ((config.sound_card == 3 || config.sound_card == 4) && dev->kind == 0)
             desc->io = arg_hex("RB", desc->io);
-        if ((sound_card == 2 || sound_card == 4) && dev->kind == 1)
+        if ((config.sound_card == 2 || config.sound_card == 4) && dev->kind == 1)
             desc->io = arg_hex("SB", desc->io);
-        if ((sound_card == 2 || sound_card == 4) && dev->kind == 1)
+        if ((config.sound_card == 2 || config.sound_card == 4) && dev->kind == 1)
             desc->irq = arg_hex("SI", desc->irq);
         if (desc->type != driver_type[dev->kind])
             rc = -7;

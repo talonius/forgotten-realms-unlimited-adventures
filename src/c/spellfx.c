@@ -181,6 +181,14 @@ struct TileInfo {
     char pad_1[3];              /* +1   not read here                     */
 };
 
+struct SpellInfo {              /* 0x16 bytes a spell, spelltab.c's       */
+    char pad_0[0xa];            /* +0   not read here                     */
+    int save_effect;            /* +a                                     */
+    int save_type;              /* +c   not read here                     */
+    unsigned char effect;       /* +e                                     */
+    char pad_f[7];              /* +f   not read here                     */
+};
+
 struct Pool {                   /* strutil.c's slot pool                  */
     int capacity;               /* +0                                     */
     int stride;                 /* +2                                     */
@@ -327,9 +335,10 @@ extern void far spell_path_targets(char x0, char y0, char x1, char y1, unsigned 
                                                                  /* 2b69:1a61 */
 extern void far spell_effect_apply(char n, char far *msg);          /* 2b69:1e6f */
 
-extern char far *spell_names[];                                  /* 2434 */
-extern int word_stun_save;                                            /* 3062 */
-extern unsigned char word_stun_fx;                                  /* 3066 */
+extern char far *spell_name_table[];                             /* 2438 */
+#define spell_names (spell_name_table - 1)    /* spell numbers start at 1 */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *txt_abort_spell;                                /* 39fc */
 extern char far *empty_text;                                     /* 3bc0 */
 extern char far *txt_flame_type;                                 /* 3bd0 */
@@ -1858,8 +1867,8 @@ void far spell_word_stun(void)                                   /* 36e3:3417 */
         n = 0;
     }
     if (n != 0)
-        fx_add_message(h, word_stun_fx, n, caster_level(0x75, 1), 0, word_stun_save, 0,
-                     msg_format("is %s", fx_names[0x6a]));
+        fx_add_message(h, spell_info[0x75].effect, n, caster_level(0x75, 1), 0,
+                       spell_info[0x75].save_effect, 0, msg_format("is %s", fx_names[0x6a]));
 }
 
 void far spell_fire_touch(void)                                  /* 36e3:3584 */

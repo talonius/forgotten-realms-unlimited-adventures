@@ -50,7 +50,7 @@ struct StepEvent {              /* one of an area's 8 counted events      */
     unsigned char zones_off;    /* +3  bit n: not facing n                */
 };
 
-struct Area {                   /* what cur_area_rec points at                */
+struct Area {                   /* what geo.area points at                    */
     char pad_0[2];              /* +0   not read here                     */
     unsigned char rows;         /* +2                                     */
     unsigned char cols;         /* +3                                     */
@@ -68,6 +68,7 @@ struct Geo {                    /* the party's place and the view state   */
     char event;                 /* +4   d418                              */
     char pad_5[2];              /* +5   not read here                     */
     char show_map;              /* +7   d41b                              */
+    struct Area far *area;      /* +8   d41c  the current area's record   */
 };
 
 struct Hero {                   /* a party member                         */
@@ -191,7 +192,6 @@ extern char test_mode;                                           /* cc7a */
 extern char ui_mode;                                             /* d128 */
 extern struct Hero far *node_list;                               /* d129 */
 extern struct Geo geo;                                           /* d414 */
-extern struct Area far *cur_area_rec;                                /* d41c */
 
 static unsigned char next_x;                                     /* d202 */
 static unsigned char next_y;                                     /* d203 */
@@ -386,16 +386,16 @@ void far move_ahead(void)                                        /* 354b:03e3 */
     if (wall_kind(nx, ny, face)) {
         nx += dir_dx[face];
         ny += dir_dy[face];
-        if (cur_area_rec->cols - 1 < nx) {
-            geo.x = cur_area_rec->cols - 1;
+        if (geo.area->cols - 1 < nx) {
+            geo.x = geo.area->cols - 1;
             cursor_obj[0x21] = 1;
         }
         if (nx < 0) {
             geo.x = 0;
             cursor_obj[0x21] = 1;
         }
-        if (cur_area_rec->rows - 1 < ny) {
-            geo.y = cur_area_rec->rows - 1;
+        if (geo.area->rows - 1 < ny) {
+            geo.y = geo.area->rows - 1;
             cursor_obj[0x21] = 1;
         }
         if (ny < 0) {
@@ -412,12 +412,12 @@ void far step_dungeon(void)                                      /* 354b:04a1 */
     geo.x += dir_dx[geo.facing];
     geo.y += dir_dy[geo.facing];
     if (geo.x < 0)
-        geo.x = cur_area_rec->cols - 1;
-    if (cur_area_rec->cols - 1 < geo.x)
+        geo.x = geo.area->cols - 1;
+    if (geo.area->cols - 1 < geo.x)
         geo.x = 0;
     if (geo.y < 0)
-        geo.y = cur_area_rec->rows - 1;
-    if (cur_area_rec->rows - 1 < geo.y)
+        geo.y = geo.area->rows - 1;
+    if (geo.area->rows - 1 < geo.y)
         geo.y = 0;
     geo.facing_wall = wall_side(geo.x, geo.y, geo.facing);
     mem_fill(door_tries, 4, 1);
@@ -513,38 +513,38 @@ char far step_event_in_zone(unsigned char dir, unsigned char n)           /* 354
     char rc;
 
     rc = 0;
-    if (cur_area_rec->step_events[n].event != 0)
+    if (geo.area->step_events[n].event != 0)
         switch (dir) {
         case 0:
-            if (!(cur_area_rec->step_events[n].zones_off & 1))
+            if (!(geo.area->step_events[n].zones_off & 1))
                 rc = 1;
             break;
         case 1:
-            if (!(cur_area_rec->step_events[n].zones_off & 2))
+            if (!(geo.area->step_events[n].zones_off & 2))
                 rc = 1;
             break;
         case 2:
-            if (!(cur_area_rec->step_events[n].zones_off & 4))
+            if (!(geo.area->step_events[n].zones_off & 4))
                 rc = 1;
             break;
         case 3:
-            if (!(cur_area_rec->step_events[n].zones_off & 8))
+            if (!(geo.area->step_events[n].zones_off & 8))
                 rc = 1;
             break;
         case 4:
-            if (!(cur_area_rec->step_events[n].zones_off & 0x10))
+            if (!(geo.area->step_events[n].zones_off & 0x10))
                 rc = 1;
             break;
         case 5:
-            if (!(cur_area_rec->step_events[n].zones_off & 0x20))
+            if (!(geo.area->step_events[n].zones_off & 0x20))
                 rc = 1;
             break;
         case 6:
-            if (!(cur_area_rec->step_events[n].zones_off & 0x40))
+            if (!(geo.area->step_events[n].zones_off & 0x40))
                 rc = 1;
             break;
         case 7:
-            if (!(cur_area_rec->step_events[n].zones_off & 0x80))
+            if (!(geo.area->step_events[n].zones_off & 0x80))
                 rc = 1;
             break;
         }
@@ -565,9 +565,9 @@ void far step_events_tick(void)                                         /* 354b:
             le_word_put(le_word_get((unsigned far *)(cursor_obj + 0x1fd) + i) + 1,
                          (unsigned far *)(cursor_obj + 0x1fd) + i);
             if (le_word_get((unsigned far *)(cursor_obj + 0x1fd) + i)
-                >= cur_area_rec->step_events[i].steps) {
+                >= geo.area->step_events[i].steps) {
                 le_word_put(0, (unsigned far *)(cursor_obj + 0x1fd) + i);
-                events_run(cur_area_rec->step_events[i].event);
+                events_run(geo.area->step_events[i].event);
             }
         }
 }
@@ -836,7 +836,7 @@ void far move_resolve(void)                                      /* 354b:0e76 */
         next_square();
         if (next_x <= 0x25 && next_y <= 0xe) {
             cell = cell_zone_at(next_x, next_y);
-            bank_text_get(text_pool_block, cur_area_rec->zone_texts_head[cell], msg_buf);
+            bank_text_get(text_pool_block, geo.area->zone_texts_head[cell], msg_buf);
         } else
             str_copy(msg_buf, "There is no way to go in that direction.");
         has_text = 0;

@@ -286,9 +286,11 @@ extern void far item_spend(struct Hero far *hero, struct Item far *item,
                              char spell);       /* 18de:1cbf, vector to overlay 12 26e3:408c */
 
 extern unsigned char constitution_hp_bonus[];        /* 1383  hit point bonus by CON    */
-extern unsigned char mu_spell_row;         /* 13a2  the spell_slots_by_level row read     */
+extern unsigned char class_spell_rows[];        /* 139d  a spell_slots_by_level row by class   */
+#define mu_spell_row (class_spell_rows[5])   /* the magic-user's row         */
 extern unsigned char spell_slots_by_level[][29][9];                          /* 14f4 */
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *class_names[];                                  /* 3914 */
 extern char far *race_names[];                                   /* 395c */
 extern char far *align_names[];                                  /* 3978 */

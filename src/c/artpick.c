@@ -250,7 +250,7 @@ extern void far big_open(unsigned char id);
                                 /* 18de:146d, vector to overlay 3 1bbc:0334 */
 extern int  far field_proc();
                                 /* 18de:175b, vector to overlay 5 1c86:0000 */
-extern void far mod18de_1783(void);
+extern void far labels_134f(void);
                                 /* 18de:1783, vector to overlay 5 1e8f:134f */
 extern unsigned char far kind_mask(unsigned char kind, int dir);
                                 /* 18de:1797, vector to overlay 5 1e8f:0f1b */
@@ -302,9 +302,11 @@ extern void far view_render(int col, int row, char x, char y, unsigned char dir)
 extern void far wall_sets_free(char reset);         /* overlay 13 26e3:1721 */
 extern void far geo_reset(char unused);           /* overlay 13 26e3:1805 */
 
-extern char far *backdrop_text;                          /* 0158  "Backdrop"     */
+extern char far *tool_names[];                               /* 0154  "Wall", ...     */
+#define backdrop_text (tool_names[1])                         /* "Backdrop"            */
 extern char far *art_names[];                       /* 01b4  "No art", ...  */
-extern char far *monster_editor_text;                          /* 01f8  "Monster Editor" */
+extern char far *screen_titles[];                            /* 01dc  "", "AD&D Unlimited Adventures", ... */
+#define monster_editor_text (screen_titles[7])                /* "Monster Editor"      */
 extern char far *image_text;                          /* 0334  "Image"        */
 extern char far *monster_text;                          /* 0338  "Monster"      */
 extern char far *replace_text;                          /* 035c  "Replace"      */
@@ -1046,7 +1048,7 @@ static void far art_preview(int n)                               /* 39f4:1a58 */
                             break;
                         case 1:
                             if (c->arg->shown != bit) {
-                                mod18de_1783();
+                                labels_134f();
                                 pal_black(0x20, 0xff);
                             }
                             show_sprite(num);
@@ -1374,7 +1376,7 @@ static void far art_save(struct ArtView far *c)                  /* 39f4:24e4 */
                     }
                     c->sets = geo.area->sets[0];
                     geo.area->sets[0] = 1;
-                    mod18de_1783();
+                    labels_134f();
                 }
     } else {
         for (i = 0; i < 5; i++, bits >>= 1)
@@ -1407,7 +1409,7 @@ static void far art_restore(struct ArtView far *c)               /* 39f4:276d */
                     for (m = 0; m < 3; m++)
                         geo.area->cells_head[m] = c->cells[m];
                     geo.area->sets[0] = c->sets;
-                    mod18de_1783();
+                    labels_134f();
                 }
     } else {
         for (i = 0; i < 5; i++, bits >>= 1)
@@ -1416,7 +1418,7 @@ static void far art_restore(struct ArtView far *c)               /* 39f4:276d */
                 case 2:
                     cursor_obj[0x13] = c->cursor_13;
                     geo.area->sets[0] = c->sets;
-                    mod18de_1783();
+                    labels_134f();
                 }
     }
 }

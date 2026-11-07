@@ -51,7 +51,7 @@
  * No _BSS.  field_released, focus_mouse_row and focus_mouse_col, which edit_begin and
  * edit_end use and section 15 uses the same way, lie past labels.c's _DATA
  * (5ec9 is a pad byte) and before menubox.c's at 5ed0: a module's _DATA is
- * one block, so they are not this module's, and they are extern here.
+ * one block, so they are not this module's: fieldvar.c defines them.
  */
 
 typedef int (far *ItemProc)();       /* (item, msg, a, b), as dialog.c's */

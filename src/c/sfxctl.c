@@ -50,7 +50,13 @@ extern int  far sound_open(char far *digital);                   /* 0c3f:0003 */
 extern void far sound_close(void);                               /* 0c3f:015c */
 extern int  far sound_event(int n);                              /* 0c3f:016e */
 
-extern int sound_card;                                           /* b394 */
+struct Config {                 /* config.c's record                      */
+    int video;                  /* +0  0 VGA, 1 EGA, 2 Tandy 16-colour  */
+    int sound_card;             /* +2                                   */
+    unsigned char rest[0x46];
+};
+
+extern struct Config config;                                     /* b392 */
 
 static char digital;                                             /* ad92 */
 static char music_on;                                            /* ad93 */
@@ -77,7 +83,7 @@ void far sfx_play(unsigned short n)                           /* 1c8e:000e */
             break;
         case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
         case 11: case 12: case 13: case 14: case 15:
-            if (sound_card == 5)
+            if (config.sound_card == 5)
                 break;
             if (digital) {
                 sound_event(n);
@@ -92,7 +98,7 @@ void far sfx_play(unsigned short n)                           /* 1c8e:000e */
             break;
         case 0x20: case 0x21: case 0x22: case 0x23: case 0x24: case 0x25:
         case 0x26: case 0x27:
-            if (sound_card == 5)
+            if (config.sound_card == 5)
                 break;
         case 0x28: case 0x29: case 0xff:
             sound_event(n);

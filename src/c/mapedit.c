@@ -214,7 +214,7 @@ extern char far *tool_names[];                        /* 0154  "Wall", ...      
 extern char far *move_names[];                        /* 0164  "Free movement"   */
 extern char far *wall_kind_names[];                        /* 016c  "Open", ...       */
 extern char far *pass_names[];                        /* 01ac  "Passable", ...   */
-extern char far *undo_names;                          /* 024c  "Undo"            */
+extern char far *undo_names[];                        /* 024c  "Undo", "Un*do"   */
 extern char far *compass_names[];                        /* 02e0  "North", ...      */
 extern char far *right_text;                          /* 0340  "Right"           */
 extern char far *left_word;                          /* 0344  "Left"            */
@@ -420,7 +420,7 @@ unsigned char far zone_at(int x, int y)                          /* 39f4:02b3 */
 void far undo_set(struct EdState far *e, char a, char show)  /* 39f4:02e5 */
 {
     e->undo_kind = a;
-    str_copy(edit_undo, undo_names);
+    str_copy(edit_undo, undo_names[0]);
     if (show) {
         ui_mark(ed_item_base(e) + 4, 0x27, (char far *)edit_undo);
         dl_draw(0);

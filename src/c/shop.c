@@ -178,7 +178,8 @@ extern void far appraise(char far *done);                        /* 21d4:09fb */
 extern void far loot_take(char far *has_coins, char far *has_items); /* 22ef:0d13 */
 extern long far rate_price(long value, unsigned char rate, unsigned count); /* 254c:0063 */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *not_enough_text;                                /* 3b50 */
 extern char far *leave_text1;                                    /* 3b54 */
 extern char far *leave_text2;                                    /* 3b58 */

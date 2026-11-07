@@ -176,7 +176,8 @@ extern void far spell_remove_curse(void);             /* 18de:1afd, vector to ov
 extern void far fx_stat_recalc(struct Hero far *hero, short stat);
                                                 /* 18de:1b07, vector to overlay 19 2e88:1a80 */
 
-extern struct SpellInfo spell_info[];                            /* 264a */
+extern struct SpellInfo spell_info_table[];                      /* 2660 */
+#define spell_info (spell_info_table - 1)     /* spell numbers start at 1 */
 extern char far *exit_text;                                      /* 3a70 */
 extern char far *selected_text;                                  /* 3b20 */
 extern char far *speed_text;                                     /* 3b24 */

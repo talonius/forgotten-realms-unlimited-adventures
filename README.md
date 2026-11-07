@@ -1,8 +1,6 @@
 # Forgotten Realms: Unlimited Adventures
 
-This project is an **unfinished** source reconstruction of SSI's DOS version of *Forgotten Realms: Unlimited Adventures*. Most of the program has been recovered as Turbo C and assembly source, but the executable cannot yet be rebuilt from this repository, and it is not yet a byte-for-byte reconstruction. The missing piece is the linker SSI used: the right version of Pocket Soft's RTLink/Plus. See [Status](#status).
-
-I am unable to continue this work. It is published in the hope that someone else can finish it.
+This project is a source reconstruction of SSI's DOS version of *Forgotten Realms: Unlimited Adventures*. All of SSI's code and data has been recovered as Turbo C and Turbo Assembler source, and this repository **builds a working `CKIT.EXE`** under DOSBox-X with Turbo C 2.01, Turbo Assembler 3.1 and Pocket Soft's RTLink/Plus 4.14. It is not a byte-for-byte rebuild of the shipped executable: the RTLink/Plus version SSI used has never been found, so the overlay manager, and therefore the code addresses, are 4.14's. See [Status](#status).
 
 ## Read this first
 
@@ -21,35 +19,57 @@ The `v1.0` and `v1.2` tags hold the reconstruction of each DOS release; `main` h
 
 | Path | Contents |
 |---|---|
-| `src/c/` | 113 Turbo C source files, the bulk of the game |
-| `src/asm/` | Hand-written assembly for Turbo Assembler, including the startup code and the Miles AIL sound library |
-| `src/rtlink/` | Reviewed assembly for the RTLink/Plus overlay manager's startup routines |
-| `src/generated/` | NASM source for every byte not yet recovered as C or TASM source, and `manifest.json` |
+| `src/c/` | 122 Turbo C source files: the game, and its data tables and text as data-only modules |
+| `src/asm/` | Turbo Assembler source: the startup code, SSI's assembly library, the Miles AIL sound library, and the shipped RTLink/Plus run-time routines |
+| `src/rtlink/` | Reviewed assembly for the shipped RTLink/Plus overlay manager's startup routines |
+| `src/generated/` | NASM listings of the bytes a linker writes itself (the MZ header, relocation tables, alignment pads) and of the shipped overlay manager, plus `manifest.json` |
+| `build/` | The DOS build: `BUILD.BAT`, the RTLink/Plus link file `CKIT.LNK`, and the generated DGROUP pieces |
+| `build.sh` | Runs `build/BUILD.BAT` under DOSBox-X |
 
-`src/generated/manifest.json` describes the whole executable as an ordered list of parts. For each part it records the file offset and size of its bytes in `CKIT.EXE` and the source and tool that produce them. For each C or TASM module it also records where the linker placed its segments (`place`) and the address of every external symbol it calls (`syms`). The executable's SHA-256 is recorded as `reference_sha256`.
+`src/generated/manifest.json` describes the whole shipped executable as an ordered list of parts. For each part it records the file offset and size of its bytes in `CKIT.EXE` and the source and tool that produce them. For each C or TASM module it also records where the linker placed its segments (`place`) and the address of every external symbol it calls (`syms`). The executable's SHA-256 is recorded as `reference_sha256`.
+
+## Building
+
+You need DOSBox-X and three DOS tools, each in its own directory:
+
+- **Turbo C 2.01**: the directory holding `TCC.EXE`, with `INCLUDE\` beneath it.
+- **Turbo Assembler 3.1**: the directory holding `TASM.EXE` (Borland C++ 3.1's `BIN`).
+- **RTLink/Plus 4.14**: the directory holding `RTLINK.EXE` and its libraries, as its installer leaves it.
+
+```
+TC201=/path/to/tc201 TASM31=/path/to/bc31/bin RTLINK=/path/to/rtlink ./build.sh
+```
+
+The result is `OBJ/CKIT.EXE`, with `OBJ/CKIT.MAP` and the tools' output in `OBJ/BUILD.LOG`. Copy it over the `CKIT.EXE` of an installed copy of the game to run it.
+
+`build/BUILD.BAT` compiles every C module as the original was compiled (below), with each module's `_DATA` and `_BSS` renamed after the module (`-zRD_<MODULE> -zDB_<MODULE>`), assembles the assembly with `/dRELINK`, and links with `build/CKIT.LNK`. Two things in that link are essential:
+
+- **The overlay tree and `RELOAD FAR`.** `CKIT.LNK` reproduces the shipped executable's 27 overlay sections in the same tree of areas. FRUA's sections call into other sections of the same area (the design menu, the editor loop, the area editor and the module loader share one), so RTLink/Plus must reload a caller's section on return.
+- **DGROUP exactly as shipped.** Some tables are indexed from 1, with their element 0 inside the previous object, and some code writes just outside its own variables; the program relies on what is next to what. Under `RELINK`, `startup.asm` includes `build/DGORDER.INC`, which declares every DGROUP segment in the shipped order, and the linker places segments in the order it first sees them. `build/DGDATA.ASM` (the alignment pads) and `build/DGBSS.ASM` (uninitialized storage no module names) supply the bytes no module owns.
+
+The files in `build/` are generated by the disassembly project's tools from the shipped executable's section table and the module layout; they are committed so that the build needs no tools beyond the three above.
 
 ## Status
 
-By bytes of `CKIT.EXE`, the parts break down as:
+By bytes of the shipped `CKIT.EXE`, the source that reproduces each part is:
 
 | Produced by | Parts | Bytes | Share |
 |---|---|---|---|
-| Turbo C 2.01, from `src/c/` | 205 | 497,645 | 85% |
-| Turbo Assembler 3.1, from `src/asm/` | 3 | 3,855 | 0.7% |
-| NASM, from `src/generated/` and `src/rtlink/` | the rest | 86,343 | 15% |
+| Turbo C 2.01, from `src/c/` | 223 | 520,221 | 88.5% |
+| Turbo Assembler 3.1, from `src/asm/` | 28 | 16,582 | 2.8% |
+| NASM, from `src/generated/` and `src/rtlink/` | the rest | 51,040 | 8.7% |
 
-Part of the NASM share is the MZ header, relocation tables and RTLink/Plus structures, which a linker writes itself. About 40 KB of it, though, is program code that has not yet been recovered as C or TASM source: chiefly `src/generated/resident-003179.asm`, `resident-01bb4b.asm` and most of overlay 27.
+The NASM share holds no program code or data of SSI's: it is the MZ header, the relocation tables and alignment that a linker writes, and the shipped RTLink/Plus overlay manager.
 
-The game was linked with Pocket Soft's **RTLink/Plus**, an overlay linker: `CKIT.EXE` carries RTLink/Plus's overlay manager and a table of 28 sections that it loads on demand. Without the RTLink/Plus version SSI used, the compiled modules cannot be linked into the original layout. The disassembly project worked around this with its own host-side tools, which assembled the NASM parts and placed each compiled C and TASM module at the address the manifest records. Those tools are not part of this repository.
+The disassembly project's host-side tools assemble the NASM parts and place each compiled C and TASM module at the address the manifest records; that rebuild matches the shipped `CKIT.EXE` byte for byte, for version 1.0 and version 1.2. Those tools are not part of this repository.
 
-**The missing piece is the right version of RTLink/Plus.** These versions were tried, and none of them matches the overlay manager in `CKIT.EXE`:
+The build in this repository links the same sources with **RTLink/Plus 4.14**. These versions were tried, and none of them matches the overlay manager in the shipped `CKIT.EXE`: RTLink 2.03, RTLink-Plus 4.00, RTLink-Plus 4.14 and RTLink-Plus 6.10. So the executable it produces is not the shipped one byte for byte. What was checked:
 
-- RTLink 2.03
-- RTLink-Plus 4.00
-- RTLink-Plus 4.14
-- RTLink-Plus 6.10
+- Its DGROUP is the shipped DGROUP: every initialized byte is equal, apart from the segment word of each of the 1,029 far pointers.
+- Driven from boot through the same keys (the title, the Rule Book copy protection, the design menu, game settings, the art gallery, the monster editor, the design list, the load-game prompt and the map editor on Dungeon 01), it shows pixel-identical screens to the shipped executable, for both versions.
+- A character can be created, saved and added to a party, and *Heirs to Skull Crag* plays: its opening events, treasure, movement in the 3D view, the area map, the character sheet, camp, and a tavern brawl fought to the end in combat.
 
-Another version, most likely one from around the game's release, may match. With it, the remaining work is to write the link: the RTLink/Plus command or response file describing the sections, and a DOS build that compiles, assembles and links everything under DOSBox-X.
+The right RTLink/Plus version, if it turns up, should link the same objects into the shipped executable byte for byte.
 
 ## Compiler and assembler
 
